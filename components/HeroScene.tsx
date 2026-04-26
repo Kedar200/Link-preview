@@ -7,6 +7,7 @@ import WhatsAppMockup from './mockups/WhatsAppMockup';
 import LinkedInMockup from './mockups/LinkedInMockup';
 import SlackMockup from './mockups/SlackMockup';
 import DiscordMockup from './mockups/DiscordMockup';
+import TwitterMockup from './mockups/TwitterMockup';
 import GenericMockup from './mockups/GenericMockup';
 
 function PhoneMockup({ data, loading, theme, app }: { data: OGData | null; loading: boolean; theme: 'light' | 'dark', app: string }) {
@@ -14,6 +15,7 @@ function PhoneMockup({ data, loading, theme, app }: { data: OGData | null; loadi
   if (app === 'linkedin') return <LinkedInMockup data={data} loading={loading} />;
   if (app === 'slack') return <SlackMockup data={data} loading={loading} theme={theme} />;
   if (app === 'discord') return <DiscordMockup data={data} loading={loading} theme={theme} />;
+  if (app === 'twitter') return <TwitterMockup data={data} loading={loading} theme={theme} />;
   return <GenericMockup data={data} loading={loading} theme={theme} app={app} />;
 }
 
@@ -110,7 +112,7 @@ export default function HeroScene({ onSubmit, loading, data, error }: HeroSceneP
             <div className="w-px h-5 bg-white/10" />
 
             {/* Export to Figma */}
-            <ExportToFigma data={data} theme={phoneTheme} disabled={!data && !loading} />
+            <ExportToFigma data={data} theme={phoneTheme} app={app} disabled={!data && !loading} />
           </div>
         </div>
       </div>

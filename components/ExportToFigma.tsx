@@ -6,19 +6,20 @@ import { copyForFigma } from '@/lib/figma-clipboard';
 interface Props {
   data: OGData | null;
   theme: 'light' | 'dark';
+  app: string;
   disabled?: boolean;
 }
 
 type State = 'idle' | 'copying' | 'done' | 'error';
 
-export default function ExportToFigma({ data, theme, disabled }: Props) {
+export default function ExportToFigma({ data, theme, app, disabled }: Props) {
   const [state, setState] = useState<State>('idle');
 
   const handleCopy = useCallback(async () => {
     if (disabled || state !== 'idle') return;
     setState('copying');
     try {
-      await copyForFigma(data, theme);
+      await copyForFigma(data, theme, app);
       setState('done');
       setTimeout(() => setState('idle'), 3000);
     } catch (err) {
@@ -26,7 +27,7 @@ export default function ExportToFigma({ data, theme, disabled }: Props) {
       setState('error');
       setTimeout(() => setState('idle'), 2500);
     }
-  }, [data, theme, disabled, state]);
+  }, [data, theme, app, disabled, state]);
 
   return (
     <button

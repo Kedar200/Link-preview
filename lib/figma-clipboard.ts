@@ -8,15 +8,15 @@
 
 import type { OGData } from '@/types';
 
-function esc(s: string) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function trunc(s: string, n: number) { return s.length > n ? s.slice(0,n) + '…' : s; }
+export function esc(s: string) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+export function trunc(s: string, n: number) { return s.length > n ? s.slice(0,n) + '…' : s; }
 
 /**
  * Fetches an image URL and returns a base64 data URI.
  * Uses a server-side proxy route to bypass CORS.
  * Returns empty string on failure (image will simply be omitted).
  */
-async function fetchImageAsDataUri(url: string): Promise<string> {
+export async function fetchImageAsDataUri(url: string): Promise<string> {
   try {
     const res = await fetch(`/api/proxy-image?url=${encodeURIComponent(url)}`);
     if (!res.ok) throw new Error('Proxy failed');
@@ -33,7 +33,7 @@ async function fetchImageAsDataUri(url: string): Promise<string> {
  *  fontSize 15 at system-ui ≈ 7.8px per char avg, so for cardW ~334px 
  *  with 14px padding each side → usable ~306px → ~39 chars per line.
  */
-function wrapText(text: string, maxCharsPerLine: number): string[] {
+export function wrapText(text: string, maxCharsPerLine: number): string[] {
   const words = text.split(' ');
   const lines: string[] = [];
   let current = '';
@@ -70,7 +70,7 @@ function getTheme(isDark: boolean) {
  * Builds the SVG string for Figma clipboard.
  * Now accepts pre-fetched base64 data URIs so the SVG is fully self-contained.
  */
-export function buildFigmaClipboard(
+export function buildWhatsAppFigmaClipboard(
   data: OGData | null,
   theme: 'light' | 'dark',
   embeddedImages: { ogImage: string; avatar: string }
@@ -404,14 +404,35 @@ export function buildFigmaClipboard(
  * Fetches all images, embeds them as base64, builds SVG, and copies to clipboard.
  * This ensures Figma gets fully self-contained SVG with no external references.
  */
-export async function copyForFigma(data: OGData | null, theme: 'light' | 'dark'): Promise<void> {
+import { buildTwitterFigmaClipboard } from './figma/twitter';
+import { buildLinkedInFigmaClipboard } from './figma/linkedin';
+import { buildSlackFigmaClipboard } from './figma/slack';
+import { buildDiscordFigmaClipboard } from './figma/discord';
+
+export async function copyForFigma(data: OGData | null, theme: 'light' | 'dark', app: string): Promise<void> {
   // Fetch all images in parallel and convert to base64 data URIs
   const [ogImage, avatar] = await Promise.all([
     data?.image ? fetchImageAsDataUri(data.image) : Promise.resolve(''),
     fetchImageAsDataUri('https://i.pravatar.cc/100?img=47'),
   ]);
 
-  const svg = buildFigmaClipboard(data, theme, { ogImage, avatar });
+  let svg = '';
+  const embeddedImages = { ogImage, avatar };
+
+  if (app === 'whatsapp') {
+    svg = buildWhatsAppFigmaClipboard(data, theme, embeddedImages);
+  } else if (app === 'twitter') {
+    svg = buildTwitterFigmaClipboard(data, theme, embeddedImages);
+  } else if (app === 'linkedin') {
+    svg = buildLinkedInFigmaClipboard(data, theme, embeddedImages);
+  } else if (app === 'slack') {
+    svg = buildSlackFigmaClipboard(data, theme, embeddedImages);
+  } else if (app === 'discord') {
+    svg = buildDiscordFigmaClipboard(data, theme, embeddedImages);
+  } else {
+    // Default fallback to whatsapp if not implemented
+    svg = buildWhatsAppFigmaClipboard(data, theme, embeddedImages);
+  }
 
   // Write as text/html (Figma recognizes embedded SVG and creates editable layers)
   const htmlBlob = new Blob(

@@ -32,11 +32,11 @@ export default function WhatsAppPreview({ data, theme = 'dark' }: Props) {
         <img
           src={data.image}
           alt=""
-          className="w-full h-[180px] object-cover"
+          className="w-full h-auto object-contain bg-black/5"
           onError={() => setImgError(true)}
         />
       ) : (
-        <div className={`w-full flex items-center justify-center ${imgFallbackBg} h-[180px]`}>
+        <div className={`w-full flex items-center justify-center ${imgFallbackBg} aspect-[1.91/1]`}>
         </div>
       )}
       
