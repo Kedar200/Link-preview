@@ -37,10 +37,6 @@ export default function WhatsAppPreview({ data, theme = 'dark' }: Props) {
         />
       ) : (
         <div className={`w-full flex items-center justify-center ${imgFallbackBg} h-[180px]`}>
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#25d366" strokeWidth="1.5">
-            <rect x="3" y="3" width="18" height="18" rx="2" />
-            <path d="M3 9h18M9 21V9" />
-          </svg>
         </div>
       )}
       

@@ -2,181 +2,19 @@
 import { useState } from 'react';
 import type { OGData } from '@/types';
 import UrlInput from './UrlInput';
-import WhatsAppPreview from './previews/WhatsAppPreview';
 import ExportToFigma from './ExportToFigma';
+import WhatsAppMockup from './mockups/WhatsAppMockup';
+import LinkedInMockup from './mockups/LinkedInMockup';
+import SlackMockup from './mockups/SlackMockup';
+import DiscordMockup from './mockups/DiscordMockup';
+import GenericMockup from './mockups/GenericMockup';
 
-function PhoneMockup({ data, loading, theme }: { data: OGData | null; loading: boolean; theme: 'light' | 'dark' }) {
-  const isDark = theme === 'dark';
-  
-  // Theme Variables
-  const bgApp = isDark ? 'bg-[#0b141a]' : 'bg-[#efeae2]';
-  const bgHeader = isDark ? 'bg-[#0b141a]' : 'bg-[#ffffff]';
-  const textTitle = isDark ? 'text-[#e9edef]' : 'text-black';
-  const textSub = isDark ? 'text-[#8696a0]' : 'text-[#54656f]';
-  const borderHeader = isDark ? 'border-[rgba(255,255,255,0.05)]' : 'border-[rgba(0,0,0,0.05)]';
-  const iconColor = isDark ? '#8696a0' : '#54656f';
-  const headerIconColor = isDark ? 'currentColor' : '#54656f';
-  
-  const bgIncoming = isDark ? 'bg-[#202c33]' : 'bg-[#ffffff]';
-  const textIncoming = isDark ? 'text-[#e9edef]' : 'text-[#111b21]';
-  const bgOutgoing = isDark ? 'bg-[#005c4b]' : 'bg-[#e1f6cb]';
-  
-  const bgDate = isDark ? 'bg-[#182229]' : 'bg-[#ffffff]';
-  
-  const bgInputBar = isDark ? 'bg-[#0b141a]' : 'bg-[#ffffff]';
-  const bgInputPill = isDark ? 'bg-[#1f2c34]' : 'bg-[#f0f2f5]';
-  const inputBorder = isDark ? 'border-[rgba(255,255,255,0.05)]' : 'border-transparent';
-  
-  const micIconFill = isDark ? '#0b141a' : '#ffffff';
-
-  return (
-    <div 
-      className={`relative w-[390px] h-[844px] flex-shrink-0 ${bgApp} rounded-[55px] border-[16px] border-black overflow-hidden flex flex-col pointer-events-auto shadow-2xl`}
-      style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
-    >
-      
-      {/* Hardware Buttons */}
-      <div className="absolute -left-[19px] top-[150px] w-[3px] h-[35px] bg-black rounded-l-md z-0" />
-      <div className="absolute -left-[19px] top-[210px] w-[3px] h-[65px] bg-black rounded-l-md z-0" />
-      <div className="absolute -left-[19px] top-[290px] w-[3px] h-[65px] bg-black rounded-l-md z-0" />
-      <div className="absolute -right-[19px] top-[240px] w-[3px] h-[95px] bg-black rounded-r-md z-0" />
-
-      {/* Notch */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[160px] h-[34px] bg-black rounded-b-[24px] z-50 flex items-center justify-end px-5">
-        <div className="w-3 h-3 rounded-full bg-[#111] shadow-inner border border-white/5"></div>
-      </div>
-
-      {/* Status bar */}
-      <div className={`h-12 w-full flex items-center justify-between px-7 pt-3 text-[14px] font-semibold z-40 ${bgHeader} ${textTitle}`}>
-        <span className="pl-1">12:45</span>
-        <div className={`flex items-center gap-1.5 opacity-90 pr-1 ${isDark ? '' : 'text-black'}`}>
-          <svg width="16" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
-          <svg width="18" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
-        </div>
-      </div>
-
-      {/* Header */}
-      <div className={`${bgHeader} flex items-center px-3 py-3 gap-2 z-30 shadow-sm border-b ${borderHeader}`}>
-        <div className={`flex items-center cursor-pointer`} style={{ color: headerIconColor }}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-          <div className="w-10 h-10 bg-gray-300 rounded-full overflow-hidden flex-shrink-0 ml-1">
-            <img src="https://i.pravatar.cc/100?img=47" alt="Manas" className="w-full h-full object-cover" />
-          </div>
-        </div>
-        <div className="flex-1 ml-2">
-          <div className={`font-semibold text-[17px] leading-tight tracking-wide ${textTitle}`}>Manas</div>
-        </div>
-        <div className="flex items-center gap-6 pr-2" style={{ color: headerIconColor }}>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
-        </div>
-      </div>
-
-      <div className={`flex-1 overflow-y-auto relative p-3 flex flex-col gap-3 scrollbar-hide z-20 pb-4`}>
-        <div 
-          className={`absolute inset-0 pointer-events-none ${isDark ? 'opacity-10' : 'opacity-10 invert'}`} 
-          style={{ 
-            backgroundImage: 'url("/wa-bg.png")', 
-            backgroundSize: '100% auto',
-            backgroundPosition: 'top center',
-            backgroundRepeat: 'repeat-y'
-          }} 
-        ></div>
-        
-        <div className="flex justify-center z-10 mt-1">
-          <span className={`${bgDate} ${textSub} font-medium text-[11px] px-3 py-1.5 rounded-lg shadow-sm`}>Yesterday</span>
-        </div>
-
-        {/* Fake Incoming Message - Sticker */}
-        <div className={`${bgIncoming} ${textIncoming} text-[15px] p-2 rounded-xl rounded-tl-none shadow-sm self-start max-w-[85%] relative z-10 mt-2`}>
-          <div className="w-24 h-24 bg-black/10 rounded flex items-center justify-center mb-1">
-            <span className="text-3xl">🐹</span>
-          </div>
-          <div className={`text-[10px] ${textSub} text-right mt-1`}>11:27 pm</div>
-        </div>
-
-        <div className="flex justify-center z-10 mt-2">
-          <span className={`${bgDate} ${textSub} font-medium text-[11px] px-3 py-1.5 rounded-lg shadow-sm`}>Today</span>
-        </div>
-
-        {/* Real Message (Preview) */}
-        <div className={`${bgOutgoing} p-1.5 rounded-xl rounded-tr-none shadow-sm self-end w-[95%] relative z-10 mt-2`}>
-          <div className={`absolute top-0 -right-2 w-3 h-3 ${bgOutgoing}`} style={{ clipPath: 'polygon(0 0, 0 100%, 100% 0)' }}></div>
-          
-          {data ? (
-            <div className="rounded-[10px] overflow-hidden">
-              <div className="scale-[0.98] transform-gpu origin-top">
-                <WhatsAppPreview data={data} theme={theme} />
-              </div>
-              <div className="px-2 pt-0.5 pb-1 flex justify-end gap-1 items-center">
-                <span className={`text-[10px] ${textSub}`}>12:33 pm</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#53bdeb" strokeWidth="2"><polyline points="20 6 9 17 4 12"/></svg>
-              </div>
-            </div>
-          ) : loading ? (
-             <div className={`h-32 ${isDark ? 'bg-black/20' : 'bg-black/5'} animate-pulse rounded-[10px] border border-[rgba(255,255,255,0.05)] flex items-center justify-center`}>
-                <span className={`${textSub} text-xs`}>Generating preview...</span>
-             </div>
-          ) : (
-            <div className={`p-4 ${isDark ? 'bg-black/20' : 'bg-white/50'} rounded-[10px] border border-[rgba(255,255,255,0.05)] text-center text-sm ${textSub} italic`}>
-               Waiting for you to paste a link...
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Input Area */}
-      <div className={`${bgInputBar} p-2 flex items-end gap-2 z-30 pb-3 relative`}>
-        <div className={`flex-1 ${bgInputPill} rounded-[24px] min-h-[50px] px-3.5 py-2.5 flex items-center text-[16px] gap-3.5 ml-1 border ${inputBorder}`}>
-          {/* Smiley Icon */}
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={iconColor} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0">
-            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-            <path d="M9 10l.01 0" />
-            <path d="M15 10l.01 0" />
-            <path d="M9.5 15a3.5 3.5 0 0 0 5 0" />
-          </svg>
-          
-          {/* Input Text */}
-          <div className="flex-1 flex items-center">
-            <span className={`${textSub} text-[17px] leading-none mt-0.5`}>Message</span>
-            <span className="w-0.5 h-5 bg-[#00a884] ml-0.5 animate-pulse rounded-full"></span>
-          </div>
-
-          {/* Paperclip Icon (Upright) */}
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={iconColor} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 transform -rotate-45 sm:rotate-0">
-             <path d="M10.5 15.5v-6.5a1.5 1.5 0 0 1 3 0v7.5a3 3 0 0 1 -6 0v-8.5a4.5 4.5 0 0 1 9 0v7.5" />
-          </svg>
-
-          {/* Rupee Icon */}
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={iconColor} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0">
-            <circle cx="12" cy="12" r="9" />
-            <path d="M14.5 8.5h-5h1.5a2.5 2.5 0 0 1 0 5h-1.5l3.5 4" />
-            <path d="M9.5 11h5" />
-          </svg>
-
-          {/* Camera Icon */}
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={iconColor} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0">
-            <path d="M5 7h2.5l1.5 -2h6l1.5 2h2.5a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
-            <circle cx="12" cy="13" r="3.5" />
-          </svg>
-        </div>
-        
-        {/* Mic Button */}
-        <div className="w-[50px] h-[50px] bg-[#00a884] rounded-full flex justify-center items-center flex-shrink-0 mr-1 shadow-sm">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill={micIconFill}>
-            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
-            <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.76 6.43 6 6.92V21h2v-3.08c3.24-.49 6-3.39 6-6.92h-2z"/>
-          </svg>
-        </div>
-      </div>
-
-      {/* iPhone Home Indicator */}
-      <div className={`${bgInputBar} h-8 flex justify-center items-center pb-3 z-30 pt-1`}>
-        <div className="w-[140px] h-[5px] bg-[#8696a0] rounded-full opacity-60"></div>
-      </div>
-    </div>
-  );
+function PhoneMockup({ data, loading, theme, app }: { data: OGData | null; loading: boolean; theme: 'light' | 'dark', app: string }) {
+  if (app === 'whatsapp') return <WhatsAppMockup data={data} loading={loading} theme={theme} />;
+  if (app === 'linkedin') return <LinkedInMockup data={data} loading={loading} />;
+  if (app === 'slack') return <SlackMockup data={data} loading={loading} theme={theme} />;
+  if (app === 'discord') return <DiscordMockup data={data} loading={loading} theme={theme} />;
+  return <GenericMockup data={data} loading={loading} theme={theme} app={app} />;
 }
 
 interface HeroSceneProps {
@@ -189,6 +27,7 @@ interface HeroSceneProps {
 
 export default function HeroScene({ onSubmit, loading, data, error }: HeroSceneProps) {
   const [phoneTheme, setPhoneTheme] = useState<'light'|'dark'>('light');
+  const [app, setApp] = useState<'whatsapp' | 'twitter' | 'linkedin' | 'slack' | 'discord' | 'instagram'>('whatsapp');
 
   return (
     <div className="relative w-full min-h-[85vh] flex flex-col lg:flex-row overflow-hidden">
@@ -220,15 +59,38 @@ export default function HeroScene({ onSubmit, loading, data, error }: HeroSceneP
         <div className="relative flex flex-col items-center justify-center">
           {/* Phone Mockup */}
           <div className="pointer-events-auto transform scale-[0.55] sm:scale-75 md:scale-[0.85] lg:scale-[0.85] origin-top mt-4 lg:mt-0 mb-[-380px] sm:mb-[-210px] md:mb-[-126px] lg:mb-[-126px]">
-            <PhoneMockup data={data} loading={loading} theme={phoneTheme} />
+            <PhoneMockup data={data} loading={loading} theme={phoneTheme} app={app} />
           </div>
 
-          {/* Mockup Controls — sits below the phone, never overlaps */}
-          <div className="pointer-events-auto flex items-center gap-2 mt-6 z-50">
+          {/* Floating Controls Dock */}
+          <div className="pointer-events-auto flex items-center gap-2 mt-6 z-50 bg-[#111a15] p-1.5 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.2)] border border-white/10">
+            {/* App Switcher (Compact) */}
+            <div className="flex items-center gap-1 px-2">
+              {[
+                { id: 'whatsapp', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>, name: 'WhatsApp' },
+                { id: 'twitter', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91C1.63 9.33.75 10.57.75 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.67-.88 3.33-2.19c1.4.46 2.91.2 3.92-.81s1.26-2.53.8-3.91c1.31-.67 2.2-1.91 2.2-3.34z"/><path d="M10.54 15.85l-3.76-4.38 1.52-1.31 2.12 2.47 4.21-4.83 1.61 1.41z" fill="#111a15"/></svg>, name: 'Twitter' },
+                { id: 'linkedin', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>, name: 'LinkedIn' },
+                { id: 'slack', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></svg>, name: 'Slack' },
+                { id: 'discord', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>, name: 'Discord' },
+                { id: 'instagram', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>, name: 'Instagram' },
+              ].map(item => (
+                <button
+                  key={item.id}
+                  onClick={() => setApp(item.id as any)}
+                  className={`w-9 h-9 rounded-full flex items-center justify-center transition-all ${app === item.id ? 'bg-white/10 text-white' : 'text-white/40 hover:text-white/80 hover:bg-white/5'}`}
+                  title={item.name}
+                >
+                  {item.icon}
+                </button>
+              ))}
+            </div>
+
+            <div className="w-px h-5 bg-white/10" />
+
             {/* Theme Toggle */}
             <button 
               onClick={() => setPhoneTheme(prev => prev === 'light' ? 'dark' : 'light')}
-              className="inline-flex items-center gap-2 h-9 px-4 rounded-full text-[13px] font-medium bg-white/[0.07] text-white/80 hover:text-white hover:bg-white/[0.12] border border-white/[0.08] hover:border-white/[0.15] backdrop-blur-sm transition-all duration-300 select-none whitespace-nowrap"
+              className="inline-flex items-center gap-2 h-9 px-4 rounded-full text-[13px] font-medium bg-transparent text-white/80 hover:text-white hover:bg-white/5 transition-all duration-300 select-none whitespace-nowrap"
               aria-label="Toggle theme"
               title={`Switch to ${phoneTheme === 'light' ? 'dark' : 'light'} mode`}
             >
@@ -245,7 +107,6 @@ export default function HeroScene({ onSubmit, loading, data, error }: HeroSceneP
               )}
             </button>
 
-            {/* Divider */}
             <div className="w-px h-5 bg-white/10" />
 
             {/* Export to Figma */}

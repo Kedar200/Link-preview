@@ -271,7 +271,7 @@ export default function AuditPanel({ audit, data }: AuditPanelProps) {
             </div>
 
             {/* Render the Phone Mockup Below the Scores */}
-            <PhoneMockup data={audit.data} />
+            <PhoneMockup data={data} />
           </div>
         </div>
       </div>

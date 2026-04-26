@@ -2,28 +2,17 @@
 import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import HeroScene from '@/components/HeroScene';
-import AuditPanel from '@/components/AuditPanel';
 import Footer from '@/components/Footer';
 import { useOGFetch } from '@/hooks/useOGFetch';
-import { runAudit } from '@/lib/audit';
-import type { AuditResult } from '@/types';
 
 export default function HomePage() {
   const { data, loading, error, fetch } = useOGFetch();
-  const [audit, setAudit] = useState<AuditResult | null>(null);
   const [hasSearched, setHasSearched] = useState(false);
 
   const handleSubmit = async (url: string) => {
     setHasSearched(true);
-    setAudit(null);
     await fetch(url);
   };
-
-  useEffect(() => {
-    if (data) {
-      setAudit(runAudit(data));
-    }
-  }, [data]);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#f4f0e6]">
@@ -45,12 +34,6 @@ export default function HomePage() {
               error={error}
               hasSearched={hasSearched}
             />
-
-            {audit && !loading && (
-              <div className="fade-in max-w-6xl mx-auto w-full px-4 mb-20 relative z-20">
-                <AuditPanel audit={audit} data={data} />
-              </div>
-            )}
           </main>
         </div>
       </div>
