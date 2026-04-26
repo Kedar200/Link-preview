@@ -16,18 +16,12 @@ export default function Header() {
 
         {/* Center Nav */}
         <div className="hidden lg:flex items-center justify-center gap-10 w-1/2">
-          <a href="#" className="text-sm font-medium text-[rgba(255,255,255,0.8)] hover:text-white transition-colors">Features</a>
-          <a href="#" className="text-sm font-medium text-[rgba(255,255,255,0.8)] hover:text-white transition-colors">Pricing</a>
-          <a href="#" className="text-sm font-medium text-[rgba(255,255,255,0.8)] hover:text-white transition-colors">API</a>
-          <a href="#" className="text-sm font-medium text-[rgba(255,255,255,0.8)] hover:text-white transition-colors">Docs</a>
+          <a href="#" className="text-sm font-medium text-[rgba(255,255,255,0.8)] hover:text-white transition-colors">Blogs</a>
         </div>
 
         {/* Right Side Actions */}
         <div className="flex items-center justify-end gap-6 w-1/4">
-          <a href="#" className="text-sm font-medium text-[rgba(255,255,255,0.8)] hover:text-white transition-colors">Log In</a>
-          <button className="bg-[#c85a44] text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-[#b04d3a] transition-colors">
-            Get Started
-          </button>
+          {/* Empty to maintain flex layout balance */}
         </div>
 
       </div>
