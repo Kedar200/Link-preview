@@ -3,6 +3,7 @@ import { useState } from 'react';
 import type { OGData } from '@/types';
 import UrlInput from './UrlInput';
 import WhatsAppPreview from './previews/WhatsAppPreview';
+import ExportToFigma from './ExportToFigma';
 
 function PhoneMockup({ data, loading, theme }: { data: OGData | null; loading: boolean; theme: 'light' | 'dark' }) {
   const isDark = theme === 'dark';
@@ -217,24 +218,38 @@ export default function HeroScene({ onSubmit, loading, data, error }: HeroSceneP
       <div className="relative z-10 w-full lg:w-[55%] flex items-start lg:items-center justify-center p-4 lg:p-12 pb-20 lg:pb-12 pointer-events-none pt-12 lg:pt-0">
         
         <div className="relative flex flex-col items-center justify-center">
-          {/* Theme Toggle */}
-          <div className="absolute top-2 lg:top-12 -right-4 lg:-right-10 z-50 pointer-events-auto">
+          {/* Phone Mockup */}
+          <div className="pointer-events-auto transform scale-[0.55] sm:scale-75 md:scale-[0.85] lg:scale-[0.85] origin-top mt-4 lg:mt-0 mb-[-380px] sm:mb-[-210px] md:mb-[-126px] lg:mb-[-126px]">
+            <PhoneMockup data={data} loading={loading} theme={phoneTheme} />
+          </div>
+
+          {/* Mockup Controls — sits below the phone, never overlaps */}
+          <div className="pointer-events-auto flex items-center gap-2 mt-6 z-50">
+            {/* Theme Toggle */}
             <button 
               onClick={() => setPhoneTheme(prev => prev === 'light' ? 'dark' : 'light')}
-              className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-all border border-white/10 shadow-xl"
+              className="inline-flex items-center gap-2 h-9 px-4 rounded-full text-[13px] font-medium bg-white/[0.07] text-white/80 hover:text-white hover:bg-white/[0.12] border border-white/[0.08] hover:border-white/[0.15] backdrop-blur-sm transition-all duration-300 select-none whitespace-nowrap"
               aria-label="Toggle theme"
               title={`Switch to ${phoneTheme === 'light' ? 'dark' : 'light'} mode`}
             >
               {phoneTheme === 'light' ? (
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                  <span>Dark</span>
+                </>
               ) : (
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                  <span>Light</span>
+                </>
               )}
             </button>
-          </div>
 
-          <div className="pointer-events-auto transform scale-[0.55] sm:scale-75 md:scale-[0.85] lg:scale-[0.85] origin-top mt-4 lg:mt-0 mb-[-380px] sm:mb-[-210px] md:mb-[-126px] lg:mb-[-126px]">
-            <PhoneMockup data={data} loading={loading} theme={phoneTheme} />
+            {/* Divider */}
+            <div className="w-px h-5 bg-white/10" />
+
+            {/* Export to Figma */}
+            <ExportToFigma data={data} theme={phoneTheme} disabled={!data && !loading} />
           </div>
         </div>
       </div>
