@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useMemo } from 'react';
 import type { OGData } from '@/types';
 import PhoneShell from './PhoneShell';
 
@@ -9,9 +9,26 @@ interface Props {
   theme: 'light' | 'dark';
 }
 
+const NAMES = [
+  'Jordan Smith',
+  'Alex Rivera',
+  'Taylor Morgan',
+  'Casey Wright',
+  'Riley Cooper',
+  'Jamie Dawson',
+  'Quinn Campbell',
+  'Skyler Reed',
+  'Morgan Page',
+  'Avery Hayes'
+];
+
 export default function SlackMockup({ data, loading, theme }: Props) {
   const isDark = theme === 'dark';
   
+  const randomName = useMemo(() => {
+    return NAMES[Math.floor(Math.random() * NAMES.length)];
+  }, []);
+
   const bgApp = isDark ? 'bg-[#1a1d21]' : 'bg-[#ffffff]';
   const textMain = isDark ? 'text-[#d1d2d3]' : 'text-[#1d1c1d]';
   const textTitle = isDark ? 'text-[#ffffff]' : 'text-[#1d1c1d]';
@@ -40,16 +57,16 @@ export default function SlackMockup({ data, loading, theme }: Props) {
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={textTitle}><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
         <div className="flex items-center ml-4 gap-2.5">
           <div className="w-9 h-9 rounded-md bg-gray-200 overflow-hidden flex-shrink-0 relative">
-            <img src="https://i.pravatar.cc/100?img=60" alt="Kedar" className="w-full h-full object-cover" />
+            <img src="https://i.pravatar.cc/100?img=11" alt="Profile" className="w-full h-full object-cover" />
             <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-[#2bac76] rounded-full border-[1.5px] border-[#1a1d21]"></div>
           </div>
           <div>
             <div className={`font-bold text-[15px] leading-tight ${textTitle} flex items-center gap-1`}>
-              KEDAR DATTRAO DESHMUKH (you)
+              {randomName} (you)
             </div>
             <div className={`text-[12px] font-medium flex items-center gap-1 ${isDark ? 'text-[#2bac76]' : 'text-[#007a5a]'}`}>
               <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" className="opacity-80"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-              <span className={textMuted}>2 tabs <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="inline"><path d="M6 9l6 6 6-6"/></svg></span>
+              <span className={textMuted}>active</span>
             </div>
           </div>
         </div>
@@ -60,7 +77,7 @@ export default function SlackMockup({ data, loading, theme }: Props) {
         
         {/* Intro text */}
         <p className={`text-[15px] ${textMain} leading-snug pr-4 mt-2`}>
-          talk to yourself here, but please bear in mind you'll have to supply both sides of the conversation.
+          This is your private sandbox for testing link previews and sharing curated assets with the marketing team.
         </p>
 
         {/* PRO Banner */}
@@ -83,11 +100,11 @@ export default function SlackMockup({ data, loading, theme }: Props) {
         {/* Link Message */}
         <div className="flex gap-3">
           <div className="w-10 h-10 rounded-md bg-gray-200 flex-shrink-0 overflow-hidden">
-            <img src="https://i.pravatar.cc/100?img=60" alt="Kedar" className="w-full h-full object-cover" />
+            <img src="https://i.pravatar.cc/100?img=60" alt="Avatar" className="w-full h-full object-cover" />
           </div>
           <div className="flex-1 pb-4 min-w-0">
             <div className="flex items-baseline gap-2">
-              <span className={`font-bold text-[15px] ${textTitle}`}>KEDAR DATTRAO DESHMUKH</span>
+              <span className={`font-bold text-[15px] ${textTitle}`}>{randomName.toUpperCase()}</span>
               <span className={`text-[12px] ${textMuted}`}>23:21</span>
             </div>
             
@@ -96,29 +113,31 @@ export default function SlackMockup({ data, loading, theme }: Props) {
             </p>
 
             {/* Slack Link Preview Attachment */}
-            {data ? (
+            {(data || !loading) && (
               <div className="mt-2 flex">
                 <div className={`w-[4px] flex-shrink-0 rounded-full mr-3 ${isDark ? 'bg-[#3a3b3c]' : 'bg-[#dddddd]'}`}></div>
                 <div className="flex-1 min-w-0 pt-0.5">
                   <div className="flex items-center gap-1.5">
-                    {data.domain ? (
-                      <img src={`https://www.google.com/s2/favicons?domain=${data.domain}&sz=32`} className="w-3.5 h-3.5 rounded-sm" />
-                    ) : (
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className={textTitle}><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-                    )}
-                    <span className={`text-[12px] font-bold ${textTitle}`}>{data.siteName || data.domain || 'youtube.com'}</span>
+                    <img src={`https://www.google.com/s2/favicons?domain=${data?.domain || 'client-portal.com'}&sz=32`} className="w-3.5 h-3.5 rounded-sm" />
+                    <span className={`text-[12px] font-bold ${textTitle}`}>{data?.siteName || data?.domain || 'Client Portal'}</span>
                   </div>
-                  <div className={`font-bold text-[15px] mt-1 leading-tight ${textTitle}`}>{data.title || 'YouTube'}</div>
-                  <div className={`text-[14px] mt-1 leading-snug ${textMain}`}>{data.description}</div>
+                  <div className={`font-bold text-[15px] mt-1 leading-tight ${textTitle}`}>{data?.title || 'Q3 Strategy Deck & Assets'}</div>
+                  <div className={`text-[14px] mt-1 leading-snug ${textMain}`}>
+                    {data?.description || 'Review the final slides and download the accompanying brand assets before the client review.'}
+                  </div>
                   
-                  {data.image && (
-                    <div className="mt-2 rounded-lg overflow-hidden border border-[rgba(0,0,0,0.1)] inline-block max-w-[260px]">
-                      <img src={data.image} alt="Preview" className="w-full object-cover max-h-[160px]" />
-                    </div>
-                  )}
+                  <div className="mt-2 rounded-lg overflow-hidden border border-[rgba(0,0,0,0.1)] inline-block max-w-[260px]">
+                    <img 
+                      src={data?.image || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop"} 
+                      alt="Preview" 
+                      className="w-full object-cover max-h-[160px]" 
+                    />
+                  </div>
                 </div>
               </div>
-            ) : loading ? (
+            )}
+            
+            {loading && (
               <div className="mt-2 flex animate-pulse">
                  <div className={`w-[4px] flex-shrink-0 rounded-full mr-3 ${isDark ? 'bg-[#3a3b3c]' : 'bg-[#dddddd]'}`}></div>
                  <div className="flex-1 pt-1 space-y-2">
@@ -127,8 +146,6 @@ export default function SlackMockup({ data, loading, theme }: Props) {
                    <div className={`h-10 w-full rounded ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`}></div>
                  </div>
               </div>
-            ) : (
-              <div className={`mt-2 italic text-sm ${textMuted}`}>Waiting for link...</div>
             )}
             
           </div>

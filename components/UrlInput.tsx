@@ -36,15 +36,15 @@ export default function UrlInput({ onSubmit, loading }: UrlInputProps) {
       <div className="w-full">
         {/* Input container */}
         <div
-          className="flex items-center rounded-2xl border transition-all input-glow shadow-xl"
+          className="flex items-center rounded-2xl border transition-all input-glow shadow-2xl"
           style={{
-            background: '#f4f0e6',
-            borderColor: 'rgba(0,0,0,0.05)',
-            padding: '8px 8px 8px 20px',
+            background: '#ffffff',
+            borderColor: 'var(--mist)',
+            padding: '8px 8px 8px 24px',
           }}
         >
           {/* Link icon */}
-          <svg className="flex-shrink-0 mr-3" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.3)" strokeWidth="2">
+          <svg className="flex-shrink-0 mr-4" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" strokeWidth="2.5" opacity="0.6">
             <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
             <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
           </svg>
@@ -57,13 +57,12 @@ export default function UrlInput({ onSubmit, loading }: UrlInputProps) {
             value={value}
             onChange={e => handleChange(e.target.value)}
             onKeyDown={handleKey}
-            placeholder="Paste your URL here (e.g., https://yo...)"
+            placeholder="Paste your URL here..."
             autoComplete="off"
             spellCheck={false}
-            className="flex-1 bg-transparent outline-none text-base font-mono min-w-0"
+            className="flex-1 bg-transparent outline-none body-md min-w-0"
             style={{
-              fontFamily: 'DM Mono, monospace',
-              color: '#111111',
+              color: 'var(--deep-forest)',
             }}
           />
 
@@ -72,17 +71,16 @@ export default function UrlInput({ onSubmit, loading }: UrlInputProps) {
             id="preview-btn"
             onClick={handleSubmit}
             disabled={!value.trim() || loading}
-            className="flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm transition-all font-syne flex-shrink-0"
+            className="flex items-center gap-2 px-8 py-4 rounded-xl transition-all label-sm flex-shrink-0 shadow-lg hover:shadow-xl active:scale-95"
             style={{
-              fontFamily: 'Syne, sans-serif',
-              background: !value.trim() || loading ? 'rgba(200,90,68,0.5)' : '#c85a44',
-              color: '#ffffff',
+              background: !value.trim() || loading ? 'rgba(26, 43, 33, 0.05)' : 'var(--deep-forest)',
+              color: !value.trim() || loading ? 'var(--sage)' : 'var(--mist)',
               cursor: !value.trim() || loading ? 'not-allowed' : 'pointer',
             }}
           >
             {loading ? (
               <>
-                Loading…
+                Scanning…
                 <svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
                 </svg>
@@ -90,7 +88,7 @@ export default function UrlInput({ onSubmit, loading }: UrlInputProps) {
             ) : (
               <>
                 Preview
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14"/>
                   <path d="M12 5l7 7-7 7"/>
                 </svg>

@@ -1,12 +1,27 @@
 import type { OGData } from '@/types';
 import { esc, trunc, wrapText } from '../figma-clipboard';
 
+const NAMES = [
+  'Jordan Smith',
+  'Alex Rivera',
+  'Taylor Morgan',
+  'Casey Wright',
+  'Riley Cooper',
+  'Jamie Dawson',
+  'Quinn Campbell',
+  'Skyler Reed',
+  'Morgan Page',
+  'Avery Hayes'
+];
+
 export function buildSlackFigmaClipboard(
   data: OGData | null,
   theme: 'light' | 'dark',
   embeddedImages: { ogImage: string; avatar: string }
 ): string {
   const isDark = theme === 'dark';
+  const randomName = NAMES[Math.floor(Math.random() * NAMES.length)];
+
   const bgApp = isDark ? '#1a1d21' : '#ffffff';
   const textMain = isDark ? '#d1d2d3' : '#1d1c1d';
   const textTitle = isDark ? '#ffffff' : '#1d1c1d';
@@ -91,7 +106,7 @@ export function buildSlackFigmaClipboard(
       </g>
       
       <g transform="translate(100, 10)">
-        <text x="0" y="14" font-family="${f}" font-size="15" font-weight="bold" fill="${textTitle}">KEDAR DATTRAO DESHMUKH (you)</text>
+        <text x="0" y="14" font-family="${f}" font-size="15" font-weight="bold" fill="${textTitle}">${esc(randomName)} (you)</text>
         <g transform="translate(0, 22)">
           ${statusIcon}
           <text x="14" y="9" font-family="${f}" font-size="12" font-weight="500" fill="${isDark ? '#2bac76' : '#007a5a'}">2 tabs</text>
@@ -126,7 +141,7 @@ export function buildSlackFigmaClipboard(
       <g transform="translate(16, 200)">
         <rect width="40" height="40" rx="6" fill="url(#slAvatar)"/>
         <g transform="translate(52, 0)">
-          <text x="0" y="14" font-family="${f}" font-size="15" font-weight="bold" fill="${textTitle}">KEDAR DATTRAO DESHMUKH</text>
+          <text x="0" y="14" font-family="${f}" font-size="15" font-weight="bold" fill="${textTitle}">${esc(randomName.toUpperCase())}</text>
           <text x="204" y="14" font-family="${f}" font-size="12" fill="${textMuted}">23:21</text>
           
           <text x="0" y="36" font-family="${f}" font-size="15" fill="${linkCol}" text-decoration="underline">${url}</text>
