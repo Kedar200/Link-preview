@@ -60,14 +60,14 @@ export default function HeroScene({ onSubmit, loading, data, error }: HeroSceneP
         
         <div className="relative flex flex-col items-center justify-center">
           {/* Phone Mockup */}
-          <div className="pointer-events-auto transform scale-[0.55] sm:scale-75 md:scale-[0.85] lg:scale-[0.85] origin-top mt-4 lg:mt-0 mb-[-380px] sm:mb-[-210px] md:mb-[-126px] lg:mb-[-126px]">
+          <div className="relative pointer-events-auto transform scale-[0.55] sm:scale-75 md:scale-[0.85] lg:scale-[0.85] origin-top mt-4 lg:mt-0 mb-[-380px] sm:mb-[-210px] md:mb-[-126px] lg:mb-[-126px]">
             <PhoneMockup data={data} loading={loading} theme={phoneTheme} app={app} />
           </div>
 
-          {/* Floating Controls Dock */}
-          <div className="pointer-events-auto flex items-center gap-2 mt-6 z-50 bg-[#111a15] p-1.5 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.2)] border border-white/10">
-            {/* App Switcher (Compact) */}
-            <div className="flex items-center gap-1 px-2">
+          {/* Vertical Controls Dock */}
+          <div className="pointer-events-auto absolute top-[60%] sm:top-1/2 -right-8 sm:-right-12 md:-right-24 -translate-y-1/2 flex flex-col items-center gap-2 z-50 bg-[#111a15] p-1.5 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.2)] border border-white/10">
+            {/* App Switcher */}
+            <div className="flex flex-col items-center gap-1 py-1">
               {[
                 { id: 'whatsapp', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>, name: 'WhatsApp' },
                 { id: 'twitter', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91C1.63 9.33.75 10.57.75 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.67-.88 3.33-2.19c1.4.46 2.91.2 3.92-.81s1.26-2.53.8-3.91c1.31-.67 2.2-1.91 2.2-3.34z"/><path d="M10.54 15.85l-3.76-4.38 1.52-1.31 2.12 2.47 4.21-4.83 1.61 1.41z" fill="#111a15"/></svg>, name: 'Twitter' },
@@ -91,32 +91,21 @@ export default function HeroScene({ onSubmit, loading, data, error }: HeroSceneP
               ))}
             </div>
 
-            <div className="w-px h-5 bg-white/10" />
+            <div className="w-5 h-px bg-white/10" />
 
             {/* Theme Toggle */}
             <button 
               onClick={() => setPhoneTheme(prev => prev === 'light' ? 'dark' : 'light')}
-              className="inline-flex items-center gap-2 h-9 px-4 rounded-full text-[13px] font-medium bg-transparent text-white/80 hover:text-white hover:bg-white/5 transition-all duration-300 select-none whitespace-nowrap"
+              className="flex items-center justify-center w-9 h-9 mb-1 rounded-full bg-transparent text-white/80 hover:text-white hover:bg-white/5 transition-all duration-300 select-none"
               aria-label="Toggle theme"
               title={`Switch to ${phoneTheme === 'light' ? 'dark' : 'light'} mode`}
             >
               {phoneTheme === 'light' ? (
-                <>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                  <span>Dark</span>
-                </>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
               ) : (
-                <>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-                  <span>Light</span>
-                </>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
               )}
             </button>
-
-            <div className="w-px h-5 bg-white/10" />
-
-            {/* Export to Figma (Hidden for v1) */}
-            {false && <ExportToFigma data={data} theme={phoneTheme} app={app} disabled={!data && !loading} />}
           </div>
         </div>
       </div>
