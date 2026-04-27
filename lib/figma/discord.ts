@@ -43,7 +43,7 @@ export function buildDiscordFigmaClipboard(
     </pattern>` : '';
   const avatarDef = `
     <pattern id="dcAvatar1" patternContentUnits="objectBoundingBox" width="1" height="1">
-      <image xlink:href="https://github.com/github.png" x="0" y="0" width="1" height="1" preserveAspectRatio="xMidYMid slice"/>
+      <image xlink:href="https://github.com/Kedar200.png" x="0" y="0" width="1" height="1" preserveAspectRatio="xMidYMid slice"/>
     </pattern>
     <pattern id="dcAvatar2" patternContentUnits="objectBoundingBox" width="1" height="1">
       <image xlink:href="https://i.pravatar.cc/100?img=33" x="0" y="0" width="1" height="1" preserveAspectRatio="xMidYMid slice"/>

@@ -34,7 +34,7 @@ export default function DiscordMockup({ data, loading, theme }: Props) {
         <div className="flex-1"></div>
         <div className={`flex items-center gap-1.5 ${textTitle}`}>
           <div className="w-4 h-4 bg-white rounded-full flex items-center justify-center overflow-hidden">
-             <img src="https://github.com/github.png" alt="Server" className="w-full h-full object-cover" />
+             <img src="https://github.com/Kedar200.png" alt="Server" className="w-full h-full object-cover" />
           </div>
           LinkPeek
         </div>
