@@ -1,14 +1,22 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import HeroScene from '@/components/HeroScene';
 import FaqSection from '@/components/FaqSection';
 import Footer from '@/components/Footer';
 import { useOGFetch } from '@/hooks/useOGFetch';
 
+const DEFAULT_URL = 'https://pin.it/1m5xLopyb';
+
 export default function HomePage() {
   const { data, loading, error, fetch } = useOGFetch();
   const [hasSearched, setHasSearched] = useState(false);
+
+  // Auto-fetch the default URL on mount so mockups never show placeholders
+  useEffect(() => {
+    setHasSearched(true);
+    fetch(DEFAULT_URL);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSubmit = async (url: string) => {
     setHasSearched(true);
