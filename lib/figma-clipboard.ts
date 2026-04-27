@@ -272,7 +272,7 @@ function buildWhatsAppFigmaClipboard(
     <!-- Status Bar -->
     <g id="Status-Bar">
       <rect x="${SX}" y="${statusY}" width="${SW}" height="${statusH}" fill="${c.header}"/>
-      <text x="${SX + 28}" y="${statusY + 34}" font-family="${f}" font-size="14" font-weight="600" fill="${c.text}">12:45</text>
+      <text x="${SX + 28}" y="${statusY + 34}" font-family="${f}" font-size="14" font-weight="600" fill="${c.text}">10:04</text>
       <!-- Status bar icons (right side) -->
       <g transform="translate(${SX + SW - 60},${statusY + 14})">
         <rect x="0" y="2" width="7" height="16" rx="1" fill="${c.text}" opacity="0.9"/>
@@ -306,7 +306,10 @@ function buildWhatsAppFigmaClipboard(
       </g>
       
       <!-- Contact Name -->
-      <text id="Contact-Name" x="${SX + 84}" y="${headerY + 36}" font-family="${f}" font-size="17" font-weight="600" fill="${c.text}">Manas</text>
+      <g transform="translate(${SX + 84}, ${headerY + 12})">
+        <text id="Contact-Name" x="0" y="14" font-family="${f}" font-size="17" font-weight="600" fill="${c.text}">E602</text>
+        <text id="Contact-Sub" x="0" y="32" font-family="${f}" font-size="12" fill="${c.sub}">Kedar, Sankalp, Saurabh...</text>
+      </g>
       
       <!-- Header Action Icons -->
       ${videoIcon}
@@ -318,37 +321,50 @@ function buildWhatsAppFigmaClipboard(
     <g id="Chat-Area">
       <rect x="${SX}" y="${chatY}" width="${SW}" height="${inputBarY - chatY}" fill="${c.screen}"/>
       
-      <!-- Yesterday Badge -->
-      <g id="Badge-Yesterday" transform="translate(${SX + SW / 2},${badgeYesterdayY})">
-        <rect x="-45" y="-12" width="90" height="26" rx="8" fill="${c.dateBg}" opacity="0.9"/>
-        <text text-anchor="middle" y="4" font-family="${f}" font-size="11" font-weight="500" fill="${c.sub}">Yesterday</text>
+      <!-- Date Badge -->
+      <g id="Badge-Date" transform="translate(${SX + SW / 2},${badgeYesterdayY})">
+        <rect x="-60" y="-12" width="120" height="26" rx="8" fill="${c.dateBg}" opacity="0.9"/>
+        <text text-anchor="middle" y="4" font-family="${f}" font-size="11" font-weight="500" fill="${c.sub}">AUGUST 27, 2026</text>
       </g>
 
-      <!-- Incoming Sticker Message -->
-      <g id="Incoming-Sticker" transform="translate(${SX + 12},${stickerY})">
-        <rect width="120" height="108" rx="12" fill="${c.inBubble}"/>
-        <rect x="10" y="8" width="100" height="72" rx="6" fill="${c.stickerBg}"/>
-        <text x="46" y="56" font-size="32" text-anchor="middle">🐹</text>
-        <text x="100" y="100" font-family="${f}" font-size="10" fill="${c.sub}" text-anchor="end">11:27 pm</text>
+      <!-- Kedar Message 1 -->
+      <g transform="translate(${SX + 12},${chatY + 50})">
+        <path d="M0 0 L12 0 L12 12 Z" fill="${c.inBubble}" transform="translate(-8, 0)"/>
+        <rect width="${SW * 0.8}" height="55" rx="10" fill="${c.inBubble}"/>
+        <text x="12" y="22" font-family="${f}" font-size="13" font-weight="bold" fill="#06cf9c">Kedar Deshmukh</text>
+        <text x="12" y="42" font-family="${f}" font-size="15" fill="${c.text}">Hey, are we finally ready to show the client?</text>
+        <text x="${SW * 0.8 - 50}" y="48" font-family="${f}" font-size="10" fill="${c.sub}">10:01 pm</text>
       </g>
 
-      <!-- Today Badge -->
-      <g id="Badge-Today" transform="translate(${SX + SW / 2},${badgeTodayY})">
-        <rect x="-32" y="-12" width="64" height="26" rx="8" fill="${c.dateBg}" opacity="0.9"/>
-        <text text-anchor="middle" y="4" font-family="${f}" font-size="11" font-weight="500" fill="${c.sub}">Today</text>
+      <!-- Outgoing Message 1 -->
+      <g transform="translate(${SX + SW - 160},${chatY + 120})">
+        <path d="M12 0 L0 0 L0 12 Z" fill="${c.outBubble}" transform="translate(148, 0)"/>
+        <rect width="148" height="60" rx="10" fill="${c.outBubble}"/>
+        <text x="12" y="22" font-family="${f}" font-size="15" fill="${c.text}">Yeah, just finishing the</text>
+        <text x="12" y="42" font-family="${f}" font-size="15" fill="${c.text}">WhatsApp mockup now.</text>
+        <text x="90" y="52" font-family="${f}" font-size="10" fill="${isDark ? 'rgba(255,255,255,0.5)' : '#54656f'}">10:04 pm</text>
       </g>
 
-      <!-- Outgoing Message Bubble -->
+      <!-- Unread Divider -->
+      <g id="Badge-Unread" transform="translate(${SX + SW / 2},${chatY + 200})">
+        <rect x="-65" y="-12" width="130" height="26" rx="12" fill="${c.dateBg}" opacity="0.9"/>
+        <text text-anchor="middle" y="4" font-family="${f}" font-size="11" font-weight="500" fill="${c.text}">1 unread message</text>
+      </g>
+
+      <!-- Kedar Message 2 -->
+      <g transform="translate(${SX + 12},${chatY + 240})">
+        <path d="M0 0 L12 0 L12 12 Z" fill="${c.inBubble}" transform="translate(-8, 0)"/>
+        <rect width="${SW * 0.75}" height="45" rx="10" fill="${c.inBubble}"/>
+        <text x="12" y="22" font-family="${f}" font-size="13" font-weight="bold" fill="#06cf9c">Kedar Deshmukh</text>
+        <text x="12" y="38" font-family="${f}" font-size="15" fill="${c.text}">Looks clean. Send me the link!</text>
+      </g>
+
+      <!-- Outgoing Message Bubble (Preview) -->
       <g id="Outgoing-Message" transform="translate(${bubbleX},${bubbleY})">
         <rect id="Bubble" width="${bubbleW}" height="${bubbleH}" rx="12" fill="${c.outBubble}"/>
-        
-        <!-- Bubble tail (triangle) -->
         <polygon points="${bubbleW},0 ${bubbleW + 8},0 ${bubbleW},10" fill="${c.outBubble}"/>
-        
         ${data ? `${cardContent}
-        
-        <!-- Timestamp + Blue Check -->
-        <text id="Time-Sent" x="${bubbleW - 56}" y="${timeY}" font-family="${f}" font-size="10" fill="${c.sub}" text-anchor="end">12:33 pm</text>
+        <text id="Time-Sent" x="${bubbleW - 56}" y="${timeY}" font-family="${f}" font-size="10" fill="${isDark ? 'rgba(255,255,255,0.5)' : '#54656f'}" text-anchor="end">10:05 pm</text>
         <g transform="translate(${bubbleW - 44},${timeY - 12}) scale(0.58)">
           <polyline points="20 6 9 17 4 12" fill="none" stroke="#53bdeb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </g>
@@ -413,7 +429,7 @@ export async function copyForFigma(data: OGData | null, theme: 'light' | 'dark',
   // Fetch all images in parallel and convert to base64 data URIs
   const [ogImage, avatar] = await Promise.all([
     data?.image ? fetchImageAsDataUri(data.image) : Promise.resolve(''),
-    fetchImageAsDataUri('https://i.pravatar.cc/100?img=47'),
+    fetchImageAsDataUri('https://i.pravatar.cc/100?img=12'),
   ]);
 
   let svg = '';

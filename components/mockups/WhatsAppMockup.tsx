@@ -27,6 +27,7 @@ export default function WhatsAppMockup({ data, loading, theme }: Props) {
   const bgOutgoing = isDark ? 'bg-[#005c4b]' : 'bg-[#e1f6cb]';
   
   const bgDate = isDark ? 'bg-[#182229]' : 'bg-[#ffffff]';
+  const unreadBg = isDark ? 'bg-[#182229]/80' : 'bg-[#ffffff]/80';
   
   const bgInputBar = isDark ? 'bg-[#0b141a]' : 'bg-[#ffffff]';
   const bgInputPill = isDark ? 'bg-[#1f2c34]' : 'bg-[#f0f2f5]';
@@ -36,9 +37,21 @@ export default function WhatsAppMockup({ data, loading, theme }: Props) {
 
   return (
     <PhoneShell bgApp={bgApp}>
+      {/* WhatsApp Doodle Background (Static) */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{ 
+          backgroundImage: "url('/wa-bg.png')",
+          backgroundSize: '400px',
+          backgroundRepeat: 'repeat',
+          opacity: 0.1,
+          filter: isDark ? 'none' : 'invert(1)'
+        }}
+      />
+
       {/* Status bar */}
       <div className={`h-12 w-full flex items-center justify-between px-7 pt-3 text-[14px] font-semibold z-40 ${bgHeader} ${textTitle}`}>
-        <span className="pl-1">12:45</span>
+        <span className="pl-1">10:04</span>
         <div className={`flex items-center gap-1.5 opacity-90 pr-1 ${isDark ? '' : 'text-black'}`}>
           <svg width="16" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
           <svg width="18" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
@@ -50,11 +63,12 @@ export default function WhatsAppMockup({ data, loading, theme }: Props) {
         <div className={`flex items-center cursor-pointer`} style={{ color: headerIconColor }}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           <div className="w-10 h-10 bg-gray-300 rounded-full overflow-hidden flex-shrink-0 ml-1">
-            <img src="https://i.pravatar.cc/100?img=47" alt="Manas" className="w-full h-full object-cover" />
+            <img src="https://i.pravatar.cc/100?img=12" alt="E602" className="w-full h-full object-cover" />
           </div>
         </div>
         <div className="flex-1 ml-2">
-          <div className={`font-semibold text-[17px] leading-tight tracking-wide ${textTitle}`}>Manas</div>
+          <div className={`font-semibold text-[17px] leading-tight tracking-wide ${textTitle}`}>E602</div>
+          <div className={`text-[12px] ${textSub} truncate max-w-[180px]`}>Kedar, Sankalp, Saurabh...</div>
         </div>
         <div className="flex items-center gap-6 pr-2" style={{ color: headerIconColor }}>
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
@@ -64,35 +78,53 @@ export default function WhatsAppMockup({ data, loading, theme }: Props) {
       </div>
 
       <div className={`flex-1 overflow-y-auto relative p-3 flex flex-col gap-3 scrollbar-hide z-20 pb-4`}>
-        {/* WhatsApp Doodle Background */}
-        <div 
-          className="absolute inset-0 pointer-events-none z-0"
-          style={{ 
-            backgroundImage: "url('/wa-bg.png')",
-            backgroundSize: '400px',
-            backgroundRepeat: 'repeat',
-            opacity: isDark ? 0.06 : 0.4,
-            filter: isDark ? 'invert(1)' : 'none'
-          }}
-        />
 
-        {/* Date: Yesterday */}
+        {/* Date Divider */}
         <div className="flex justify-center z-10 mt-1">
-          <span className={`${bgDate} ${textSub} font-medium text-[11px] px-3 py-1.5 rounded-lg shadow-sm`}>Yesterday</span>
+          <span className={`${bgDate} ${textSub} font-medium text-[11px] px-3 py-1.5 rounded-lg shadow-sm uppercase tracking-wider`}>August 27, 2026</span>
         </div>
 
-        {/* Fake Incoming Message - Sticker */}
-        <div className={`${bgIncoming} ${textIncoming} text-[15px] p-2 rounded-xl rounded-tl-none shadow-sm self-start max-w-[85%] relative z-10 mt-2`}>
+        {/* Kedar Deshmukh: Hey, are we ready... */}
+        <div className={`${bgIncoming} p-2 rounded-xl rounded-tl-none shadow-sm self-start max-w-[85%] relative z-10 mt-1`}>
           <div className={`absolute top-0 -left-2 w-3 h-3 ${bgIncoming}`} style={{ clipPath: 'polygon(100% 0, 100% 100%, 0 0)' }}></div>
-          <div className="w-24 h-24 bg-black/5 rounded-lg flex items-center justify-center mb-1 border border-black/5">
-            <span className="text-4xl filter drop-shadow-sm">🐹</span>
+          <div className="text-[13px] font-bold text-[#06cf9c] mb-0.5">Kedar Deshmukh</div>
+          <div className={`${textIncoming} text-[15px] leading-snug`}>
+            Hey, are we finally ready to show the client the link previews? 🚀
           </div>
-          <div className={`text-[10px] ${textSub} text-right mt-1`}>11:27 pm</div>
+          <div className={`text-[10px] ${textSub} text-right mt-1`}>10:01 pm</div>
         </div>
 
-        {/* Date: Today */}
-        <div className="flex justify-center z-10 mt-2">
-          <span className={`${bgDate} ${textSub} font-medium text-[11px] px-3 py-1.5 rounded-lg shadow-sm`}>Today</span>
+        {/* Kedar Deshmukh: Need to make sure... */}
+        <div className={`${bgIncoming} p-2 rounded-xl rounded-tl-none shadow-sm self-start max-w-[85%] relative z-10`}>
+          <div className="text-[13px] font-bold text-[#06cf9c] mb-0.5">Kedar Deshmukh</div>
+          <div className={`${textIncoming} text-[15px] leading-snug`}>
+            Need to make sure they look premium on both mobile and desktop.
+          </div>
+          <div className={`text-[10px] ${textSub} text-right mt-1`}>10:01 pm</div>
+        </div>
+
+        {/* Outgoing: Yeah, just finishing... */}
+        <div className={`${bgOutgoing} p-2 rounded-xl rounded-tr-none shadow-sm self-end max-w-[85%] relative z-10`}>
+          <div className={`absolute top-0 -right-2 w-3 h-3 ${bgOutgoing}`} style={{ clipPath: 'polygon(0 0, 0 100%, 100% 0)' }}></div>
+          <div className={`${textIncoming} text-[15px] leading-snug`}>
+            Yeah, just finishing up the WhatsApp mockup now. Check this out:
+          </div>
+          <div className={`text-[10px] ${isDark ? 'text-white/50' : 'text-[#54656f]'} text-right mt-1 flex justify-end items-center gap-1`}>
+            10:04 pm
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#53bdeb" strokeWidth="2"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+        </div>
+
+        {/* Unread Divider */}
+        <div className="flex justify-center z-10 my-1">
+          <span className={`${unreadBg} ${textTitle} text-[11px] font-medium px-4 py-1 rounded-full shadow-sm`}>1 unread message</span>
+        </div>
+
+        {/* Kedar Deshmukh: Wow, that looks... */}
+        <div className={`${bgIncoming} p-2 rounded-xl rounded-tl-none shadow-sm self-start max-w-[85%] relative z-10`}>
+          <div className="text-[13px] font-bold text-[#06cf9c] mb-0.5">Kedar Deshmukh</div>
+          <div className={`${textIncoming} text-[15px] leading-snug`}>Wow, that looks clean. Send me the link!</div>
+          <div className={`text-[10px] ${textSub} text-right mt-1`}>10:04 pm</div>
         </div>
 
         {/* Real Message (Preview) */}
@@ -105,7 +137,7 @@ export default function WhatsAppMockup({ data, loading, theme }: Props) {
                 <WhatsAppPreview data={data} theme={theme} />
               </div>
               <div className="px-2 pt-0.5 pb-1 flex justify-end gap-1 items-center">
-                <span className={`text-[10px] ${textSub}`}>12:33 pm</span>
+                <span className={`text-[10px] ${isDark ? 'text-white/50' : 'text-[#54656f]'}`}>10:05 pm</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#53bdeb" strokeWidth="2"><polyline points="20 6 9 17 4 12"/></svg>
               </div>
             </div>

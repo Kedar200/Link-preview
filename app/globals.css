@@ -131,11 +131,6 @@ body {
   width: 0%;
 }
 
-/* Lime glow for input focus */
-.input-glow:focus-within {
-  box-shadow: 0 0 0 2px rgba(232, 255, 71, 0.25);
-  border-color: rgba(232, 255, 71, 0.5) !important;
-}
 
 /* Transition defaults */
 .transition-all {

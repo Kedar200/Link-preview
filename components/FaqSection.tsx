@@ -36,16 +36,16 @@ export default function FaqSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {faqData.map((faq, index) => {
             const hoverColors = [
-              'hover:bg-[#1a2b21] hover:text-[#f4f0e6]',
-              'hover:bg-[#2f4a3a] hover:text-[#f4f0e6]',
-              'hover:bg-[#4f6f5b] hover:text-[#f4f0e6]',
-              'hover:bg-[#dde6e1] hover:text-[#1a2b21]'
+              'hover:bg-[#1a2b21] hover:text-[#f4f0e6] hover:border-[#1a2b21]',
+              'hover:bg-[#2f4a3a] hover:text-[#f4f0e6] hover:border-[#2f4a3a]',
+              'hover:bg-[#4f6f5b] hover:text-[#f4f0e6] hover:border-[#4f6f5b]',
+              'hover:bg-[#dde6e1] hover:text-[#1a2b21] hover:border-[#dde6e1]'
             ];
             
             return (
               <div 
                 key={index}
-                className={`group relative bg-[#dde6e1]/20 rounded-[2.5rem] p-12 min-h-[280px] flex flex-col justify-between transition-all duration-500 border border-transparent card-animate ${hoverColors[index % 4]}`}
+                className={`group relative bg-[#dde6e1]/20 rounded-[2.5rem] p-12 min-h-[280px] flex flex-col justify-between transition-all duration-500 border border-[#4f6f5b]/15 card-animate ${hoverColors[index % 4]}`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {/* Arrow Button */}
