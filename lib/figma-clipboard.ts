@@ -16,7 +16,7 @@ export function trunc(s: string, n: number) { return s.length > n ? s.slice(0,n)
  * Uses a server-side proxy route to bypass CORS.
  * Returns empty string on failure (image will simply be omitted).
  */
-export async function fetchImageAsDataUri(url: string): Promise<string> {
+async function fetchImageAsDataUri(url: string): Promise<string> {
   try {
     const res = await fetch(`/api/proxy-image?url=${encodeURIComponent(url)}`);
     if (!res.ok) throw new Error('Proxy failed');
@@ -70,7 +70,7 @@ function getTheme(isDark: boolean) {
  * Builds the SVG string for Figma clipboard.
  * Now accepts pre-fetched base64 data URIs so the SVG is fully self-contained.
  */
-export function buildWhatsAppFigmaClipboard(
+function buildWhatsAppFigmaClipboard(
   data: OGData | null,
   theme: 'light' | 'dark',
   embeddedImages: { ogImage: string; avatar: string }

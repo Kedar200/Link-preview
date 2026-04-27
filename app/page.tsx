@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Header from '@/components/Header';
 import HeroScene from '@/components/HeroScene';
 import Footer from '@/components/Footer';
@@ -34,6 +34,8 @@ export default function HomePage() {
               error={error}
               hasSearched={hasSearched}
             />
+
+
           </main>
         </div>
       </div>

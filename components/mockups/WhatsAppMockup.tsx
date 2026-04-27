@@ -64,6 +64,18 @@ export default function WhatsAppMockup({ data, loading, theme }: Props) {
       </div>
 
       <div className={`flex-1 overflow-y-auto relative p-3 flex flex-col gap-3 scrollbar-hide z-20 pb-4`}>
+        {/* WhatsApp Doodle Background */}
+        <div 
+          className="absolute inset-0 pointer-events-none z-0"
+          style={{ 
+            backgroundImage: "url('/wa-bg.png')",
+            backgroundSize: '400px',
+            backgroundRepeat: 'repeat',
+            opacity: isDark ? 0.06 : 0.4,
+            filter: isDark ? 'invert(1)' : 'none'
+          }}
+        />
+
         {/* Date: Yesterday */}
         <div className="flex justify-center z-10 mt-1">
           <span className={`${bgDate} ${textSub} font-medium text-[11px] px-3 py-1.5 rounded-lg shadow-sm`}>Yesterday</span>
