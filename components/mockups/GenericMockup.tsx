@@ -24,7 +24,7 @@ export default function GenericMockup({ data, loading, theme, app }: Props) {
   return (
     <PhoneShell bgApp={bgApp}>
       {/* Status bar */}
-      <div className={`h-12 w-full flex items-center justify-between px-6 pt-2 text-[12px] font-semibold z-40 ${headerBg} ${headerText} tracking-tight`}>
+      <div className={`h-12 w-full flex items-center justify-between px-6 pt-2 text-[12px] font-semibold z-40 transition-all duration-300 ${headerBg} ${headerText} tracking-tight`}>
         <span>9:41</span>
         <div className="flex items-center gap-1.5">
           <svg width="14" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
@@ -32,7 +32,7 @@ export default function GenericMockup({ data, loading, theme, app }: Props) {
         </div>
       </div>
 
-      <div className={`flex-1 flex flex-col pt-8 pb-10 px-4 overflow-y-auto scrollbar-hide z-20 ${bgApp}`}>
+      <div className={`flex-1 flex flex-col pt-8 pb-10 px-4 overflow-y-auto scrollbar-hide z-20 transition-all duration-300 ${bgApp}`}>
         {data ? (
           <div className="w-full animate-in fade-in slide-in-from-bottom-2 duration-500">
             {app === 'twitter' && <TwitterPreview data={data} />}

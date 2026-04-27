@@ -36,18 +36,61 @@ export async function GET(request: NextRequest) {
   const timeout = setTimeout(() => controller.abort(), 6000);
 
   try {
-    const response = await fetch(url, {
+    const commonHeaders = {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+      'Accept-Language': 'en-US,en;q=0.9',
+      'Sec-Ch-Ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
+      'Sec-Ch-Ua-Mobile': '?0',
+      'Sec-Ch-Ua-Platform': '"Windows"',
+      'Upgrade-Insecure-Requests': '1',
+      'Referer': 'https://www.google.com/',
+    };
+
+    let response = await fetch(url, {
       signal: controller.signal,
-      headers: {
-        'User-Agent':
-          'Mozilla/5.0 (compatible; LinkPeekBot/1.0; +https://linkpeek.app) Twitterbot/1.0',
-        Accept: 'text/html,application/xhtml+xml',
-        'Accept-Language': 'en-US,en;q=0.9',
-      },
+      headers: commonHeaders,
       redirect: 'follow',
     });
 
     clearTimeout(timeout);
+
+    let html = await response.text();
+
+
+    // Akamai challenge detection: 200 OK but with meta-refresh
+    if (response.ok && html.includes('http-equiv="refresh"') && html.length < 5000) {
+      const setCookie = response.headers.get('set-cookie');
+      const refreshMatch = html.match(/URL=['"]?([^'"]+)['"]?/i);
+      const refreshUrl = refreshMatch ? makeAbsolute(refreshMatch[1], url) : url;
+
+      if (setCookie || refreshUrl !== url) {
+        // Extract only the name=value part of the cookie
+        const cleanCookie = setCookie ? setCookie.split(';')[0] : '';
+        
+        const retryController = new AbortController();
+        const retryTimeout = setTimeout(() => retryController.abort(), 6000);
+        
+        const retryResponse = await fetch(refreshUrl, {
+          signal: retryController.signal,
+          headers: {
+            ...commonHeaders,
+            'Cookie': cleanCookie,
+            'Referer': url,
+          },
+          redirect: 'follow',
+        });
+        
+        clearTimeout(retryTimeout);
+        if (retryResponse.ok) {
+          const retryHtml = await retryResponse.text();
+          if (retryHtml.length > html.length) {
+            html = retryHtml;
+            response = retryResponse;
+          }
+        }
+      }
+    }
 
     if (!response.ok) {
       const statusText =
@@ -78,7 +121,6 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const html = await response.text();
     const $ = cheerio.load(html);
 
     const getMeta = (property: string) =>

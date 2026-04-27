@@ -40,7 +40,7 @@ export function buildTwitterFigmaClipboard(
     </pattern>`;
 
   // Top header icons
-  const xLogo = `<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 22.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="${textMain}"/>`;
+  const xLogo = `<path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153zM17.61 20.644h2.039L6.486 3.24H4.298l13.312 17.404z" fill="${textMain}"/>`;
   
   // Tweet Action Bar Icons
   const replyIcon = `<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" fill="none" stroke="${textMuted}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
@@ -119,8 +119,8 @@ export function buildTwitterFigmaClipboard(
       <circle cx="36" cy="36" r="20" fill="url(#twAvatar)"/>
       
       <g transform="translate(68, 16)">
-        <text x="0" y="14" font-family="${f}" font-size="15" font-weight="bold" fill="${textMain}">Alex Doe</text>
-        <text x="70" y="14" font-family="${f}" font-size="15" fill="${textMuted}">@alexdoe · 26s</text>
+        <text x="0" y="14" font-family="${f}" font-size="15" font-weight="bold" fill="${textMain}">Alex</text>
+        <text x="40" y="14" font-family="${f}" font-size="15" fill="${textMuted}">@alex · 26s</text>
         
         <g transform="translate(${cardW - 18}, 5)">${menuIcon}</g>
         
@@ -149,9 +149,9 @@ export function buildTwitterFigmaClipboard(
       <rect width="${SW}" height="140" fill="${bgMain}"/>
       <circle cx="36" cy="36" r="20" fill="url(#twAvatar)"/>
       <g transform="translate(68, 16)">
-        <text x="0" y="14" font-family="${f}" font-size="15" font-weight="bold" fill="${textMain}">Tech News</text>
-        <g transform="translate(76, 1)">${verifiedBadge}</g>
-        <text x="100" y="14" font-family="${f}" font-size="15" fill="${textMuted}">@technews · 2h</text>
+        <text x="0" y="14" font-family="${f}" font-size="15" font-weight="bold" fill="${textMain}">Sam</text>
+        <g transform="translate(38, 1)">${verifiedBadge}</g>
+        <text x="60" y="14" font-family="${f}" font-size="15" fill="${textMuted}">@sam_tech · 2h</text>
         
         <text x="0" y="38" font-family="${f}" font-size="15" fill="${textMain}">Just dropped: A comprehensive guide on</text>
         <text x="0" y="58" font-family="${f}" font-size="15" fill="${textMain}">optimizing your social media meta tags for better</text>

@@ -11,7 +11,7 @@ export default function PhoneShell({
 }) {
   return (
     <div 
-      className={`relative w-[390px] h-[844px] flex-shrink-0 ${bgApp} rounded-[55px] border-[16px] border-black overflow-hidden flex flex-col pointer-events-auto shadow-2xl ${className}`}
+      className={`relative w-[390px] h-[844px] flex-shrink-0 ${bgApp} rounded-[55px] border-[16px] border-black overflow-hidden flex flex-col pointer-events-auto shadow-2xl transition-all duration-300 ${className}`}
       style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
     >
       {/* Hardware Buttons */}

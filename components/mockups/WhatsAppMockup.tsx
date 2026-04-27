@@ -50,7 +50,7 @@ export default function WhatsAppMockup({ data, loading, theme }: Props) {
       />
 
       {/* Status bar */}
-      <div className={`h-12 w-full flex items-center justify-between px-7 pt-3 text-[14px] font-semibold z-40 ${bgHeader} ${textTitle}`}>
+      <div className={`h-12 w-full flex items-center justify-between px-7 pt-3 text-[14px] font-semibold z-40 transition-all duration-300 ${bgHeader} ${textTitle}`}>
         <span className="pl-1">10:04</span>
         <div className={`flex items-center gap-1.5 opacity-90 pr-1 ${isDark ? '' : 'text-black'}`}>
           <svg width="16" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
@@ -59,7 +59,7 @@ export default function WhatsAppMockup({ data, loading, theme }: Props) {
       </div>
 
       {/* Header */}
-      <div className={`${bgHeader} flex items-center px-3 py-3 gap-2 z-30 shadow-sm border-b ${borderHeader}`}>
+      <div className={`${bgHeader} flex items-center px-3 py-3 gap-2 z-30 shadow-sm border-b transition-all duration-300 ${borderHeader}`}>
         <div className={`flex items-center cursor-pointer`} style={{ color: headerIconColor }}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           <div className="w-10 h-10 bg-gray-300 rounded-full overflow-hidden flex-shrink-0 ml-1">
@@ -67,8 +67,8 @@ export default function WhatsAppMockup({ data, loading, theme }: Props) {
           </div>
         </div>
         <div className="flex-1 ml-2">
-          <div className={`font-semibold text-[17px] leading-tight tracking-wide ${textTitle}`}>E602</div>
-          <div className={`text-[12px] ${textSub} truncate max-w-[180px]`}>Kedar, Sankalp, Saurabh...</div>
+          <div className={`font-semibold text-[17px] leading-tight tracking-wide ${textTitle}`}>Product Team</div>
+          <div className={`text-[12px] ${textSub} truncate max-w-[180px]`}>Alex, Sam, Jamie...</div>
         </div>
         <div className="flex items-center gap-6 pr-2" style={{ color: headerIconColor }}>
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
@@ -77,17 +77,17 @@ export default function WhatsAppMockup({ data, loading, theme }: Props) {
         </div>
       </div>
 
-      <div className={`flex-1 overflow-y-auto relative p-3 flex flex-col gap-3 scrollbar-hide z-20 pb-4`}>
+      <div className={`flex-1 overflow-y-auto relative p-3 flex flex-col gap-3 scrollbar-hide z-20 pb-4 transition-all duration-300`}>
 
         {/* Date Divider */}
         <div className="flex justify-center z-10 mt-1">
-          <span className={`${bgDate} ${textSub} font-medium text-[11px] px-3 py-1.5 rounded-lg shadow-sm uppercase tracking-wider`}>August 27, 2026</span>
+          <span className={`${bgDate} ${textSub} font-medium text-[11px] px-3 py-1.5 rounded-lg shadow-sm uppercase tracking-wider transition-all duration-300`}>August 27, 2026</span>
         </div>
 
         {/* Kedar Deshmukh: Hey, are we ready... */}
-        <div className={`${bgIncoming} p-2 rounded-xl rounded-tl-none shadow-sm self-start max-w-[85%] relative z-10 mt-1`}>
+        <div className={`${bgIncoming} p-2 rounded-xl rounded-tl-none shadow-sm self-start max-w-[85%] relative z-10 mt-1 transition-all duration-300`}>
           <div className={`absolute top-0 -left-2 w-3 h-3 ${bgIncoming}`} style={{ clipPath: 'polygon(100% 0, 100% 100%, 0 0)' }}></div>
-          <div className="text-[13px] font-bold text-[#06cf9c] mb-0.5">Kedar Deshmukh</div>
+          <div className="text-[13px] font-bold text-[#06cf9c] mb-0.5">Alex</div>
           <div className={`${textIncoming} text-[15px] leading-snug`}>
             Hey, are we finally ready to show the client the link previews? 🚀
           </div>
@@ -95,7 +95,7 @@ export default function WhatsAppMockup({ data, loading, theme }: Props) {
         </div>
 
         {/* Kedar Deshmukh: Need to make sure... */}
-        <div className={`${bgIncoming} p-2 rounded-xl rounded-tl-none shadow-sm self-start max-w-[85%] relative z-10`}>
+        <div className={`${bgIncoming} p-2 rounded-xl rounded-tl-none shadow-sm self-start max-w-[85%] relative z-10 transition-all duration-300`}>
           <div className="text-[13px] font-bold text-[#06cf9c] mb-0.5">Kedar Deshmukh</div>
           <div className={`${textIncoming} text-[15px] leading-snug`}>
             Need to make sure they look premium on both mobile and desktop.
@@ -104,7 +104,7 @@ export default function WhatsAppMockup({ data, loading, theme }: Props) {
         </div>
 
         {/* Outgoing: Yeah, just finishing... */}
-        <div className={`${bgOutgoing} p-2 rounded-xl rounded-tr-none shadow-sm self-end max-w-[85%] relative z-10`}>
+        <div className={`${bgOutgoing} p-2 rounded-xl rounded-tr-none shadow-sm self-end max-w-[85%] relative z-10 transition-all duration-300`}>
           <div className={`absolute top-0 -right-2 w-3 h-3 ${bgOutgoing}`} style={{ clipPath: 'polygon(0 0, 0 100%, 100% 0)' }}></div>
           <div className={`${textIncoming} text-[15px] leading-snug`}>
             Yeah, just finishing up the WhatsApp mockup now. Check this out:
@@ -117,12 +117,12 @@ export default function WhatsAppMockup({ data, loading, theme }: Props) {
 
         {/* Unread Divider */}
         <div className="flex justify-center z-10 my-1">
-          <span className={`${unreadBg} ${textTitle} text-[11px] font-medium px-4 py-1 rounded-full shadow-sm`}>1 unread message</span>
+          <span className={`${unreadBg} ${textTitle} text-[11px] font-medium px-4 py-1 rounded-full shadow-sm transition-all duration-300`}>1 unread message</span>
         </div>
 
         {/* Kedar Deshmukh: Wow, that looks... */}
         <div className={`${bgIncoming} p-2 rounded-xl rounded-tl-none shadow-sm self-start max-w-[85%] relative z-10`}>
-          <div className="text-[13px] font-bold text-[#06cf9c] mb-0.5">Kedar Deshmukh</div>
+          <div className="text-[13px] font-bold text-[#06cf9c] mb-0.5">Alex</div>
           <div className={`${textIncoming} text-[15px] leading-snug`}>Wow, that looks clean. Send me the link!</div>
           <div className={`text-[10px] ${textSub} text-right mt-1`}>10:04 pm</div>
         </div>
@@ -154,8 +154,8 @@ export default function WhatsAppMockup({ data, loading, theme }: Props) {
       </div>
 
       {/* Input Area */}
-      <div className={`${bgInputBar} p-2 flex items-end gap-2 z-30 pb-3 relative`}>
-        <div className={`flex-1 ${bgInputPill} rounded-[24px] min-h-[50px] px-3.5 py-2.5 flex items-center text-[16px] gap-3.5 ml-1 border ${inputBorder}`}>
+      <div className={`${bgInputBar} p-2 flex items-end gap-2 z-30 pb-3 relative transition-all duration-300`}>
+        <div className={`flex-1 ${bgInputPill} rounded-[24px] min-h-[50px] px-3.5 py-2.5 flex items-center text-[16px] gap-3.5 ml-1 border transition-all duration-300 ${inputBorder}`}>
           {/* Smiley Icon */}
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={iconColor} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0">
             <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
@@ -199,7 +199,7 @@ export default function WhatsAppMockup({ data, loading, theme }: Props) {
       </div>
 
       {/* iPhone Home Indicator */}
-      <div className={`${bgInputBar} h-8 flex justify-center items-center pb-3 z-30 pt-1`}>
+      <div className={`${bgInputBar} h-8 flex justify-center items-center pb-3 z-30 pt-1 transition-all duration-300`}>
         <div className="w-[140px] h-[5px] bg-[#8696a0] rounded-full opacity-60"></div>
       </div>
     </PhoneShell>

@@ -26,7 +26,7 @@ export default function WhatsAppPreview({ data, theme = 'dark' }: Props) {
   const domainColor = isDark ? 'text-[#e9edef]' : 'text-black';
 
   return (
-    <div className={`rounded-[10px] overflow-hidden flex flex-col ${cardBg}`}>
+    <div className={`rounded-[10px] overflow-hidden flex flex-col transition-all duration-300 ${cardBg}`}>
       {/* Image */}
       {data.image && !imgError ? (
         <img

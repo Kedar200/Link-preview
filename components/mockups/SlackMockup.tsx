@@ -27,7 +27,7 @@ export default function SlackMockup({ data, loading, theme }: Props) {
   return (
     <PhoneShell bgApp={bgApp}>
       {/* Status bar */}
-      <div className={`h-12 w-full flex items-center justify-between px-7 pt-3 text-[14px] font-semibold z-40 ${headerBg} ${textTitle}`}>
+      <div className={`h-12 w-full flex items-center justify-between px-7 pt-3 text-[14px] font-semibold z-40 transition-all duration-300 ${headerBg} ${textTitle}`}>
         <span className="pl-1">9:59</span>
         <div className="flex items-center gap-1.5 opacity-90 pr-1">
           <svg width="16" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
@@ -36,7 +36,7 @@ export default function SlackMockup({ data, loading, theme }: Props) {
       </div>
 
       {/* Header */}
-      <div className={`flex items-center px-4 py-2 border-b ${borderCol} ${headerBg} z-30`}>
+      <div className={`flex items-center px-4 py-2 border-b transition-all duration-300 ${borderCol} ${headerBg} z-30`}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={textTitle}><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
         <div className="flex items-center ml-4 gap-2.5">
           <div className="w-9 h-9 rounded-md bg-gray-200 overflow-hidden flex-shrink-0 relative">
@@ -45,7 +45,7 @@ export default function SlackMockup({ data, loading, theme }: Props) {
           </div>
           <div>
             <div className={`font-bold text-[15px] leading-tight ${textTitle} flex items-center gap-1`}>
-              Sunil Kumar
+              Alex
             </div>
             <div className={`text-[12px] font-medium flex items-center gap-1 ${isDark ? 'text-[#2bac76]' : 'text-[#007a5a]'}`}>
               <span className={textMuted}>5 tabs</span>
@@ -59,7 +59,7 @@ export default function SlackMockup({ data, loading, theme }: Props) {
       </div>
 
       {/* Messages */}
-      <div className={`flex-1 overflow-y-auto px-4 pt-3 pb-14 flex flex-col gap-5 scrollbar-hide z-20 ${bgApp}`}>
+      <div className={`flex-1 overflow-y-auto px-4 pt-3 pb-14 flex flex-col gap-5 scrollbar-hide z-20 transition-all duration-300 ${bgApp}`}>
         
         {/* Sunil: Sweet... */}
         <div className="flex gap-3">
@@ -68,7 +68,7 @@ export default function SlackMockup({ data, loading, theme }: Props) {
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-baseline gap-2">
-              <span className={`font-bold text-[15px] ${textTitle}`}>Sunil Kumar</span>
+              <span className={`font-bold text-[15px] ${textTitle}`}>Alex</span>
               <span className={`text-[12px] ${textMuted}`}>10:22 AM</span>
             </div>
             <p className={`text-[15px] mt-0.5 ${textMain}`}>Sweet. Can you share a preview here? Want to see how it handles the metadata and the dark mode toggle.</p>
@@ -82,7 +82,7 @@ export default function SlackMockup({ data, loading, theme }: Props) {
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-baseline gap-2">
-              <span className={`font-bold text-[15px] ${textTitle}`}>Sudhanshu Bhale</span>
+              <span className={`font-bold text-[15px] ${textTitle}`}>Sam</span>
               <span className={`text-[12px] ${textMuted}`}>10:25 AM</span>
             </div>
             <p className={`text-[15px] mt-0.5 ${textMain}`}>On it. Sharing the live link below. Let me know what you think of the image scaling.</p>
@@ -96,7 +96,7 @@ export default function SlackMockup({ data, loading, theme }: Props) {
           </div>
           <div className="flex-1 min-w-0 pb-6">
             <div className="flex items-baseline gap-2">
-              <span className={`font-bold text-[15px] ${textTitle}`}>Sudhanshu Bhale</span>
+              <span className={`font-bold text-[15px] ${textTitle}`}>Sam</span>
               <span className={`text-[12px] ${textMuted}`}>13:47</span>
             </div>
             <p className={`text-[15px] mt-0.5 ${textMain}`}>Here is the generated preview for the landing page. It scales dynamically based on the platform:</p>
@@ -144,19 +144,14 @@ export default function SlackMockup({ data, loading, theme }: Props) {
       </div>
 
       {/* Input Area */}
-      <div className={`relative px-4 py-3 ${headerBg} z-30 pb-10 border-t ${borderCol}`}>
-        {/* Status indicator: Sunil Kumar has paused their notifications */}
-        <div className={`absolute -top-10 left-0 right-0 h-10 px-4 flex items-center gap-2 ${isDark ? 'bg-[#1a1d21]/95' : 'bg-[#ffffff]/95'} border-t ${borderCol}`}>
-           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={textMuted} strokeWidth="2"><path d="M10.333 4.333a2 2 0 0 1 3.334 0l6.634 11.492A2 2 0 0 1 18.634 19H5.366a2 2 0 0 1-1.667-3.175l6.634-11.492z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-           <span className={`text-[12px] ${textMuted}`}>Sunil Kumar has paused their notifications</span>
-        </div>
+      <div className={`relative px-4 py-3 transition-all duration-300 ${headerBg} z-30 pb-10 border-t ${borderCol}`}>
 
         <div className="flex items-center gap-3">
           <button className={`w-8 h-8 rounded-full border ${isDark ? 'border-[#555] text-[#ababad]' : 'border-[#999] text-[#616061]'} flex items-center justify-center flex-shrink-0`}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </button>
           <div className={`flex-1 ${isDark ? 'bg-[#222529] border-[#3a3b3c]' : 'bg-[#f8f8f8] border-[#dddddd]'} border rounded-xl h-[44px] px-4 flex items-center`}>
-            <span className={`text-[15px] ${textMuted}`}>Message Sunil Kumar</span>
+            <span className={`text-[15px] ${textMuted}`}>Message Alex</span>
           </div>
           <button className={`${textMuted} flex-shrink-0 pr-1`}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>

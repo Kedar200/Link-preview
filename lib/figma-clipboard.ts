@@ -307,8 +307,8 @@ function buildWhatsAppFigmaClipboard(
       
       <!-- Contact Name -->
       <g transform="translate(${SX + 84}, ${headerY + 12})">
-        <text id="Contact-Name" x="0" y="14" font-family="${f}" font-size="17" font-weight="600" fill="${c.text}">E602</text>
-        <text id="Contact-Sub" x="0" y="32" font-family="${f}" font-size="12" fill="${c.sub}">Kedar, Sankalp, Saurabh...</text>
+        <text id="Contact-Name" x="0" y="14" font-family="${f}" font-size="17" font-weight="600" fill="${c.text}">Product Team</text>
+        <text id="Contact-Sub" x="0" y="32" font-family="${f}" font-size="12" fill="${c.sub}">Alex, Sam, Jamie...</text>
       </g>
       
       <!-- Header Action Icons -->
@@ -331,7 +331,7 @@ function buildWhatsAppFigmaClipboard(
       <g transform="translate(${SX + 12},${chatY + 50})">
         <path d="M0 0 L12 0 L12 12 Z" fill="${c.inBubble}" transform="translate(-8, 0)"/>
         <rect width="${SW * 0.8}" height="55" rx="10" fill="${c.inBubble}"/>
-        <text x="12" y="22" font-family="${f}" font-size="13" font-weight="bold" fill="#06cf9c">Kedar Deshmukh</text>
+        <text x="12" y="22" font-family="${f}" font-size="13" font-weight="bold" fill="#06cf9c">Alex</text>
         <text x="12" y="42" font-family="${f}" font-size="15" fill="${c.text}">Hey, are we finally ready to show the client?</text>
         <text x="${SW * 0.8 - 50}" y="48" font-family="${f}" font-size="10" fill="${c.sub}">10:01 pm</text>
       </g>
@@ -355,7 +355,7 @@ function buildWhatsAppFigmaClipboard(
       <g transform="translate(${SX + 12},${chatY + 240})">
         <path d="M0 0 L12 0 L12 12 Z" fill="${c.inBubble}" transform="translate(-8, 0)"/>
         <rect width="${SW * 0.75}" height="45" rx="10" fill="${c.inBubble}"/>
-        <text x="12" y="22" font-family="${f}" font-size="13" font-weight="bold" fill="#06cf9c">Kedar Deshmukh</text>
+        <text x="12" y="22" font-family="${f}" font-size="13" font-weight="bold" fill="#06cf9c">Alex</text>
         <text x="12" y="38" font-family="${f}" font-size="15" fill="${c.text}">Looks clean. Send me the link!</text>
       </g>
 

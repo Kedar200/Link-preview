@@ -88,7 +88,7 @@ export function buildSlackFigmaClipboard(
       </g>
       
       <g transform="translate(100, 10)">
-        <text x="0" y="14" font-family="${f}" font-size="15" font-weight="bold" fill="${textTitle}">Sunil Kumar</text>
+        <text x="0" y="14" font-family="${f}" font-size="15" font-weight="bold" fill="${textTitle}">Alex</text>
         <text x="0" y="32" font-family="${f}" font-size="12" font-weight="500" fill="${textMuted}">5 tabs</text>
       </g>
     </g>
@@ -99,7 +99,7 @@ export function buildSlackFigmaClipboard(
       <!-- Sunil: Sweet... -->
       <g transform="translate(16, 20)">
         <rect width="40" height="40" rx="6" fill="url(#slAvatar1)"/>
-        <text x="52" y="14" font-family="${f}" font-size="15" font-weight="bold" fill="${textTitle}">Sunil Kumar</text>
+        <text x="52" y="14" font-family="${f}" font-size="15" font-weight="bold" fill="${textTitle}">Alex</text>
         <text x="52" y="36" font-family="${f}" font-size="15" fill="${textMain}">Can you share a preview here?</text>
       </g>
 
@@ -107,7 +107,7 @@ export function buildSlackFigmaClipboard(
       <g transform="translate(16, 80)">
         <rect width="40" height="40" rx="6" fill="#E91E63"/>
         <text x="20" y="26" font-family="${f}" font-size="18" font-weight="bold" fill="#fff" text-anchor="middle">S</text>
-        <text x="52" y="14" font-family="${f}" font-size="15" font-weight="bold" fill="${textTitle}">Sudhanshu Bhale</text>
+        <text x="52" y="14" font-family="${f}" font-size="15" font-weight="bold" fill="${textTitle}">Sam</text>
         <text x="52" y="36" font-family="${f}" font-size="15" fill="${textMain}">On it. Sharing the live link below.</text>
       </g>
 
@@ -116,7 +116,7 @@ export function buildSlackFigmaClipboard(
         <rect width="40" height="40" rx="6" fill="#E91E63"/>
         <text x="20" y="26" font-family="${f}" font-size="18" font-weight="bold" fill="#fff" text-anchor="middle">S</text>
         <g transform="translate(52, 0)">
-          <text x="0" y="14" font-family="${f}" font-size="15" font-weight="bold" fill="${textTitle}">Sudhanshu Bhale</text>
+          <text x="0" y="14" font-family="${f}" font-size="15" font-weight="bold" fill="${textTitle}">Sam</text>
           <text x="0" y="36" font-family="${f}" font-size="15" fill="${textMain}">Here is the generated preview:</text>
           <text x="0" y="58" font-family="${f}" font-size="15" fill="${linkCol}" text-decoration="underline">${url}</text>
 
@@ -133,16 +133,13 @@ export function buildSlackFigmaClipboard(
       <rect width="${SW}" height="100" fill="${headerBg}"/>
       <line x1="0" y1="0" x2="${SW}" y2="0" stroke="${borderCol}" stroke-width="1"/>
       
-      <g transform="translate(16, 12)">
-        <text x="20" y="12" font-family="${f}" font-size="12" fill="${textMuted}">Sunil Kumar has paused their notifications</text>
-      </g>
 
       <g transform="translate(0, 32)">
         <circle cx="32" cy="34" r="16" fill="none" stroke="${isDark ? '#555' : '#999'}" stroke-width="1"/>
         <g transform="translate(22, 24)" fill="none" stroke="${isDark ? '#ababad' : '#616061'}">${plusIcon}</g>
 
         <rect x="56" y="12" width="${SW - 104}" height="44" rx="12" fill="${isDark ? '#222529' : '#f8f8f8'}" stroke="${isDark ? '#3a3b3c' : '#dddddd'}" stroke-width="1"/>
-        <text x="72" y="38" font-family="${f}" font-size="15" fill="${textMuted}">Message Sunil Kumar</text>
+        <text x="72" y="38" font-family="${f}" font-size="15" fill="${textMuted}">Message Alex</text>
 
         <g transform="translate(${SW - 36}, 22)" fill="none" stroke="${textMuted}">${micIcon}</g>
       </g>

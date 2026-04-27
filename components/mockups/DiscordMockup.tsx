@@ -30,7 +30,7 @@ export default function DiscordMockup({ data, loading, theme }: Props) {
   return (
     <PhoneShell bgApp={bgMain}>
       {/* Topmost Server Header */}
-      <div className={`h-11 w-full flex items-center justify-between px-4 pt-1 text-[13px] font-bold z-40 ${bgServerHeader} ${textMuted} border-b ${isDark ? 'border-[#1e1f22]' : 'border-[#d1d3d6]'}`}>
+      <div className={`h-11 w-full flex items-center justify-between px-4 pt-1 text-[13px] font-bold z-40 transition-all duration-300 ${bgServerHeader} ${textMuted} border-b ${isDark ? 'border-[#1e1f22]' : 'border-[#d1d3d6]'}`}>
         <div className="flex-1"></div>
         <div className={`flex items-center gap-1.5 ${textTitle}`}>
           <div className="w-4 h-4 bg-white rounded-full flex items-center justify-center overflow-hidden">
@@ -45,7 +45,7 @@ export default function DiscordMockup({ data, loading, theme }: Props) {
       </div>
 
       {/* Channel Header */}
-      <div className={`flex items-center px-4 py-2 shadow-[0_1px_2px_rgba(0,0,0,0.1)] ${bgHeader} z-30`}>
+      <div className={`flex items-center px-4 py-2 shadow-[0_1px_2px_rgba(0,0,0,0.1)] transition-all duration-300 ${bgHeader} z-30`}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={textTitle}><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         <div className="flex items-center ml-4 gap-2 flex-1 min-w-0">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className={textMuted}><path d="M10.59 4l-1.63 7H4.5v2h4.03l-1.16 5H3.5v2h3.41l-1.63 7h2.24l1.63-7h4.43l-1.63 7h2.24l1.63-7h4.43v-2h-4.03l1.16-5h3.86v-2h-3.41l1.63-7h-2.24l-1.63 7h-4.43l1.63-7H10.59zm3.56 9h-4.43l1.16-5h4.43l-1.16 5z"/></svg>
@@ -59,7 +59,7 @@ export default function DiscordMockup({ data, loading, theme }: Props) {
       </div>
 
       {/* Messages */}
-      <div className={`flex-1 overflow-y-auto px-1 py-2 flex flex-col gap-0 scrollbar-hide z-20 ${bgMain}`}>
+      <div className={`flex-1 overflow-y-auto px-1 py-2 flex flex-col gap-0 scrollbar-hide z-20 transition-all duration-300 ${bgMain}`}>
         
         {/* Fake Message 1 */}
         <div className="flex gap-3 px-3 py-1 mt-2 hover:bg-black/5">
@@ -178,8 +178,8 @@ export default function DiscordMockup({ data, loading, theme }: Props) {
       </div>
 
       {/* Input Area */}
-      <div className={`px-3 py-2 ${bgMain} z-30 pb-6 relative`}>
-        <div className={`flex items-center gap-3 ${bgInput} rounded-[24px] min-h-[44px] px-3 border border-transparent shadow-sm`}>
+      <div className={`px-3 py-2 transition-all duration-300 ${bgMain} z-30 pb-6 relative`}>
+        <div className={`flex items-center gap-3 transition-all duration-300 ${bgInput} rounded-[24px] min-h-[44px] px-3 border border-transparent shadow-sm`}>
           <button className={`w-6 h-6 rounded-full ${isDark ? 'bg-[#4f545c]' : 'bg-[#b9bbbe]'} text-${isDark ? '[#383a40]' : 'white'} flex items-center justify-center flex-shrink-0`}>
              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={isDark ? '#383a40' : '#ffffff'} strokeWidth="3" strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </button>
