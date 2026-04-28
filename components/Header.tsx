@@ -1,19 +1,23 @@
-import Image from 'next/image';
-
 export default function Header() {
   return (
     <header className="relative z-10 w-full pt-8 pb-4">
       <div className="max-w-[1400px] mx-auto px-6 sm:px-12 flex items-center justify-between">
         
         {/* Left Side Logo */}
-        <div className="flex items-center gap-2.5">
-          <Image
-            src="/logo.png"
-            alt="LinkPeek logo"
-            width={28}
-            height={28}
-            className="rounded-md"
-          />
+        <div className="flex items-center gap-3">
+          {/* LP monogram with eye-slit — inline SVG for crisp rendering */}
+          <svg width="30" height="30" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="LinkPeek logo">
+            {/* Background rounded square */}
+            <rect width="64" height="64" rx="14" fill="#2f4a3a"/>
+            {/* L — left vertical + bottom bar */}
+            <path d="M14 12 H22 V44 H34 V52 H14 Z" fill="#f4f0e6"/>
+            {/* P — vertical + bowl */}
+            <path d="M30 12 H38 V52 H30 V12 Z" fill="#f4f0e6"/>
+            <path d="M38 12 H44 Q54 12 54 24 Q54 36 44 36 H38 V28 H43 Q46 28 46 24 Q46 20 43 20 H38 V12 Z" fill="#f4f0e6"/>
+            {/* Eye slit in P's bowl */}
+            <ellipse cx="44" cy="24" rx="4.5" ry="2.8" fill="#2f4a3a"/>
+            <circle cx="45" cy="24" r="1.2" fill="#f4f0e6"/>
+          </svg>
           <span className="text-xl font-bold tracking-tight text-white">
             LinkPeek
           </span>
