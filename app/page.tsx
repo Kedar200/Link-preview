@@ -8,7 +8,7 @@ import Footer from '@/components/Footer';
 import { useOGFetch } from '@/hooks/useOGFetch';
 import { trackUrlChecked } from '@/lib/analytics';
 
-const DEFAULT_URL = 'https://pin.it/1m5xLopyb';
+const DEFAULT_URL = 'https://getlinkpeek.com';
 
 export default function HomePage() {
   const { data, loading, error, fetch } = useOGFetch();
