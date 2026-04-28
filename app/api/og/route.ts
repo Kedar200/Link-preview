@@ -152,7 +152,26 @@ export async function GET(request: NextRequest) {
       twitterCard: getMeta('twitter:card'),
       url,
       isLocalhost: false,
+      imageSize: undefined as number | undefined,
     };
+
+    // Probe image file size via HEAD so front-end can enforce per-platform limits
+    if (data.image) {
+      try {
+        const headCtrl = new AbortController();
+        const headTimeout = setTimeout(() => headCtrl.abort(), 3000);
+        const headRes = await fetch(data.image, {
+          method: 'HEAD',
+          signal: headCtrl.signal,
+          redirect: 'follow',
+        });
+        clearTimeout(headTimeout);
+        const cl = headRes.headers.get('content-length');
+        if (cl) data.imageSize = parseInt(cl, 10);
+      } catch {
+        // Non-critical – leave imageSize undefined
+      }
+    }
 
     return NextResponse.json(data);
   } catch (err: unknown) {

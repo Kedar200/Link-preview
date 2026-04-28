@@ -148,6 +148,10 @@ export function runAudit(data: OGData): AuditResult {
   if (has(data.description) && charLen(data.description) > 80) {
     findings.push({ id: next(), tag: 'og:description', severity: 'info', plain: 'WhatsApp only shows the first ~80 chars of your description.', technical: 'Description exceeds WhatsApp display limit', platforms: ['whatsapp'] });
   }
+  if (has(data.image) && data.imageSize != null && data.imageSize > 300 * 1024) {
+    const sizeKB = Math.round(data.imageSize / 1024);
+    findings.push({ id: next(), tag: 'og:image', severity: 'critical', plain: `Your OG image is ${sizeKB} KB — WhatsApp won't load images larger than ~300 KB. The preview will appear without an image. Compress or resize it to under 300 KB.`, technical: `og:image file size ${sizeKB} KB exceeds WhatsApp ~300 KB limit`, platforms: ['whatsapp'] });
+  }
 
   // ── Slack-specific checks ──────────────────────────────────────────────
   if (!has(data.siteName)) {

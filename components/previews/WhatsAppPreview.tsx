@@ -7,6 +7,9 @@ interface Props {
   theme?: 'light' | 'dark';
 }
 
+// WhatsApp silently drops OG images larger than ~300 KB
+const WHATSAPP_IMAGE_SIZE_LIMIT = 300 * 1024; // 300 KB
+
 function truncate(s: string, n: number) {
   return s.length > n ? s.slice(0, n) + '…' : s;
 }
@@ -17,27 +20,28 @@ export default function WhatsAppPreview({ data, theme = 'dark' }: Props) {
   const desc = truncate(data.description, 120);
 
   const isDark = theme === 'dark';
+
+  // Check if image exceeds WhatsApp's size limit
+  const imageTooLarge =
+    data.imageSize != null && data.imageSize > WHATSAPP_IMAGE_SIZE_LIMIT;
+  const showImage = !!data.image && !imgError && !imageTooLarge;
   
   // Background colors based on theme
   const cardBg = isDark ? 'bg-[#024a3c]' : 'bg-[#cfebba]';
-  const imgFallbackBg = isDark ? 'bg-[#01352a]' : 'bg-[#bfe3a2]';
   const titleColor = isDark ? 'text-[#e9edef]' : 'text-black';
   const descColor = isDark ? 'text-[#8ea59f]' : 'text-[#54656f]';
   const domainColor = isDark ? 'text-[#e9edef]' : 'text-black';
 
   return (
     <div className={`rounded-[10px] overflow-hidden flex flex-col transition-all duration-300 ${cardBg}`}>
-      {/* Image */}
-      {data.image && !imgError ? (
+      {/* Image – only rendered if within WhatsApp's size limit */}
+      {showImage && (
         <img
           src={data.image}
           alt=""
           className="w-full h-auto object-contain bg-black/5"
           onError={() => setImgError(true)}
         />
-      ) : (
-        <div className={`w-full flex items-center justify-center ${imgFallbackBg} aspect-[1.91/1]`}>
-        </div>
       )}
       
       {/* Text Content */}
@@ -57,3 +61,4 @@ export default function WhatsAppPreview({ data, theme = 'dark' }: Props) {
     </div>
   );
 }
+

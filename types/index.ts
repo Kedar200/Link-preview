@@ -10,4 +10,5 @@ export interface OGData {
   twitterCard: string;
   url: string;
   isLocalhost: boolean;
+  imageSize?: number; // bytes – from HEAD request on og:image
 }
