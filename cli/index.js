@@ -176,10 +176,10 @@ async function start() {
       console.log('  ┌─────────────────────────────────────────┐');
       console.log('  │                                         │');
       console.log(`  │   🔗 LinkPeek Local Companion v1.0.0    │`);
-      console.log(`  │   Running on http://localhost:${port}     │`);
+      console.log(`  │   Running on http://localhost:${port}   │`);
       console.log('  │                                         │');
-      console.log('  │   Ready to preview localhost URLs from   │');
-      console.log('  │   linkpeek-steel.vercel.app              │');
+      console.log('  │   Ready to preview localhost URLs from  │');
+      console.log('  │   https://getlinkpeek.com/              │');
       console.log('  │                                         │');
       console.log('  │   Press Ctrl+C to stop                  │');
       console.log('  │                                         │');
