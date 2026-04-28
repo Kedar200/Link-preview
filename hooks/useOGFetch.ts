@@ -4,8 +4,8 @@ import type { OGData } from '@/types';
 import { isLocalhostUrl, normalizeUrl } from '@/lib/detect';
 import { parseOGFromHTML } from '@/lib/parseOG';
 
-const COMPANION_PORT = 9876;
-const COMPANION_BASE = `http://localhost:${COMPANION_PORT}`;
+const COMPANION_PORT_START = 9876;
+const COMPANION_PORT_END = 9886;
 
 // Special error code the UI can detect for showing companion setup instructions
 export const LOCALHOST_COMPANION_NEEDED = '__LOCALHOST_COMPANION_NEEDED__';
@@ -22,17 +22,20 @@ function appIsLocal(): boolean {
   return isLocalhostUrl(window.location.href);
 }
 
-/** Quick health-check to see if the companion server is running */
-async function isCompanionRunning(): Promise<boolean> {
-  try {
-    const res = await fetch(`${COMPANION_BASE}/health`, {
-      signal: AbortSignal.timeout(1500),
-    });
-    const json = await res.json();
-    return json.status === 'ok';
-  } catch {
-    return false;
+/** Scan port range and return the first port with a running companion, or null */
+async function findCompanionPort(): Promise<number | null> {
+  // Fire all health checks in parallel for speed
+  const checks = [];
+  for (let port = COMPANION_PORT_START; port <= COMPANION_PORT_END; port++) {
+    checks.push(
+      fetch(`http://localhost:${port}/health`, { signal: AbortSignal.timeout(1500) })
+        .then(r => r.json())
+        .then(json => json.status === 'ok' ? port : null)
+        .catch(() => null)
+    );
   }
+  const results = await Promise.all(checks);
+  return results.find(p => p !== null) ?? null;
 }
 
 export function useOGFetch() {
@@ -72,11 +75,12 @@ export function useOGFetch() {
         } else {
           // LinkPeek is deployed (Vercel, etc.) — server can't reach user's
           // localhost. Try the local companion proxy first.
-          const companionAlive = await isCompanionRunning();
+          const companionPort = await findCompanionPort();
 
-          if (companionAlive) {
+          if (companionPort) {
+            const base = `http://localhost:${companionPort}`;
             const res = await fetch(
-              `${COMPANION_BASE}/api/og?url=${encodeURIComponent(url)}`,
+              `${base}/api/og?url=${encodeURIComponent(url)}`,
               { signal: AbortSignal.timeout(10000) }
             );
             const json = await res.json();

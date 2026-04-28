@@ -3,8 +3,8 @@
 const http = require('http');
 const { URL } = require('url');
 
-const PORT = process.env.PORT || 9876;
-const SUPPORTED_ORIGINS = ['https://linkpeek-steel.vercel.app', 'https://linkpeek.com', 'http://localhost:3000', 'http://localhost:3001'];
+const PREFERRED_PORT = 9876;
+const MAX_PORT = 9886; // will try 9876–9886
 
 // ─── Minimal OG parser ────────────────────────────────────────────────────────
 function parseOG(html, sourceUrl) {
@@ -48,93 +48,156 @@ function parseOG(html, sourceUrl) {
   };
 }
 
-// ─── Server ────────────────────────────────────────────────────────────────────
-const server = http.createServer(async (req, res) => {
-  const origin = req.headers.origin || '';
+// ─── Check if a port already has our companion running ─────────────────────────
+function checkExistingCompanion(port) {
+  return new Promise((resolve) => {
+    const req = http.get(`http://localhost:${port}/health`, { timeout: 1500 }, (res) => {
+      let body = '';
+      res.on('data', (c) => body += c);
+      res.on('end', () => {
+        try {
+          const json = JSON.parse(body);
+          resolve(json.status === 'ok');
+        } catch { resolve(false); }
+      });
+    });
+    req.on('error', () => resolve(false));
+    req.on('timeout', () => { req.destroy(); resolve(false); });
+  });
+}
 
-  // CORS — allow LinkPeek origins + any localhost
-  const isAllowed = SUPPORTED_ORIGINS.includes(origin) || origin.startsWith('http://localhost:');
-  res.setHeader('Access-Control-Allow-Origin', isAllowed ? origin : '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Access-Control-Max-Age', '86400');
+// ─── Try to listen on a port, resolve with the port or reject ──────────────────
+function tryListen(server, port) {
+  return new Promise((resolve, reject) => {
+    server.once('error', (err) => {
+      if (err.code === 'EADDRINUSE') reject(err);
+      else reject(err);
+    });
+    server.listen(port, () => resolve(port));
+  });
+}
 
-  if (req.method === 'OPTIONS') {
-    res.writeHead(204);
-    res.end();
-    return;
-  }
+// ─── Create the server ─────────────────────────────────────────────────────────
+function createServer() {
+  return http.createServer(async (req, res) => {
+    const origin = req.headers.origin || '';
 
-  const reqUrl = new URL(req.url, `http://localhost:${PORT}`);
+    // CORS — allow any origin (companion is local-only, no security risk)
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Max-Age', '86400');
 
-  // Health check — used by the web app to detect if companion is running
-  if (reqUrl.pathname === '/health') {
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ status: 'ok', version: '1.0.0' }));
-    return;
-  }
-
-  // OG fetch endpoint
-  if (reqUrl.pathname === '/api/og') {
-    const targetUrl = reqUrl.searchParams.get('url');
-    if (!targetUrl) {
-      res.writeHead(400, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ error: 'url parameter is required' }));
+    if (req.method === 'OPTIONS') {
+      res.writeHead(204);
+      res.end();
       return;
     }
 
-    try {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 8000);
+    const reqUrl = new URL(req.url, `http://localhost`);
 
-      const response = await fetch(targetUrl, {
-        headers: { 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' },
-        signal: controller.signal,
-        redirect: 'follow',
-      });
-      clearTimeout(timeout);
+    // Health check
+    if (reqUrl.pathname === '/health') {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ status: 'ok', version: '1.0.0' }));
+      return;
+    }
 
-      if (!response.ok) {
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-          error: `Local server returned ${response.status}`,
-          ...parseOG('', targetUrl),
-        }));
+    // OG fetch
+    if (reqUrl.pathname === '/api/og') {
+      const targetUrl = reqUrl.searchParams.get('url');
+      if (!targetUrl) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'url parameter is required' }));
         return;
       }
 
-      const html = await response.text();
-      const data = parseOG(html, targetUrl);
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 8000);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(data));
-    } catch (err) {
-      const msg = err.name === 'AbortError'
-        ? 'Local server took too long to respond.'
-        : `Could not reach ${targetUrl} — is your dev server running?`;
+        const response = await fetch(targetUrl, {
+          headers: { 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' },
+          signal: controller.signal,
+          redirect: 'follow',
+        });
+        clearTimeout(timeout);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ error: msg, ...parseOG('', targetUrl) }));
+        if (!response.ok) {
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({
+            error: `Local server returned ${response.status}`,
+            ...parseOG('', targetUrl),
+          }));
+          return;
+        }
+
+        const html = await response.text();
+        const data = parseOG(html, targetUrl);
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(data));
+      } catch (err) {
+        const msg = err.name === 'AbortError'
+          ? 'Local server took too long to respond.'
+          : `Could not reach ${targetUrl} — is your dev server running?`;
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: msg, ...parseOG('', targetUrl) }));
+      }
+      return;
     }
-    return;
+
+    res.writeHead(404, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'Not found' }));
+  });
+}
+
+// ─── Start with auto port-finding ──────────────────────────────────────────────
+async function start() {
+  // First, check if companion is already running on the preferred port
+  const alreadyRunning = await checkExistingCompanion(PREFERRED_PORT);
+  if (alreadyRunning) {
+    console.log('');
+    console.log('  ✅ LinkPeek companion is already running on port ' + PREFERRED_PORT);
+    console.log('     You\'re all set! Go preview your localhost URLs.');
+    console.log('');
+    process.exit(0);
   }
 
-  res.writeHead(404, { 'Content-Type': 'application/json' });
-  res.end(JSON.stringify({ error: 'Not found' }));
-});
+  const server = createServer();
 
-server.listen(PORT, () => {
-  console.log('');
-  console.log('  ┌─────────────────────────────────────────┐');
-  console.log('  │                                         │');
-  console.log(`  │   🔗 LinkPeek Local Companion v1.0.0    │`);
-  console.log(`  │   Running on http://localhost:${PORT}     │`);
-  console.log('  │                                         │');
-  console.log('  │   Ready to preview localhost URLs from   │');
-  console.log('  │   linkpeek-steel.vercel.app              │');
-  console.log('  │                                         │');
-  console.log('  │   Press Ctrl+C to stop                  │');
-  console.log('  │                                         │');
-  console.log('  └─────────────────────────────────────────┘');
-  console.log('');
-});
+  // Try ports in range
+  for (let port = PREFERRED_PORT; port <= MAX_PORT; port++) {
+    try {
+      await tryListen(server, port);
+
+      console.log('');
+      console.log('  ┌─────────────────────────────────────────┐');
+      console.log('  │                                         │');
+      console.log(`  │   🔗 LinkPeek Local Companion v1.0.0    │`);
+      console.log(`  │   Running on http://localhost:${port}     │`);
+      console.log('  │                                         │');
+      console.log('  │   Ready to preview localhost URLs from   │');
+      console.log('  │   linkpeek-steel.vercel.app              │');
+      console.log('  │                                         │');
+      console.log('  │   Press Ctrl+C to stop                  │');
+      console.log('  │                                         │');
+      console.log('  └─────────────────────────────────────────┘');
+      if (port !== PREFERRED_PORT) {
+        console.log(`  ℹ  Port ${PREFERRED_PORT} was busy, using ${port} instead.`);
+      }
+      console.log('');
+      return; // success
+    } catch {
+      // Port busy, try next
+      continue;
+    }
+  }
+
+  console.error(`  ❌ Could not find a free port in range ${PREFERRED_PORT}–${MAX_PORT}.`);
+  console.error('     Close other services and try again.');
+  process.exit(1);
+}
+
+start();
