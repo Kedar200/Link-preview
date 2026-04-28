@@ -15,7 +15,7 @@ const faqData = [
   },
   {
     question: "Which platforms are supported?",
-    answer: "We support pixel-perfect replicas for WhatsApp, X (Twitter), LinkedIn, Slack, Discord, and Facebook."
+    answer: "We support pixel-perfect replicas for WhatsApp, X (Twitter), LinkedIn, Slack, Discord, and Instagram."
   }
 ];
 
