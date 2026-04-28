@@ -140,6 +140,9 @@ export async function GET(request: NextRequest) {
     const twitterImage = getMeta('twitter:image') || getMeta('twitter:image:src');
     const rawImage = ogImage || twitterImage;
 
+    // Detect multiple og:image tags (causes unpredictable behaviour)
+    const ogImageCount = $('meta[property="og:image"]').length;
+
     const data = {
       title: ogTitle || twitterTitle || pageTitle || '',
       description: ogDesc || twitterDesc || metaDesc || '',
@@ -153,9 +156,14 @@ export async function GET(request: NextRequest) {
       url,
       isLocalhost: false,
       imageSize: undefined as number | undefined,
+      imageContentType: undefined as string | undefined,
+      imageType: getMeta('og:image:type') || '',
+      twitterSite: getMeta('twitter:site') || '',
+      twitterCreator: getMeta('twitter:creator') || '',
+      multipleOgImages: ogImageCount > 1,
     };
 
-    // Probe image file size via HEAD so front-end can enforce per-platform limits
+    // Probe image file size + Content-Type via HEAD
     if (data.image) {
       try {
         const headCtrl = new AbortController();
@@ -168,12 +176,15 @@ export async function GET(request: NextRequest) {
         clearTimeout(headTimeout);
         const cl = headRes.headers.get('content-length');
         if (cl) data.imageSize = parseInt(cl, 10);
+        const ct = headRes.headers.get('content-type');
+        if (ct) data.imageContentType = ct.split(';')[0].trim().toLowerCase();
       } catch {
-        // Non-critical – leave imageSize undefined
+        // Non-critical – leave imageSize/imageContentType undefined
       }
     }
 
     return NextResponse.json(data);
+
   } catch (err: unknown) {
     clearTimeout(timeout);
     const isAbort =

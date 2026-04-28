@@ -49,11 +49,15 @@ export function parseOGFromHTML(html: string, sourceUrl: string): OGData {
   const twitterDesc = getMeta('twitter:description');
   const metaDesc = getMetaName('description');
 
-  const ogImage = getMeta('og:image');
+  const ogImage = getMeta('og:image') || getMeta('og:image:url');
   const twitterImage = getMeta('twitter:image');
 
   const rawImage = ogImage || twitterImage;
   const absoluteImage = rawImage ? makeAbsolute(rawImage, sourceUrl) : '';
+
+  // Detect multiple og:image tags
+  const ogImageMatches = html.match(/property=["']og:image["']/gi);
+  const multipleOgImages = (ogImageMatches?.length ?? 0) > 1;
 
   return {
     title: ogTitle || twitterTitle || pageTitle || '',
@@ -67,5 +71,10 @@ export function parseOGFromHTML(html: string, sourceUrl: string): OGData {
     twitterCard: getMeta('twitter:card') || getMetaName('twitter:card'),
     url: sourceUrl,
     isLocalhost: false,
+    imageType: getMeta('og:image:type'),
+    twitterSite: getMeta('twitter:site') || getMetaName('twitter:site'),
+    twitterCreator: getMeta('twitter:creator') || getMetaName('twitter:creator'),
+    multipleOgImages,
   };
 }
+
