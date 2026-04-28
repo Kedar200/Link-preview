@@ -6,6 +6,7 @@ import AuditInsights from '@/components/AuditInsights';
 import FaqSection from '@/components/FaqSection';
 import Footer from '@/components/Footer';
 import { useOGFetch } from '@/hooks/useOGFetch';
+import { trackUrlChecked } from '@/lib/analytics';
 
 const DEFAULT_URL = 'https://pin.it/1m5xLopyb';
 
@@ -21,6 +22,7 @@ export default function HomePage() {
 
   const handleSubmit = async (url: string) => {
     setHasSearched(true);
+    trackUrlChecked(url);
     await fetch(url);
   };
 
