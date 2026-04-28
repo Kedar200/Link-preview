@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import HeroScene from '@/components/HeroScene';
+import AuditInsights from '@/components/AuditInsights';
 import FaqSection from '@/components/FaqSection';
 import Footer from '@/components/Footer';
 import { useOGFetch } from '@/hooks/useOGFetch';
@@ -47,8 +48,10 @@ export default function HomePage() {
         </div>
       </div>
 
+      <AuditInsights data={data} loading={loading} />
       <FaqSection />
       <Footer />
     </div>
   );
 }
+

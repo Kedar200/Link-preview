@@ -3,6 +3,7 @@ import { useState } from 'react';
 import type { OGData } from '@/types';
 import UrlInput from './UrlInput';
 import ExportToFigma from './ExportToFigma';
+import { LOCALHOST_COMPANION_NEEDED } from '@/hooks/useOGFetch';
 import WhatsAppMockup from './mockups/WhatsAppMockup';
 import LinkedInMockup from './mockups/LinkedInMockup';
 import SlackMockup from './mockups/SlackMockup';
@@ -51,7 +52,34 @@ export default function HeroScene({ onSubmit, loading, data, error }: HeroSceneP
             <UrlInput onSubmit={onSubmit} loading={loading} />
           </div>
 
-          {error && !loading && (
+          {error && !loading && error === LOCALHOST_COMPANION_NEEDED && (
+            <div className="mt-6 p-5 rounded-2xl bg-[#0d1a13] border border-[#2f4a3a]/60 fade-in max-w-[480px]">
+              <div className="flex items-start gap-3 mb-3">
+                <span className="text-lg leading-none mt-0.5">🔗</span>
+                <div>
+                  <p className="text-sm font-inter font-[600] text-white mb-1">Local Companion Required</p>
+                  <p className="text-xs font-inter text-white/50 leading-relaxed">
+                    To preview localhost URLs from the deployed app, run our tiny companion in your terminal:
+                  </p>
+                </div>
+              </div>
+              <div className="bg-black/40 rounded-xl px-4 py-3 font-mono text-[13px] text-[#22c55e] flex items-center justify-between gap-2">
+                <code>npx linkpeek-local</code>
+                <button
+                  onClick={() => { navigator.clipboard.writeText('npx linkpeek-local'); }}
+                  className="text-white/30 hover:text-white/70 transition-colors flex-shrink-0"
+                  title="Copy command"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                </button>
+              </div>
+              <p className="text-[10px] font-mono text-white/25 mt-2 tracking-wide">
+                Zero config • No tunnels • Works in 2 seconds
+              </p>
+            </div>
+          )}
+
+          {error && !loading && error !== LOCALHOST_COMPANION_NEEDED && (
             <p className="mt-4 text-sm text-red-400 font-mono fade-in">{error}</p>
           )}
         </div>

@@ -1,0 +1,15 @@
+{
+  "name": "linkpeek-local",
+  "version": "1.0.0",
+  "description": "Local companion for LinkPeek — preview localhost URLs without tunnels",
+  "bin": {
+    "linkpeek-local": "./index.js"
+  },
+  "main": "index.js",
+  "keywords": ["linkpeek", "og", "open-graph", "localhost", "preview", "meta-tags"],
+  "author": "LinkPeek",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

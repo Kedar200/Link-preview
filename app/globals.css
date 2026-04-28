@@ -172,3 +172,48 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #bbb;
 }
+
+/* ─── Audit ring draw animation ─── */
+@keyframes ringDraw {
+  from {
+    stroke-dashoffset: var(--ring-offset);
+  }
+  to {
+    stroke-dashoffset: var(--ring-target);
+  }
+}
+
+.audit-ring-progress {
+  animation: ringDraw 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 0.3s;
+  stroke-dashoffset: var(--ring-offset);
+}
+
+/* ─── Audit scanning dots ─── */
+@keyframes auditDots {
+  0%   { content: ''; }
+  25%  { content: '.'; }
+  50%  { content: '..'; }
+  75%  { content: '...'; }
+}
+
+.audit-dots::after {
+  content: '';
+  animation: auditDots 1.2s infinite steps(1);
+}
+
+/* ─── Audit pulse glow ─── */
+@keyframes auditPulse {
+  0%, 100% { box-shadow: 0 0 15px rgba(26,43,33,0.3); }
+  50%      { box-shadow: 0 0 25px rgba(26,43,33,0.6); }
+}
+
+.audit-pulse {
+  animation: auditPulse 1.5s ease-in-out infinite;
+}
+
+/* ─── Finding row stagger ─── */
+.audit-finding-row {
+  animation: fadeIn 0.4s ease forwards;
+  opacity: 0;
+}
