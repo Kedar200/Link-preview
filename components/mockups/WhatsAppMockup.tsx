@@ -111,7 +111,7 @@ export default function WhatsAppMockup({ data, loading, theme }: Props) {
           </div>
           <div className={`text-[10px] ${isDark ? 'text-white/50' : 'text-[#54656f]'} text-right mt-1 flex justify-end items-center gap-1`}>
             10:04 pm
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#53bdeb" strokeWidth="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="16" height="11" viewBox="0 0 16 11" fill="none"><path d="M11.071 0.653a.457.457 0 0 0-.304.149L5.39 7.046 3.268 4.781a.46.46 0 0 0-.66.023.457.457 0 0 0 .024.66l2.45 2.609a.457.457 0 0 0 .648.017l5.704-6.39a.458.458 0 0 0-.363-.747z" fill="#53bdeb"/><path d="M15.071 0.653a.457.457 0 0 0-.304.149L9.39 7.046 8.682 6.28l-.666.746.703.748a.457.457 0 0 0 .648.017l5.704-6.39a.458.458 0 0 0-.363-.747z" fill="#53bdeb"/></svg>
           </div>
         </div>
 
@@ -138,7 +138,7 @@ export default function WhatsAppMockup({ data, loading, theme }: Props) {
               </div>
               <div className="px-2 pt-0.5 pb-1 flex justify-end gap-1 items-center">
                 <span className={`text-[10px] ${isDark ? 'text-white/50' : 'text-[#54656f]'}`}>10:05 pm</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#53bdeb" strokeWidth="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="16" height="11" viewBox="0 0 16 11" fill="none"><path d="M11.071 0.653a.457.457 0 0 0-.304.149L5.39 7.046 3.268 4.781a.46.46 0 0 0-.66.023.457.457 0 0 0 .024.66l2.45 2.609a.457.457 0 0 0 .648.017l5.704-6.39a.458.458 0 0 0-.363-.747z" fill="#53bdeb"/><path d="M15.071 0.653a.457.457 0 0 0-.304.149L9.39 7.046 8.682 6.28l-.666.746.703.748a.457.457 0 0 0 .648.017l5.704-6.39a.458.458 0 0 0-.363-.747z" fill="#53bdeb"/></svg>
               </div>
             </div>
           ) : loading ? (

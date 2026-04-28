@@ -1,6 +1,6 @@
 {
   "name": "linkpeek-local",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Local companion for LinkPeek — preview localhost URLs without tunnels",
   "bin": {
     "linkpeek-local": "./index.js"

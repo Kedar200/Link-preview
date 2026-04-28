@@ -107,21 +107,36 @@ export default function TwitterMockup({ data, loading, theme }: Props) {
             <div className="mt-2.5">
               {data ? (
                 <>
-                  <div className={`rounded-2xl overflow-hidden relative border ${borderCol}`}>
-                    {data.image ? (
-                       <img src={data.image} alt="Preview" className="w-full aspect-[1.91/1] object-cover" />
-                    ) : (
-                       <div className={`w-full aspect-[1.91/1] flex items-center justify-center ${isDark ? 'bg-[#16181c]' : 'bg-[#f7f9f9]'}`}>
-                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" className={textMuted} strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18M9 21V9" /></svg>
-                       </div>
-                    )}
-                    {data.title && (
-                      <div className="absolute bottom-2 left-2 right-2 flex pointer-events-none">
-                        <div className="bg-black/70 backdrop-blur-md text-white px-2.5 py-1 rounded text-[13px] truncate max-w-full">{truncate(data.title, 45)}</div>
+                  {data.image ? (
+                    /* === Large image card === */
+                    <div className={`rounded-2xl overflow-hidden relative border ${borderCol}`}>
+                      <img src={data.image} alt="Preview" className="w-full aspect-[1.91/1] object-cover" />
+                      {data.title && (
+                        <div className="absolute bottom-2 left-2 right-2 flex pointer-events-none">
+                          <div className="bg-black/70 backdrop-blur-md text-white px-2.5 py-1 rounded text-[13px] truncate max-w-full">{truncate(data.title, 45)}</div>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    /* === Compact card (no image) — matches real X/Twitter === */
+                    <div className={`rounded-2xl overflow-hidden border ${borderCol} flex items-stretch`}>
+                      {/* Thumbnail / icon area */}
+                      <div className={`w-[72px] flex-shrink-0 flex items-center justify-center ${isDark ? 'bg-[#16181c]' : 'bg-[#f0f3f4]'}`}>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={mutedFill} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                          <rect x="3" y="3" width="18" height="18" rx="2" />
+                          <path d="M3 9h18M9 21V9" />
+                        </svg>
                       </div>
-                    )}
-                  </div>
-                  {(data.siteName || data.domain) && (
+                      {/* Text area */}
+                      <div className={`flex-1 min-w-0 px-3 py-2.5 flex flex-col justify-center gap-0.5 ${isDark ? 'bg-[#16181c]' : 'bg-[#f7f9f9]'}`}>
+                        <span className={`text-[13px] ${textMuted} leading-tight`}>{data.domain?.toLowerCase() || data.siteName?.toLowerCase()}</span>
+                        {data.title && (
+                          <span className={`text-[15px] ${textMain} leading-snug truncate font-normal`}>{truncate(data.title, 50)}</span>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                  {data.image && (data.siteName || data.domain) && (
                     <div className={`text-[13px] ${textMuted} mt-1.5`}>From {data.siteName?.toLowerCase() || data.domain?.toLowerCase()}</div>
                   )}
                 </>
