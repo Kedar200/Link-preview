@@ -8,7 +8,7 @@ interface Props {
 }
 
 // WhatsApp silently drops OG images larger than ~300 KB
-const WHATSAPP_IMAGE_SIZE_LIMIT = 300 * 1024; // 300 KB
+const WHATSAPP_IMAGE_SIZE_LIMIT = 600 * 1024; // 600 KB
 
 function truncate(s: string, n: number) {
   return s.length > n ? s.slice(0, n) + '…' : s;
