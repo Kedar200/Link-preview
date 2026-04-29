@@ -76,12 +76,12 @@ export default function TwitterMockup({ data, loading, theme }: Props) {
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-1 min-w-0">
-              <span className={`font-bold text-[15px] ${textMain}`}>Raja</span>
+              <span className={`font-bold text-[15px] ${textMain}`}>Penny</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill={blueColor} className="flex-shrink-0"><path d="M22.25 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.918-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.337 2.25c-.416-.165-.866-.25-1.336-.25-2.21 0-3.918 1.79-3.918 4 0 .495.084.965.238 1.4-1.273.65-2.148 2.02-2.148 3.6 0 1.46.74 2.746 1.846 3.45-.065.342-.1.69-.1 1.05 0 2.21 1.71 4 3.918 4 .47 0 .92-.086 1.336-.25.52 1.334 1.82 2.25 3.337 2.25s2.816-.916 3.337-2.25c.416.164.866.25 1.336.25 2.21 0 3.918-1.79 3.918-4 0-.36-.035-.708-.1-1.05 1.106-.704 1.846-1.99 1.846-3.45z"/><path d="M10.23 15.6l-3.32-3.3c-.3-.3-.3-.78 0-1.08.3-.3.78-.3 1.08 0l2.25 2.24 6.17-6.17c.3-.3.78-.3 1.08 0 .3.3.3.78 0 1.08l-6.71 6.71c-.15.15-.35.22-.54.22-.2 0-.4-.07-.55-.2z" fill="white"/></svg>
-              <span className={`text-[15px] ${textMuted} truncate`}>@yesofficialraja</span>
+              <span className={`text-[15px] ${textMuted} truncate`}>@tech</span>
               <span className={`text-[15px] ${textMuted} flex-shrink-0`}>· 6h</span>
             </div>
-            <div className={`text-[15px] ${textMain} mt-1 leading-[1.4]`}>What Indian food is this ?</div>
+            <div className={`text-[15px] ${textMain} mt-1 leading-[1.4]`}>Is there something new in market</div>
             <div className={`flex items-center gap-5 mt-2 ${textMuted} text-[13px]`}>
               <span>💬 12</span><span>🔄 8</span><span>❤️ 342</span>
             </div>
