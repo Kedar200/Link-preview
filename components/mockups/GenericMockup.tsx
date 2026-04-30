@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import type { OGData } from '@/types';
 import PhoneShell from './PhoneShell';
 import TwitterPreview from '../previews/TwitterPreview';
@@ -15,14 +15,14 @@ interface Props {
   app: string;
 }
 
-export default function GenericMockup({ data, loading, theme, app }: Props) {
+const GenericMockup = forwardRef<HTMLDivElement, Props>(function GenericMockup({ data, loading, theme, app }, ref) {
   const isDark = theme === 'dark';
   const bgApp = isDark ? 'bg-black' : 'bg-white';
   const headerText = isDark ? 'text-white' : 'text-black';
   const headerBg = isDark ? 'bg-black' : 'bg-[#f0f2f5]';
 
   return (
-    <PhoneShell bgApp={bgApp}>
+    <PhoneShell ref={ref} bgApp={bgApp}>
       {/* Status bar */}
       <div className={`h-12 w-full flex items-center justify-between px-6 pt-2 text-[12px] font-semibold z-40 transition-all duration-300 ${headerBg} ${headerText} tracking-tight`}>
         <span>9:41</span>
@@ -58,4 +58,7 @@ export default function GenericMockup({ data, loading, theme, app }: Props) {
       </div>
     </PhoneShell>
   );
-}
+});
+
+GenericMockup.displayName = 'GenericMockup';
+export default GenericMockup;

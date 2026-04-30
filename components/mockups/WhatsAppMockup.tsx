@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import type { OGData } from '@/types';
 import PhoneShell from './PhoneShell';
 import WhatsAppPreview from '../previews/WhatsAppPreview';
@@ -10,7 +10,7 @@ interface Props {
   theme: 'light' | 'dark';
 }
 
-export default function WhatsAppMockup({ data, loading, theme }: Props) {
+const WhatsAppMockup = forwardRef<HTMLDivElement, Props>(function WhatsAppMockup({ data, loading, theme }, ref) {
   const isDark = theme === 'dark';
   
   // App-specific Theme Variables
@@ -36,7 +36,7 @@ export default function WhatsAppMockup({ data, loading, theme }: Props) {
   const micIconFill = isDark ? '#0b141a' : '#ffffff';
 
   return (
-    <PhoneShell bgApp={bgApp}>
+    <PhoneShell ref={ref} bgApp={bgApp}>
       {/* WhatsApp Doodle Background (Static) */}
       <div 
         className="absolute inset-0 pointer-events-none z-0"
@@ -63,7 +63,7 @@ export default function WhatsAppMockup({ data, loading, theme }: Props) {
         <div className={`flex items-center cursor-pointer`} style={{ color: headerIconColor }}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           <div className="w-10 h-10 bg-gray-300 rounded-full overflow-hidden flex-shrink-0 ml-1">
-            <img src="https://i.pravatar.cc/100?img=12" alt="E602" className="w-full h-full object-cover" />
+            <img src="/avatars/avatar-12.jpg" alt="E602" className="w-full h-full object-cover" />
           </div>
         </div>
         <div className="flex-1 ml-2">
@@ -81,54 +81,24 @@ export default function WhatsAppMockup({ data, loading, theme }: Props) {
 
         {/* Date Divider */}
         <div className="flex justify-center z-10 mt-1">
-          <span className={`${bgDate} ${textSub} font-medium text-[11px] px-3 py-1.5 rounded-lg shadow-sm uppercase tracking-wider transition-all duration-300`}>August 27, 2026</span>
+          <span className={`${bgDate} ${textSub} font-medium text-[11px] px-3 py-1.5 rounded-lg shadow-sm uppercase tracking-wider transition-all duration-300`}>Today</span>
         </div>
 
-        {/* Kedar Deshmukh: Hey, are we ready... */}
-        <div className={`${bgIncoming} p-2 rounded-xl rounded-tl-none shadow-sm self-start max-w-[85%] relative z-10 mt-1 transition-all duration-300`}>
+        {/* Spacer to push content toward bottom */}
+        <div className="flex-1" />
+
+        {/* Incoming message */}
+        <div className={`${bgIncoming} p-2 rounded-xl rounded-tl-none shadow-sm self-start max-w-[85%] relative z-10 transition-all duration-300`}>
           <div className={`absolute top-0 -left-2 w-3 h-3 ${bgIncoming}`} style={{ clipPath: 'polygon(100% 0, 100% 100%, 0 0)' }}></div>
           <div className="text-[13px] font-bold text-[#06cf9c] mb-0.5">Alex</div>
           <div className={`${textIncoming} text-[15px] leading-snug`}>
-            Hey, are we finally ready to show the client the link previews? 🚀
+            Send me the link! 🔗
           </div>
-          <div className={`text-[10px] ${textSub} text-right mt-1`}>10:01 pm</div>
-        </div>
-
-        {/* Kedar Deshmukh: Need to make sure... */}
-        <div className={`${bgIncoming} p-2 rounded-xl rounded-tl-none shadow-sm self-start max-w-[85%] relative z-10 transition-all duration-300`}>
-          <div className="text-[13px] font-bold text-[#06cf9c] mb-0.5">Kedar Deshmukh</div>
-          <div className={`${textIncoming} text-[15px] leading-snug`}>
-            Need to make sure they look premium on both mobile and desktop.
-          </div>
-          <div className={`text-[10px] ${textSub} text-right mt-1`}>10:01 pm</div>
-        </div>
-
-        {/* Outgoing: Yeah, just finishing... */}
-        <div className={`${bgOutgoing} p-2 rounded-xl rounded-tr-none shadow-sm self-end max-w-[85%] relative z-10 transition-all duration-300`}>
-          <div className={`absolute top-0 -right-2 w-3 h-3 ${bgOutgoing}`} style={{ clipPath: 'polygon(0 0, 0 100%, 100% 0)' }}></div>
-          <div className={`${textIncoming} text-[15px] leading-snug`}>
-            Yeah, just finishing up the WhatsApp mockup now. Check this out:
-          </div>
-          <div className={`text-[10px] ${isDark ? 'text-white/50' : 'text-[#54656f]'} text-right mt-1 flex justify-end items-center gap-1`}>
-            10:04 pm
-            <svg width="16" height="11" viewBox="0 0 16 11" fill="none"><path d="M11.071 0.653a.457.457 0 0 0-.304.149L5.39 7.046 3.268 4.781a.46.46 0 0 0-.66.023.457.457 0 0 0 .024.66l2.45 2.609a.457.457 0 0 0 .648.017l5.704-6.39a.458.458 0 0 0-.363-.747z" fill="#53bdeb"/><path d="M15.071 0.653a.457.457 0 0 0-.304.149L9.39 7.046 8.682 6.28l-.666.746.703.748a.457.457 0 0 0 .648.017l5.704-6.39a.458.458 0 0 0-.363-.747z" fill="#53bdeb"/></svg>
-          </div>
-        </div>
-
-        {/* Unread Divider */}
-        <div className="flex justify-center z-10 my-1">
-          <span className={`${unreadBg} ${textTitle} text-[11px] font-medium px-4 py-1 rounded-full shadow-sm transition-all duration-300`}>1 unread message</span>
-        </div>
-
-        {/* Kedar Deshmukh: Wow, that looks... */}
-        <div className={`${bgIncoming} p-2 rounded-xl rounded-tl-none shadow-sm self-start max-w-[85%] relative z-10`}>
-          <div className="text-[13px] font-bold text-[#06cf9c] mb-0.5">Alex</div>
-          <div className={`${textIncoming} text-[15px] leading-snug`}>Wow, that looks clean. Send me the link!</div>
           <div className={`text-[10px] ${textSub} text-right mt-1`}>10:04 pm</div>
         </div>
 
-        {/* Real Message (Preview) */}
-        <div className={`${bgOutgoing} p-1.5 rounded-xl rounded-tr-none shadow-sm self-end w-[95%] relative z-10 mt-2`}>
+        {/* Outgoing link preview */}
+        <div className={`${bgOutgoing} p-1.5 rounded-xl rounded-tr-none shadow-sm self-end w-[95%] relative z-10`}>
           <div className={`absolute top-0 -right-2 w-3 h-3 ${bgOutgoing}`} style={{ clipPath: 'polygon(0 0, 0 100%, 100% 0)' }}></div>
           
           {data ? (
@@ -204,4 +174,7 @@ export default function WhatsAppMockup({ data, loading, theme }: Props) {
       </div>
     </PhoneShell>
   );
-}
+});
+
+WhatsAppMockup.displayName = 'WhatsAppMockup';
+export default WhatsAppMockup;

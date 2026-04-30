@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import type { OGData } from '@/types';
 import PhoneShell from './PhoneShell';
 
@@ -8,13 +8,13 @@ interface Props {
   loading: boolean;
 }
 
-export default function LinkedInMockup({ data, loading }: Props) {
+const LinkedInMockup = forwardRef<HTMLDivElement, Props>(function LinkedInMockup({ data, loading }, ref) {
   const bgApp = 'bg-white';
   const textMain = 'text-gray-900';
   const textSub = 'text-gray-500';
 
   return (
-    <PhoneShell bgApp={bgApp}>
+    <PhoneShell ref={ref} bgApp={bgApp}>
       {/* Status bar */}
       <div className={`h-12 w-full flex items-center justify-between px-7 pt-3 text-[14px] font-semibold z-40 bg-white ${textMain}`}>
         <span className="pl-1">11:20</span>
@@ -55,7 +55,7 @@ export default function LinkedInMockup({ data, loading }: Props) {
         {/* Kedar: Deleted message */}
         <div className="flex gap-3">
           <div className="w-10 h-10 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden">
-            <img src="https://i.pravatar.cc/100?img=12" alt="Kedar" className="w-full h-full object-cover" />
+            <img src="/avatars/avatar-12.jpg" alt="Kedar" className="w-full h-full object-cover" />
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-baseline gap-1.5">
@@ -71,7 +71,7 @@ export default function LinkedInMockup({ data, loading }: Props) {
         {/* Pranav: ? */}
         <div className="flex gap-3">
           <div className="w-10 h-10 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden">
-            <img src="https://i.pravatar.cc/100?img=11" alt="Pranav" className="w-full h-full object-cover" />
+            <img src="/avatars/avatar-11.jpg" alt="Pranav" className="w-full h-full object-cover" />
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-baseline gap-1.5">
@@ -86,7 +86,7 @@ export default function LinkedInMockup({ data, loading }: Props) {
         {/* Kedar: Nothing was testing... */}
         <div className="flex gap-3">
           <div className="w-10 h-10 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden">
-            <img src="https://i.pravatar.cc/100?img=12" alt="Kedar" className="w-full h-full object-cover" />
+            <img src="/avatars/avatar-12.jpg" alt="Kedar" className="w-full h-full object-cover" />
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-baseline gap-1.5">
@@ -107,7 +107,7 @@ export default function LinkedInMockup({ data, loading }: Props) {
         {/* Pranav: Oh, OK */}
         <div className="flex gap-3">
           <div className="w-10 h-10 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden">
-            <img src="https://i.pravatar.cc/100?img=11" alt="Pranav" className="w-full h-full object-cover" />
+            <img src="/avatars/avatar-11.jpg" alt="Pranav" className="w-full h-full object-cover" />
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-baseline gap-1.5">
@@ -122,7 +122,7 @@ export default function LinkedInMockup({ data, loading }: Props) {
         {/* Link Message */}
         <div className="flex gap-3 relative">
           <div className="w-10 h-10 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden">
-            <img src="https://i.pravatar.cc/100?img=12" alt="Kedar" className="w-full h-full object-cover" />
+            <img src="/avatars/avatar-12.jpg" alt="Kedar" className="w-full h-full object-cover" />
           </div>
           <div className="flex-1 pb-10">
             <div className="flex items-baseline gap-1.5">
@@ -168,7 +168,7 @@ export default function LinkedInMockup({ data, loading }: Props) {
             {/* Read status */}
             <div className="absolute right-0 bottom-6 flex flex-col items-center gap-1">
                <div className="w-4 h-4 rounded-full overflow-hidden border border-white">
-                  <img src="https://i.pravatar.cc/100?img=11" alt="status" className="w-full h-full object-cover" />
+                  <img src="/avatars/avatar-11.jpg" alt="status" className="w-full h-full object-cover" />
                </div>
                <svg width="14" height="14" viewBox="0 0 24 24" className="text-gray-500"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/></svg>
             </div>
@@ -203,4 +203,7 @@ export default function LinkedInMockup({ data, loading }: Props) {
       </div>
     </PhoneShell>
   );
-}
+});
+
+LinkedInMockup.displayName = 'LinkedInMockup';
+export default LinkedInMockup;

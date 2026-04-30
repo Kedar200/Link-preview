@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import type { OGData } from '@/types';
 import PhoneShell from './PhoneShell';
 
@@ -13,7 +13,7 @@ function truncate(s: string, n: number) {
   return s?.length > n ? s.slice(0, n) + '...' : s;
 }
 
-export default function TwitterMockup({ data, loading, theme }: Props) {
+const TwitterMockup = forwardRef<HTMLDivElement, Props>(function TwitterMockup({ data, loading, theme }, ref) {
   const isDark = theme === 'dark';
   
   const bgMain = isDark ? 'bg-black' : 'bg-white';
@@ -26,7 +26,7 @@ export default function TwitterMockup({ data, loading, theme }: Props) {
   const blueBg = 'bg-[#1d9bf0]';
 
   return (
-    <PhoneShell bgApp={bgMain}>
+    <PhoneShell ref={ref} bgApp={bgMain}>
       {/* Status bar */}
       <div className={`h-12 w-full flex items-center justify-between px-7 pt-3 text-[14px] font-semibold z-40 transition-all duration-300 ${bgMain} ${textMain}`}>
         <span className="pl-1">1:04</span>
@@ -40,7 +40,7 @@ export default function TwitterMockup({ data, loading, theme }: Props) {
       {/* Top Header */}
       <div className={`px-4 pb-1 flex items-center justify-between z-40 transition-all duration-300 ${bgMain}`}>
         <div className="w-9 h-9 rounded-full overflow-hidden">
-          <img src="https://i.pravatar.cc/100?img=11" alt="Avatar" className="w-full h-full object-cover" />
+          <img src="/avatars/avatar-11.jpg" alt="Avatar" className="w-full h-full object-cover" />
         </div>
         <div className={`flex items-center justify-center ${textMain}`}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153zM17.61 20.644h2.039L6.486 3.24H4.298l13.312 17.404z"/></svg>
@@ -66,32 +66,13 @@ export default function TwitterMockup({ data, loading, theme }: Props) {
         </div>
       </div>
 
-      {/* Feed Content — 3 tweets: above / main card / below */}
+      {/* Feed Content */}
       <div className={`flex-1 overflow-hidden scrollbar-hide z-20 pb-16 transition-all duration-300 ${bgMain}`}>
-        
-        {/* Tweet 1 — ABOVE */}
-        <div className={`px-4 py-3 border-b ${borderCol} flex gap-3`}>
-          <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
-             <img src="https://i.pravatar.cc/100?img=68" alt="Raja" className="w-full h-full object-cover" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-1 min-w-0">
-              <span className={`font-bold text-[15px] ${textMain}`}>Penny</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill={blueColor} className="flex-shrink-0"><path d="M22.25 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.918-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.337 2.25c-.416-.165-.866-.25-1.336-.25-2.21 0-3.918 1.79-3.918 4 0 .495.084.965.238 1.4-1.273.65-2.148 2.02-2.148 3.6 0 1.46.74 2.746 1.846 3.45-.065.342-.1.69-.1 1.05 0 2.21 1.71 4 3.918 4 .47 0 .92-.086 1.336-.25.52 1.334 1.82 2.25 3.337 2.25s2.816-.916 3.337-2.25c.416.164.866.25 1.336.25 2.21 0 3.918-1.79 3.918-4 0-.36-.035-.708-.1-1.05 1.106-.704 1.846-1.99 1.846-3.45z"/><path d="M10.23 15.6l-3.32-3.3c-.3-.3-.3-.78 0-1.08.3-.3.78-.3 1.08 0l2.25 2.24 6.17-6.17c.3-.3.78-.3 1.08 0 .3.3.3.78 0 1.08l-6.71 6.71c-.15.15-.35.22-.54.22-.2 0-.4-.07-.55-.2z" fill="white"/></svg>
-              <span className={`text-[15px] ${textMuted} truncate`}>@tech</span>
-              <span className={`text-[15px] ${textMuted} flex-shrink-0`}>· 6h</span>
-            </div>
-            <div className={`text-[15px] ${textMain} mt-1 leading-[1.4]`}>Is there something new in market</div>
-            <div className={`flex items-center gap-5 mt-2 ${textMuted} text-[13px]`}>
-              <span>💬 12</span><span>🔄 8</span><span>❤️ 342</span>
-            </div>
-          </div>
-        </div>
 
-        {/* Tweet 2 — MAIN CARD (center) */}
+        {/* Main Tweet with link card */}
         <div className={`px-4 py-3 border-b ${borderCol} flex gap-3`}>
           <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
-             <img src="https://i.pravatar.cc/100?img=11" alt="Kedar" className="w-full h-full object-cover" />
+             <img src="/avatars/avatar-11.jpg" alt="Kedar" className="w-full h-full object-cover" />
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between">
@@ -118,16 +99,14 @@ export default function TwitterMockup({ data, loading, theme }: Props) {
                       )}
                     </div>
                   ) : (
-                    /* === Compact card (no image) — matches real X/Twitter === */
+                    /* === Compact card (no image) === */
                     <div className={`rounded-2xl overflow-hidden border ${borderCol} flex items-stretch`}>
-                      {/* Thumbnail / icon area */}
                       <div className={`w-[72px] flex-shrink-0 flex items-center justify-center ${isDark ? 'bg-[#16181c]' : 'bg-[#f0f3f4]'}`}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={mutedFill} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                           <rect x="3" y="3" width="18" height="18" rx="2" />
                           <path d="M3 9h18M9 21V9" />
                         </svg>
                       </div>
-                      {/* Text area */}
                       <div className={`flex-1 min-w-0 px-3 py-2.5 flex flex-col justify-center gap-0.5 ${isDark ? 'bg-[#16181c]' : 'bg-[#f7f9f9]'}`}>
                         <span className={`text-[13px] ${textMuted} leading-tight`}>{data.domain?.toLowerCase() || data.siteName?.toLowerCase()}</span>
                         {data.title && (
@@ -150,25 +129,6 @@ export default function TwitterMockup({ data, loading, theme }: Props) {
             </div>
             <div className={`flex items-center gap-5 mt-2.5 ${textMuted} text-[13px]`}>
               <span>💬 7</span><span>🔄 41</span><span>❤️ 901</span><span>📊 36.4K</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Tweet 3 — BELOW */}
-        <div className={`px-4 py-3 border-b ${borderCol} flex gap-3`}>
-          <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
-             <img src="https://i.pravatar.cc/100?img=33" alt="Sam" className="w-full h-full object-cover" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-1 min-w-0">
-              <span className={`font-bold text-[15px] ${textMain}`}>Sam</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill={blueColor} className="flex-shrink-0"><path d="M22.25 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.918-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.337 2.25c-.416-.165-.866-.25-1.336-.25-2.21 0-3.918 1.79-3.918 4 0 .495.084.965.238 1.4-1.273.65-2.148 2.02-2.148 3.6 0 1.46.74 2.746 1.846 3.45-.065.342-.1.69-.1 1.05 0 2.21 1.71 4 3.918 4 .47 0 .92-.086 1.336-.25.52 1.334 1.82 2.25 3.337 2.25s2.816-.916 3.337-2.25c.416.164.866.25 1.336.25 2.21 0 3.918-1.79 3.918-4 0-.36-.035-.708-.1-1.05 1.106-.704 1.846-1.99 1.846-3.45z"/><path d="M10.23 15.6l-3.32-3.3c-.3-.3-.3-.78 0-1.08.3-.3.78-.3 1.08 0l2.25 2.24 6.17-6.17c.3-.3.78-.3 1.08 0 .3.3.3.78 0 1.08l-6.71 6.71c-.15.15-.35.22-.54.22-.2 0-.4-.07-.55-.2z" fill="white"/></svg>
-              <span className={`text-[15px] ${textMuted} truncate`}>@sam_tech</span>
-              <span className={`text-[15px] ${textMuted} flex-shrink-0`}>· 2h</span>
-            </div>
-            <div className={`text-[15px] ${textMain} mt-1 leading-[1.4]`}>A guide on optimizing social media meta tags for better engagement 🧵</div>
-            <div className={`flex items-center gap-5 mt-2 ${textMuted} text-[13px]`}>
-              <span>💬 24</span><span>🔄 156</span><span>❤️ 2.1K</span>
             </div>
           </div>
         </div>
@@ -208,4 +168,7 @@ export default function TwitterMockup({ data, loading, theme }: Props) {
       
     </PhoneShell>
   );
-}
+});
+
+TwitterMockup.displayName = 'TwitterMockup';
+export default TwitterMockup;

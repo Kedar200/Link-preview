@@ -1,16 +1,13 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
-export default function PhoneShell({ 
-  children, 
-  bgApp = 'bg-white',
-  className = ''
-}: { 
+const PhoneShell = forwardRef<HTMLDivElement, {
   children: React.ReactNode;
   bgApp?: string;
   className?: string;
-}) {
+}>(({ children, bgApp = 'bg-white', className = '' }, ref) => {
   return (
     <div 
+      ref={ref}
       className={`relative w-[390px] h-[844px] flex-shrink-0 ${bgApp} rounded-[55px] border-[16px] border-black overflow-hidden flex flex-col pointer-events-auto shadow-2xl transition-all duration-300 ${className}`}
       style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
     >
@@ -28,4 +25,8 @@ export default function PhoneShell({
       {children}
     </div>
   );
-}
+});
+
+PhoneShell.displayName = 'PhoneShell';
+
+export default PhoneShell;

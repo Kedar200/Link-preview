@@ -1,9 +1,9 @@
 'use client';
-import { useState } from 'react';
+import { useState, useRef, useCallback, forwardRef } from 'react';
 import type { OGData } from '@/types';
 import UrlInput from './UrlInput';
-import ExportToFigma from './ExportToFigma';
 import { LOCALHOST_COMPANION_NEEDED } from '@/hooks/useOGFetch';
+import { exportMockup } from '@/lib/export-mockup';
 import WhatsAppMockup from './mockups/WhatsAppMockup';
 import LinkedInMockup from './mockups/LinkedInMockup';
 import SlackMockup from './mockups/SlackMockup';
@@ -12,15 +12,18 @@ import TwitterMockup from './mockups/TwitterMockup';
 import InstagramMockup from './mockups/InstagramMockup';
 import GenericMockup from './mockups/GenericMockup';
 
-function PhoneMockup({ data, loading, theme, app }: { data: OGData | null; loading: boolean; theme: 'light' | 'dark', app: string }) {
-  if (app === 'whatsapp') return <WhatsAppMockup data={data} loading={loading} theme={theme} />;
-  if (app === 'linkedin') return <LinkedInMockup data={data} loading={loading} />;
-  if (app === 'slack') return <SlackMockup data={data} loading={loading} theme={theme} />;
-  if (app === 'discord') return <DiscordMockup data={data} loading={loading} theme={theme} />;
-  if (app === 'twitter') return <TwitterMockup data={data} loading={loading} theme={theme} />;
-  if (app === 'instagram') return <InstagramMockup data={data} loading={loading} theme={theme} />;
-  return <GenericMockup data={data} loading={loading} theme={theme} app={app} />;
-}
+const PhoneMockup = forwardRef<HTMLDivElement, { data: OGData | null; loading: boolean; theme: 'light' | 'dark'; app: string }>(
+  function PhoneMockup({ data, loading, theme, app }, ref) {
+    if (app === 'whatsapp') return <WhatsAppMockup ref={ref} data={data} loading={loading} theme={theme} />;
+    if (app === 'linkedin') return <LinkedInMockup ref={ref} data={data} loading={loading} />;
+    if (app === 'slack') return <SlackMockup ref={ref} data={data} loading={loading} theme={theme} />;
+    if (app === 'discord') return <DiscordMockup ref={ref} data={data} loading={loading} theme={theme} />;
+    if (app === 'twitter') return <TwitterMockup ref={ref} data={data} loading={loading} theme={theme} />;
+    if (app === 'instagram') return <InstagramMockup ref={ref} data={data} loading={loading} theme={theme} />;
+    return <GenericMockup ref={ref} data={data} loading={loading} theme={theme} app={app} />;
+  }
+);
+PhoneMockup.displayName = 'PhoneMockup';
 
 interface HeroSceneProps {
   onSubmit: (url: string) => void;
@@ -30,9 +33,28 @@ interface HeroSceneProps {
   hasSearched: boolean;
 }
 
+type ExportState = 'idle' | 'exporting' | 'done' | 'error';
+
 export default function HeroScene({ onSubmit, loading, data, error }: HeroSceneProps) {
   const [phoneTheme, setPhoneTheme] = useState<'light'|'dark'>('light');
   const [app, setApp] = useState<'whatsapp' | 'twitter' | 'linkedin' | 'slack' | 'discord' | 'instagram'>('whatsapp');
+  const [exportState, setExportState] = useState<ExportState>('idle');
+
+  const mockupRef = useRef<HTMLDivElement>(null);
+
+  const handleExport = useCallback(async (format: 'png' | 'clipboard') => {
+    if (!mockupRef.current || exportState !== 'idle') return;
+    setExportState('exporting');
+    try {
+      await exportMockup(mockupRef.current, { format, pixelRatio: 2 });
+      setExportState('done');
+      setTimeout(() => setExportState('idle'), 3000);
+    } catch (err) {
+      console.error('Export failed:', err);
+      setExportState('error');
+      setTimeout(() => setExportState('idle'), 2500);
+    }
+  }, [exportState]);
 
   return (
     <div className="relative w-full min-h-[85vh] flex flex-col lg:flex-row overflow-hidden">
@@ -91,7 +113,7 @@ export default function HeroScene({ onSubmit, loading, data, error }: HeroSceneP
         <div className="relative flex flex-col items-center justify-center">
           {/* Phone Mockup */}
           <div className="relative pointer-events-auto transform scale-[0.55] sm:scale-75 md:scale-[0.85] lg:scale-[0.85] origin-top mt-4 lg:mt-0 mb-[-380px] sm:mb-[-210px] md:mb-[-126px] lg:mb-[-126px]">
-            <PhoneMockup data={data} loading={loading} theme={phoneTheme} app={app} />
+            <PhoneMockup ref={mockupRef} data={data} loading={loading} theme={phoneTheme} app={app} />
           </div>
 
           {/* Vertical Controls Dock */}
@@ -136,6 +158,56 @@ export default function HeroScene({ onSubmit, loading, data, error }: HeroSceneP
               ) : (
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
               )}
+            </button>
+
+            <div className="w-8 h-px bg-white/10 my-1" />
+
+            {/* Export Buttons */}
+            <button
+              onClick={() => handleExport('png')}
+              disabled={exportState !== 'idle'}
+              className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 select-none ${
+                exportState === 'done' 
+                  ? 'bg-emerald-500/20 text-emerald-300' 
+                  : exportState === 'exporting'
+                  ? 'text-white/20 cursor-wait'
+                  : exportState === 'error'
+                  ? 'bg-red-500/20 text-red-300'
+                  : 'text-white/40 hover:text-white/80 hover:bg-white/10'
+              }`}
+              title={exportState === 'done' ? 'Downloaded!' : exportState === 'exporting' ? 'Exporting...' : 'Download as PNG'}
+            >
+              {exportState === 'exporting' ? (
+                <svg className="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2.5" strokeDasharray="32" strokeLinecap="round" />
+                </svg>
+              ) : exportState === 'done' ? (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              ) : (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+              )}
+            </button>
+
+            <button
+              onClick={() => handleExport('clipboard')}
+              disabled={exportState !== 'idle'}
+              className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 select-none ${
+                exportState === 'done' 
+                  ? 'bg-emerald-500/20 text-emerald-300' 
+                  : 'text-white/40 hover:text-white/80 hover:bg-white/10'
+              }`}
+              title="Copy to clipboard"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
             </button>
           </div>
         </div>
