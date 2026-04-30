@@ -44,59 +44,6 @@ const LinkedInMockup = forwardRef<HTMLDivElement, Props>(function LinkedInMockup
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto px-4 py-2 flex flex-col gap-6 scrollbar-hide z-20 bg-white">
-        
-        {/* SUNDAY Divider */}
-        <div className="flex items-center my-1 mt-4">
-          <div className="flex-1 h-px bg-gray-200"></div>
-          <span className="px-4 text-[11px] font-bold text-gray-500 tracking-widest uppercase">SUNDAY</span>
-          <div className="flex-1 h-px bg-gray-200"></div>
-        </div>
-
-        {/* Kedar: Deleted message */}
-        <div className="flex gap-3">
-          <div className="w-10 h-10 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden">
-            <img src="/avatars/avatar-12.jpg" alt="Kedar" className="w-full h-full object-cover" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-baseline gap-1.5">
-              <span className="font-bold text-[15px] text-gray-900">Sam</span>
-              <span className="text-[12px] text-gray-500">• (He/Him) • 11:19 PM</span>
-            </div>
-            <div className="mt-1.5 inline-block bg-[#f3f2ef] rounded-lg px-3 py-1.5 border border-gray-200">
-              <span className="text-[14px] text-gray-600 italic">This message has been deleted.</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Pranav: ? */}
-        <div className="flex gap-3">
-          <div className="w-10 h-10 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden">
-            <img src="/avatars/avatar-11.jpg" alt="Pranav" className="w-full h-full object-cover" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-baseline gap-1.5">
-              <span className="font-bold text-[15px] text-gray-900">Alex</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" className="text-gray-500"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/></svg>
-              <span className="text-[12px] text-gray-500">• 11:32 PM</span>
-            </div>
-            <p className="text-[15px] mt-1 text-gray-800 leading-snug">?</p>
-          </div>
-        </div>
-
-        {/* Kedar: Nothing was testing... */}
-        <div className="flex gap-3">
-          <div className="w-10 h-10 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden">
-            <img src="/avatars/avatar-12.jpg" alt="Kedar" className="w-full h-full object-cover" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-baseline gap-1.5">
-              <span className="font-bold text-[15px] text-gray-900">Sam</span>
-              <span className="text-[12px] text-gray-500">• (He/Him) • 11:35 PM</span>
-            </div>
-            <p className="text-[15px] mt-1 text-gray-800 leading-snug">Nothing was testing somwthing</p>
-          </div>
-        </div>
-
         {/* TODAY Divider */}
         <div className="flex items-center my-1">
           <div className="flex-1 h-px bg-gray-200"></div>

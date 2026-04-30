@@ -80,16 +80,6 @@ const InstagramMockup = forwardRef<HTMLDivElement, Props>(function InstagramMock
         {/* Spacer to push messages toward bottom */}
         <div className="flex-1" />
 
-        {/* Incoming: asking about topic */}
-        <div className="flex items-end gap-2.5 max-w-[85%]">
-          <div className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0">
-            <img src="/avatars/avatar-sudhanshu.jpg" alt="Sudhanshu" className="w-full h-full object-cover" />
-          </div>
-          <div className={`${bgIncoming} ${textPrimary} px-4 py-2 rounded-[20px] text-[15px] transition-all duration-300`}>
-            Bro share me your project url.
-          </div>
-        </div>
-
         {/* Outgoing: sharing context */}
         <div className={`${bgOutgoing} ${textOutgoing} px-4 py-2 rounded-[20px] self-end max-w-[80%] text-[15px] transition-all duration-300`}>
           Check this out 👇

@@ -61,19 +61,6 @@ const SlackMockup = forwardRef<HTMLDivElement, Props>(function SlackMockup({ dat
       {/* Messages */}
       <div className={`flex-1 overflow-y-auto px-4 pt-3 pb-14 flex flex-col gap-5 scrollbar-hide z-20 transition-all duration-300 ${bgApp}`}>
         
-        {/* Sunil: Sweet... */}
-        <div className="flex gap-3">
-          <div className="w-10 h-10 rounded-md bg-gray-200 flex-shrink-0 overflow-hidden">
-            <img src="/avatars/avatar-11.jpg" alt="Sunil" className="w-full h-full object-cover" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-baseline gap-2">
-              <span className={`font-bold text-[15px] ${textTitle}`}>Alex</span>
-              <span className={`text-[12px] ${textMuted}`}>10:22 AM</span>
-            </div>
-            <p className={`text-[15px] mt-0.5 ${textMain}`}>Sweet. Can you share a preview here? Want to see how it handles the metadata and the dark mode toggle.</p>
-          </div>
-        </div>
 
         {/* Sudhanshu: On it... */}
         <div className="flex gap-3">
