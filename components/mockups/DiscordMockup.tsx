@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import type { OGData } from '@/types';
 import PhoneShell from './PhoneShell';
 
@@ -9,7 +9,7 @@ interface Props {
   theme: 'light' | 'dark';
 }
 
-export default function DiscordMockup({ data, loading, theme }: Props) {
+const DiscordMockup = forwardRef<HTMLDivElement, Props>(function DiscordMockup({ data, loading, theme }, ref) {
   const isDark = theme === 'dark';
   
   // Base Discord Theme Colors
@@ -28,13 +28,13 @@ export default function DiscordMockup({ data, loading, theme }: Props) {
   const dividerCol = isDark ? 'bg-[#3f4147]' : 'bg-[#e3e5e8]';
 
   return (
-    <PhoneShell bgApp={bgMain}>
+    <PhoneShell ref={ref} bgApp={bgMain}>
       {/* Topmost Server Header */}
       <div className={`h-11 w-full flex items-center justify-between px-4 pt-1 text-[13px] font-bold z-40 transition-all duration-300 ${bgServerHeader} ${textMuted} border-b ${isDark ? 'border-[#1e1f22]' : 'border-[#d1d3d6]'}`}>
         <div className="flex-1"></div>
         <div className={`flex items-center gap-1.5 ${textTitle}`}>
           <div className="w-4 h-4 bg-white rounded-full flex items-center justify-center overflow-hidden">
-             <img src="https://github.com/Kedar200.png" alt="Server" className="w-full h-full object-cover" />
+             <img src="/avatars/kedar-github.jpg" alt="Server" className="w-full h-full object-cover" />
           </div>
           LinkPeek
         </div>
@@ -92,7 +92,7 @@ export default function DiscordMockup({ data, loading, theme }: Props) {
         {/* Fake Message 2 (with our link) */}
         <div className="flex gap-3 px-3 py-1 hover:bg-black/5">
           <div className="w-10 h-10 rounded-full flex-shrink-0 overflow-hidden mt-0.5">
-            <img src="https://i.pravatar.cc/100?img=33" alt="cainb" className="w-full h-full object-cover" />
+            <img src="/avatars/avatar-33.jpg" alt="cainb" className="w-full h-full object-cover" />
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-baseline gap-2">
@@ -156,7 +156,7 @@ export default function DiscordMockup({ data, loading, theme }: Props) {
             {/* Reply thread */}
             <div className="flex items-center gap-1.5 ml-0 mb-0.5 z-10 relative mt-0.5">
               <div className="w-4 h-4 rounded-full overflow-hidden flex-shrink-0">
-                <img src="https://i.pravatar.cc/100?img=33" alt="Sam" className="w-full h-full object-cover" />
+                <img src="/avatars/avatar-33.jpg" alt="Sam" className="w-full h-full object-cover" />
               </div>
               <span className={`font-semibold text-[13px] text-[#d126cc]`}>@Sam</span>
               <span className={`bg-[#313338] border ${isDark ? 'border-[#3f4147]' : 'border-[#d1d3d6]'} rounded px-1 text-[9px] font-bold ${textMuted} flex items-center gap-0.5`}><span className="text-[#3ba55c]">✦</span> MOD</span>
@@ -202,4 +202,7 @@ export default function DiscordMockup({ data, loading, theme }: Props) {
       </div>
     </PhoneShell>
   );
-}
+});
+
+DiscordMockup.displayName = 'DiscordMockup';
+export default DiscordMockup;

@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import type { OGData } from '@/types';
 import PhoneShell from './PhoneShell';
 
@@ -9,7 +9,7 @@ interface Props {
   theme: 'light' | 'dark';
 }
 
-export default function InstagramMockup({ data, loading, theme }: Props) {
+const InstagramMockup = forwardRef<HTMLDivElement, Props>(function InstagramMockup({ data, loading, theme }, ref) {
   const isDark = theme === 'dark';
   
   // App-specific Theme Variables
@@ -25,7 +25,7 @@ export default function InstagramMockup({ data, loading, theme }: Props) {
   const borderCard = isDark ? 'border-white/5' : 'border-black/5';
 
   return (
-    <PhoneShell bgApp={bgApp}>
+    <PhoneShell ref={ref} bgApp={bgApp}>
       {/* Status bar */}
       <div className={`h-12 w-full flex items-center justify-between px-8 pt-3 text-[14px] font-bold z-40 transition-all duration-300 ${bgApp} ${textPrimary}`}>
         <span className="pl-1">12:10</span>
@@ -42,7 +42,7 @@ export default function InstagramMockup({ data, loading, theme }: Props) {
         </div>
         <div className="flex items-center gap-3 flex-1 min-w-0">
           <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
-            <img src="https://i.pravatar.cc/100?u=sudhanshu" alt="Sudhanshu" className="w-full h-full object-cover" />
+            <img src="/avatars/avatar-sudhanshu.jpg" alt="Sudhanshu" className="w-full h-full object-cover" />
           </div>
           <div className="flex flex-col min-w-0">
             <div className={`font-bold text-[16px] leading-tight ${textPrimary}`}>Sudhanshu</div>
@@ -62,7 +62,7 @@ export default function InstagramMockup({ data, loading, theme }: Props) {
         {/* IG DM Profile Intro (shown at top of new convos) */}
         <div className="flex flex-col items-center pt-6 pb-2 gap-1">
           <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-black/5">
-            <img src="https://i.pravatar.cc/100?u=sudhanshu" alt="Sudhanshu" className="w-full h-full object-cover" />
+            <img src="/avatars/avatar-sudhanshu.jpg" alt="Sudhanshu" className="w-full h-full object-cover" />
           </div>
           <div className={`font-bold text-[16px] ${textPrimary} mt-1`}>Sudhanshu</div>
           <div className={`text-[13px] ${textSecondary}`}>sudhanshub_999 · Instagram</div>
@@ -79,16 +79,6 @@ export default function InstagramMockup({ data, loading, theme }: Props) {
 
         {/* Spacer to push messages toward bottom */}
         <div className="flex-1" />
-
-        {/* Incoming: asking about topic */}
-        <div className="flex items-end gap-2.5 max-w-[85%]">
-          <div className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0">
-            <img src="https://i.pravatar.cc/100?u=sudhanshu" alt="Sudhanshu" className="w-full h-full object-cover" />
-          </div>
-          <div className={`${bgIncoming} ${textPrimary} px-4 py-2 rounded-[20px] text-[15px] transition-all duration-300`}>
-            Bro share me your project url.
-          </div>
-        </div>
 
         {/* Outgoing: sharing context */}
         <div className={`${bgOutgoing} ${textOutgoing} px-4 py-2 rounded-[20px] self-end max-w-[80%] text-[15px] transition-all duration-300`}>
@@ -157,4 +147,7 @@ export default function InstagramMockup({ data, loading, theme }: Props) {
       </div>
     </PhoneShell>
   );
-}
+});
+
+InstagramMockup.displayName = 'InstagramMockup';
+export default InstagramMockup;

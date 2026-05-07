@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import type { OGData } from '@/types';
 import PhoneShell from './PhoneShell';
 
@@ -9,7 +9,7 @@ interface Props {
   theme: 'light' | 'dark';
 }
 
-export default function SlackMockup({ data, loading, theme }: Props) {
+const SlackMockup = forwardRef<HTMLDivElement, Props>(function SlackMockup({ data, loading, theme }, ref) {
   const isDark = theme === 'dark';
   
   const bgApp = isDark ? 'bg-[#1a1d21]' : 'bg-[#ffffff]';
@@ -25,7 +25,7 @@ export default function SlackMockup({ data, loading, theme }: Props) {
   const proText = isDark ? 'text-[#ffffff]' : 'text-[#1d1c1d]';
 
   return (
-    <PhoneShell bgApp={bgApp}>
+    <PhoneShell ref={ref} bgApp={bgApp}>
       {/* Status bar */}
       <div className={`h-12 w-full flex items-center justify-between px-7 pt-3 text-[14px] font-semibold z-40 transition-all duration-300 ${headerBg} ${textTitle}`}>
         <span className="pl-1">9:59</span>
@@ -40,7 +40,7 @@ export default function SlackMockup({ data, loading, theme }: Props) {
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={textTitle}><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
         <div className="flex items-center ml-4 gap-2.5">
           <div className="w-9 h-9 rounded-md bg-gray-200 overflow-hidden flex-shrink-0 relative">
-            <img src="https://i.pravatar.cc/100?img=11" alt="Sunil" className="w-full h-full object-cover" />
+            <img src="/avatars/avatar-11.jpg" alt="Sunil" className="w-full h-full object-cover" />
             <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-[#2bac76] rounded-full border-[1.5px] border-[#1a1d21]"></div>
           </div>
           <div>
@@ -61,19 +61,6 @@ export default function SlackMockup({ data, loading, theme }: Props) {
       {/* Messages */}
       <div className={`flex-1 overflow-y-auto px-4 pt-3 pb-14 flex flex-col gap-5 scrollbar-hide z-20 transition-all duration-300 ${bgApp}`}>
         
-        {/* Sunil: Sweet... */}
-        <div className="flex gap-3">
-          <div className="w-10 h-10 rounded-md bg-gray-200 flex-shrink-0 overflow-hidden">
-            <img src="https://i.pravatar.cc/100?img=11" alt="Sunil" className="w-full h-full object-cover" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-baseline gap-2">
-              <span className={`font-bold text-[15px] ${textTitle}`}>Alex</span>
-              <span className={`text-[12px] ${textMuted}`}>10:22 AM</span>
-            </div>
-            <p className={`text-[15px] mt-0.5 ${textMain}`}>Sweet. Can you share a preview here? Want to see how it handles the metadata and the dark mode toggle.</p>
-          </div>
-        </div>
 
         {/* Sudhanshu: On it... */}
         <div className="flex gap-3">
@@ -165,4 +152,7 @@ export default function SlackMockup({ data, loading, theme }: Props) {
       </div>
     </PhoneShell>
   );
-}
+});
+
+SlackMockup.displayName = 'SlackMockup';
+export default SlackMockup;
