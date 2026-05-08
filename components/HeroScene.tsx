@@ -63,11 +63,11 @@ export default function HeroScene({ onSubmit, loading, data, error }: HeroSceneP
       <div className="relative z-20 w-full lg:w-[45%] flex flex-col justify-start px-6 sm:px-12 xl:px-20 pt-20 pb-16 lg:pb-32 pointer-events-none">
         <div className="pointer-events-auto">
           <h1 className="h1 mb-10 text-white max-w-[800px]">
-            Design the click.<span className="text-[rgba(255,255,255,0.45)]"> Master the preview.</span>
+            Make your links look perfect<span className="text-[rgba(255,255,255,0.45)]"> on social media.</span>
           </h1>
 
           <p className="body-lg mb-14 text-[rgba(255,255,255,0.7)] max-w-[540px]">
-            The ultimate sandbox for social sharing. Render high-fidelity mockups, test localhost without tunnels, and export pixel-perfect layouts directly to Figma.
+            See exactly how your website looks before you post. Preview links instantly, test them while you build, and export your designs to Figma.
           </p>
 
           <div className="w-full max-w-[480px]">
