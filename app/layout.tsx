@@ -31,6 +31,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
+    site: '@KedarDe02887131',
     title: 'LinkPeek — See your link before you share it',
     description: 'Preview and fix your link previews across 6 platforms instantly.',
     images: ['/og-image.png'],
