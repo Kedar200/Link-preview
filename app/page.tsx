@@ -38,12 +38,16 @@ export default function HomePage() {
     setShowCursor(false);
     trackEvent('skip_tutorial');
     doFetch();
+    
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('onboardingDone', 'true');
+    }
   }, [doFetch]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
     
-    if (window.innerWidth < 1024 || sessionStorage.getItem('onboardingDone')) {
+    if (window.innerWidth < 1024 || localStorage.getItem('onboardingDone')) {
       setAnimState('done');
       doFetch();
       return;
@@ -99,7 +103,7 @@ export default function HomePage() {
       
       if (cancelled) return;
       skipAnimation();
-      sessionStorage.setItem('onboardingDone', 'true');
+      localStorage.setItem('onboardingDone', 'true');
     };
     
     run();
