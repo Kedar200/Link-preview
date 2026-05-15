@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? process.env.VERCEL_PROJECT_PRODUCTION_URL
       ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-      : 'https://linkpeek-steel.vercel.app/'
+      : 'https://getlinkpeek.com/'
   ),
   title: 'LinkPeek — See your link before you share it',
   description:
@@ -44,6 +44,37 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="antialiased">
         <GoogleAnalytics />
         {children}
+
+        {/* Global Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": "LinkPeek",
+              "operatingSystem": "All",
+              "applicationCategory": "DeveloperApplication",
+              "description": "Instantly preview and audit your Open Graph meta tags across 6 platforms.",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+              }
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "LinkPeek",
+              "url": "https://getlinkpeek.com/"
+            })
+          }}
+        />
       </body>
     </html>
   );
