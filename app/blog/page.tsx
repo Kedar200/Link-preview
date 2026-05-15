@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import BlogMasonryGrid, { type BlogMasonryPost } from '@/components/BlogMasonryGrid';
 import {
   type BlogPost,
+  getBlogById,
   getBlogDate,
-  getBlogDescription,
   getBlogPath,
   getBlogs,
 } from '@/lib/blogs';
@@ -37,6 +38,39 @@ function formatDate(value: string) {
   }).format(date);
 }
 
+function cleanDescriptionForCard(description: string | undefined, title: string) {
+  if (!description) return undefined;
+
+  let cleaned = description.replace(/\s+/g, ' ').trim();
+  const normalizedTitle = title.replace(/\s+/g, ' ').trim();
+
+  if (normalizedTitle && cleaned.toLowerCase().startsWith(normalizedTitle.toLowerCase())) {
+    cleaned = cleaned.slice(normalizedTitle.length).trim();
+  }
+
+  cleaned = cleaned
+    .replace(/^\?*\s*(\[[^\]]+\])?\s*/g, '')
+    .replace(/^[\s:;-]+/g, '')
+    .trim();
+
+  return cleaned || undefined;
+}
+
+function getOptionalBlogDescription(post: BlogPost) {
+  const explicitDescription = post.description || post.excerpt;
+  if (explicitDescription) return cleanDescriptionForCard(explicitDescription, post.title);
+
+  const text = (post.htmlContent ?? '')
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  const cleaned = cleanDescriptionForCard(text, post.title);
+  return cleaned ? `${cleaned.slice(0, 165)}${cleaned.length > 165 ? '...' : ''}` : undefined;
+}
+
 export default async function BlogIndex() {
   let blogs: BlogPost[] = [];
 
@@ -47,6 +81,35 @@ export default async function BlogIndex() {
   }
 
   const [featuredPost, ...remainingPosts] = blogs;
+  let featuredPostWithContent = featuredPost;
+
+  if (featuredPost) {
+    try {
+      const fullFeaturedPost = await getBlogById(featuredPost.id);
+      featuredPostWithContent = fullFeaturedPost
+        ? { ...featuredPost, ...fullFeaturedPost, slug: featuredPost.slug }
+        : featuredPost;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const featuredDescription = featuredPostWithContent
+    ? getOptionalBlogDescription(featuredPostWithContent)
+    : undefined;
+  const masonryPosts: BlogMasonryPost[] = remainingPosts.map((blog) => {
+    const date = getBlogDate(blog);
+
+    return {
+      id: blog.id,
+      title: blog.title,
+      href: getBlogPath(blog),
+      dateTime: date,
+      formattedDate: formatDate(date),
+      description: getOptionalBlogDescription(blog),
+      coverImageUrl: blog.coverImageUrl,
+    };
+  });
 
   return (
     <main className="min-h-screen bg-[#f4f0e6] text-[#1a2b21]">
@@ -83,39 +146,52 @@ export default async function BlogIndex() {
       </section>
 
       <section className="mx-auto w-full max-w-[1180px] px-6 py-12 sm:px-10 lg:px-12 lg:py-16">
-        {featuredPost ? (
+        {featuredPostWithContent ? (
           <Link
-            href={getBlogPath(featuredPost)}
-            className="group grid overflow-hidden rounded-lg border border-[#1a2b21]/10 bg-white shadow-[0_18px_60px_rgba(26,43,33,0.08)] transition-transform hover:-translate-y-1 lg:grid-cols-[1fr_0.9fr]"
+            href={getBlogPath(featuredPostWithContent)}
+            className="group grid overflow-hidden rounded-[1.25rem] border border-[#1a2b21]/10 bg-white shadow-[0_18px_60px_rgba(26,43,33,0.08)] transition-transform hover:-translate-y-1 lg:grid-cols-[0.95fr_1fr]"
           >
-            <div className="aspect-[16/10] bg-[#dce6dd] lg:aspect-auto">
-              {featuredPost.coverImageUrl ? (
+            <div className="relative aspect-[16/10] overflow-hidden bg-[#dce6dd] lg:aspect-auto">
+              {featuredPostWithContent.coverImageUrl ? (
                 <img
-                  src={featuredPost.coverImageUrl}
+                  src={featuredPostWithContent.coverImageUrl}
                   alt=""
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                 />
               ) : (
                 <div className="flex h-full w-full items-center justify-center bg-[#dce6dd] text-[#1a2b21]/40">
                   LinkPeek
                 </div>
               )}
-            </div>
-            <article className="flex min-h-[360px] flex-col justify-between p-7 sm:p-9 lg:p-10">
-              <div>
-                <div className="mb-5 flex items-center gap-3 text-sm text-[#4f6f5b]">
-                  <time dateTime={getBlogDate(featuredPost)}>{formatDate(getBlogDate(featuredPost))}</time>
-                  <span aria-hidden="true">/</span>
-                  <span>Featured</span>
-                </div>
-                <h2 className="text-3xl font-semibold leading-tight text-[#1a2b21] sm:text-4xl">
-                  {featuredPost.title}
-                </h2>
-                <p className="mt-5 line-clamp-4 text-base leading-7 text-[#4f6f5b]">
-                  {getBlogDescription(featuredPost)}
-                </p>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1a2b21]/35 via-transparent to-transparent" />
+              <div className="absolute bottom-5 left-5 flex items-center gap-2 rounded-full bg-[#f4f0e6]/90 px-4 py-2 text-sm font-semibold text-[#1a2b21] backdrop-blur">
+                Featured read
+                <span aria-hidden="true">-&gt;</span>
               </div>
-              <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[#1a2b21]">
+            </div>
+            <article className="flex min-h-[360px] flex-col p-7 sm:p-9 lg:p-12">
+              <div>
+                <div className="mb-6 flex flex-wrap items-center gap-3">
+                  <time
+                    dateTime={getBlogDate(featuredPostWithContent)}
+                    className="rounded-full bg-[#dde6e1]/45 px-3 py-1.5 text-sm font-medium text-[#4f6f5b]"
+                  >
+                    {formatDate(getBlogDate(featuredPostWithContent))}
+                  </time>
+                  <span className="rounded-full border border-[#4f6f5b]/20 px-3 py-1.5 text-sm font-medium text-[#4f6f5b]">
+                    Featured
+                  </span>
+                </div>
+                <h2 className="max-w-3xl text-3xl font-semibold leading-[1.05] text-[#1a2b21] sm:text-4xl lg:text-5xl">
+                  {featuredPostWithContent.title}
+                </h2>
+                {featuredDescription && (
+                  <p className="mt-7 max-w-2xl border-l-2 border-[#4f6f5b]/25 pl-5 text-lg leading-8 text-[#4f6f5b]">
+                    {featuredDescription}
+                  </p>
+                )}
+              </div>
+              <span className="mt-10 inline-flex w-fit items-center gap-2 rounded-full bg-[#1a2b21] px-5 py-3 text-sm font-semibold text-[#f4f0e6] transition-colors group-hover:bg-[#2f4a3a]">
                 Read article
                 <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">
                   -&gt;
@@ -129,48 +205,7 @@ export default async function BlogIndex() {
           </div>
         )}
 
-        {remainingPosts.length > 0 && (
-          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {remainingPosts.map((blog) => (
-              <Link
-                key={blog.id}
-                href={getBlogPath(blog)}
-                className="group flex min-h-[420px] flex-col overflow-hidden rounded-lg border border-[#1a2b21]/10 bg-white transition-all hover:-translate-y-1 hover:border-[#1a2b21]/25 hover:shadow-[0_18px_50px_rgba(26,43,33,0.08)]"
-              >
-                <div className="aspect-[16/10] bg-[#dce6dd]">
-                  {blog.coverImageUrl ? (
-                    <img
-                      src={blog.coverImageUrl}
-                      alt=""
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                    />
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center text-[#1a2b21]/35">
-                      LinkPeek
-                    </div>
-                  )}
-                </div>
-                <article className="flex flex-1 flex-col p-6">
-                  <time dateTime={getBlogDate(blog)} className="text-sm text-[#4f6f5b]">
-                    {formatDate(getBlogDate(blog))}
-                  </time>
-                  <h2 className="mt-4 line-clamp-3 text-2xl font-semibold leading-snug text-[#1a2b21]">
-                    {blog.title}
-                  </h2>
-                  <p className="mt-4 line-clamp-3 text-sm leading-6 text-[#4f6f5b]">
-                    {getBlogDescription(blog)}
-                  </p>
-                  <span className="mt-auto inline-flex items-center gap-2 pt-8 text-sm font-semibold text-[#1a2b21]">
-                    Read
-                    <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">
-                      -&gt;
-                    </span>
-                  </span>
-                </article>
-              </Link>
-            ))}
-          </div>
-        )}
+        <BlogMasonryGrid posts={masonryPosts} />
       </section>
     </main>
   );

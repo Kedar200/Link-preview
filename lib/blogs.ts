@@ -295,7 +295,7 @@ export async function getBlogs(limit = 50) {
   );
 }
 
-async function getBlogById(id: string) {
+export async function getBlogById(id: string) {
   const res = await fetch(`${CONTENT_API_URL}/${id}`, {
     headers: authHeaders(),
     next: { revalidate: 3600 },
