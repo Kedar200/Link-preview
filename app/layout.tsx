@@ -1,13 +1,10 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
+import { getSiteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? process.env.VERCEL_PROJECT_PRODUCTION_URL
-      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-      : 'https://getlinkpeek.com/'
-  ),
+  metadataBase: new URL(getSiteUrl()),
   title: 'LinkPeek — See your link before you share it',
   description:
     'Instantly preview how your link looks on WhatsApp, Twitter/X, LinkedIn, Slack, Discord and Instagram. Fix sharing issues before anyone sees them.',
