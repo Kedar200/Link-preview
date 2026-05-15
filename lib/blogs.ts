@@ -3,7 +3,7 @@ import { load } from 'cheerio';
 
 const CONTENT_API_URL = 'https://api.visualref.com/api/v1/content';
 const CONTENT_API_TOKEN =
-  process.env.VISUALREF_API_TOKEN ?? 'vr_live_no-2c0EEK_kyHsGV3JfqGVZE7N4vejuq';
+  process.env.VISUALREF_API_TOKEN ?? 'env';
 
 export type BlogPost = {
   id: string;
