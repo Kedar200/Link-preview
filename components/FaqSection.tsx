@@ -21,19 +21,19 @@ const faqData = [
 
 export default function FaqSection() {
   return (
-    <section className="py-24 px-6 md:px-12 lg:px-24 bg-[#f4f0e6]">
-      <div className="max-w-7xl mx-auto">
+    <section className="faq-section">
+      <div className="faq-container">
         {/* Heading */}
-        <div className="mb-16 card-animate flex items-baseline gap-4">
-          <div className="w-4 h-4 rounded-full bg-[#dde6e1] shadow-[0_0_15px_rgba(221,230,225,0.4)]" />
+        <div className="section-heading card-animate">
+          <div className="section-heading-dot faq-heading-dot" />
           <h2 className="h2 tracking-tighter text-[#1a2b21]">
-            Curiosity. <br />
-            <span className="text-[#4f6f5b]/50">Unpacked.</span>
+            Questions. <br />
+            <span className="text-[#4f6f5b]/50">Answered.</span>
           </h2>
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="faq-grid">
           {faqData.map((faq, index) => {
             const hoverColors = [
               'hover:bg-[#1a2b21] hover:text-[#f4f0e6] hover:border-[#1a2b21]',
@@ -45,12 +45,12 @@ export default function FaqSection() {
             return (
               <div 
                 key={index}
-                className={`group relative bg-[#dde6e1]/20 rounded-[2.5rem] p-12 min-h-[280px] flex flex-col justify-between transition-all duration-500 border border-[#4f6f5b]/15 card-animate ${hoverColors[index % 4]}`}
+                className={`faq-card group card-animate ${hoverColors[index % 4]}`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {/* Arrow Button */}
-                <div className="absolute top-10 right-10">
-                  <div className="w-14 h-14 rounded-full border border-current opacity-20 flex items-center justify-center transition-all duration-500 group-hover:opacity-100">
+                <div className="faq-arrow">
+                  <div>
                     <svg 
                       width="24" 
                       height="24" 
@@ -69,7 +69,7 @@ export default function FaqSection() {
                 </div>
 
                 {/* Content */}
-                <div className="mt-auto">
+                <div className="faq-card-content">
                   <h3 className="h3 mb-2 transition-colors duration-500">
                     {faq.question}
                   </h3>

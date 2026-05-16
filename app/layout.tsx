@@ -5,17 +5,29 @@ import { getSiteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
-  title: 'LinkPeek — See your link before you share it',
+  title: 'LinkPeek - Open Graph Preview Tool & Link Preview Checker',
   description:
-    'Instantly preview how your link looks on WhatsApp, Twitter/X, LinkedIn, Slack, Discord and Instagram. Fix sharing issues before anyone sees them.',
-  keywords: ['og preview', 'link preview', 'open graph checker', 'social media preview', 'meta tags'],
+    'Check Open Graph previews, OG images, Twitter cards, LinkedIn previews, and WhatsApp link previews before you publish or share your URL.',
+  keywords: [
+    'Open Graph preview tool',
+    'social media link preview tool',
+    'link preview checker',
+    'OG image preview',
+    'Twitter card preview',
+    'LinkedIn preview checker',
+    'WhatsApp link preview checker',
+    'Open Graph checker',
+    'social media preview',
+    'meta tags',
+  ],
   icons: {
     icon: '/icon.png',
     apple: '/apple-icon.png',
   },
   openGraph: {
-    title: 'LinkPeek — See your link before you share it',
-    description: 'Preview and fix your link previews across 6 platforms instantly.',
+    title: 'LinkPeek - Open Graph Preview Tool & Link Preview Checker',
+    description:
+      'Preview Open Graph images, Twitter cards, LinkedIn previews, WhatsApp link previews, Slack, Discord, and Instagram cards before you share.',
     type: 'website',
     images: [
       {
@@ -29,8 +41,9 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@KedarDe02887131',
-    title: 'LinkPeek — See your link before you share it',
-    description: 'Preview and fix your link previews across 6 platforms instantly.',
+    title: 'LinkPeek - Open Graph Preview Tool',
+    description:
+      'Check OG images, Twitter cards, LinkedIn previews, and WhatsApp link previews before you publish.',
     images: ['/og-image.png'],
   },
 };
@@ -52,7 +65,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "name": "LinkPeek",
               "operatingSystem": "All",
               "applicationCategory": "DeveloperApplication",
-              "description": "Instantly preview and audit your Open Graph meta tags across 6 platforms.",
+              "applicationSubCategory": "Open Graph preview tool",
+              "description": "Open Graph preview tool and social media link preview checker for testing OG images, Twitter cards, LinkedIn previews, WhatsApp link previews, Slack, Discord, and Instagram cards before publishing.",
+              "featureList": [
+                "Open Graph preview checker",
+                "OG image preview",
+                "Twitter card preview",
+                "LinkedIn preview checker",
+                "WhatsApp link preview checker",
+                "Social media link preview audit"
+              ],
               "offers": {
                 "@type": "Offer",
                 "price": "0",

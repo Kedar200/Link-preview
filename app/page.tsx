@@ -3,7 +3,8 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import Header from '@/components/Header';
 import HeroScene from '@/components/HeroScene';
 import AuditInsights from '@/components/AuditInsights';
-import InformationSection from '@/components/InformationSection';
+import SeoPreviewSection from '@/components/SeoPreviewSection';
+import LocalhostPreviewSection from '@/components/LocalhostPreviewSection';
 import FaqSection from '@/components/FaqSection';
 import Footer from '@/components/Footer';
 import { useOGFetch } from '@/hooks/useOGFetch';
@@ -169,7 +170,8 @@ export default function HomePage() {
       </div>
 
       <AuditInsights data={data} loading={loading} />
-      <InformationSection />
+      <SeoPreviewSection />
+      <LocalhostPreviewSection />
       <FaqSection />
       <Footer />
     </div>
