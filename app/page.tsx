@@ -150,7 +150,7 @@ export default function HomePage() {
 
           <div className="relative z-10 flex flex-col">
             <Header />
-            <main className="flex-1 flex flex-col relative">
+            <main className="flex-1 flex flex-col relative z-20">
               <HeroScene
                 onSubmit={handleSubmit}
                 loading={loading}

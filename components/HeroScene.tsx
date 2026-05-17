@@ -71,7 +71,7 @@ export default function HeroScene({ onSubmit, loading, data, error, isAnimating,
   }, [exportState]);
 
   return (
-    <div className="relative w-full min-h-[85vh] flex flex-col lg:flex-row overflow-hidden">
+    <div className="relative w-full min-h-[85vh] flex flex-col lg:flex-row">
       
       {/* Left Content Area */}
       <div className={`relative z-20 w-full lg:w-[45%] flex flex-col justify-start px-6 sm:px-12 xl:px-20 pt-20 pb-16 lg:pb-32 ${isAnimating ? 'pointer-events-none' : ''} transition-all duration-[1500ms] ease-out ${animState === 'zoom-phone' || animState === 'switching' ? 'opacity-20 blur-sm grayscale brightness-[0.4]' : 'opacity-100 blur-0 grayscale-0 brightness-100'}`}>
@@ -128,7 +128,7 @@ export default function HeroScene({ onSubmit, loading, data, error, isAnimating,
       </div>
 
       {/* Right Content Area (Phone Mockup) */}
-      <div className={`relative z-10 w-full lg:w-[55%] flex items-start lg:items-center justify-center p-4 lg:p-12 pb-20 lg:pb-12 pointer-events-none pt-12 lg:pt-0 transition-transform duration-[1500ms] ease-out ${animState === 'zoom-phone' || animState === 'switching' ? 'scale-[1.08] translate-x-[-2%]' : 'scale-100 translate-x-0'}`}>
+      <div className={`relative z-30 w-full lg:w-[55%] flex items-start lg:items-center justify-center p-4 lg:p-12 pb-20 lg:pb-12 pointer-events-none pt-12 lg:pt-0 transition-transform duration-[1500ms] ease-out ${animState === 'zoom-phone' || animState === 'switching' ? 'scale-[1.08] translate-x-[-2%]' : 'scale-100 translate-x-0'}`}>
         
         <div className="relative flex flex-col items-center justify-center">
           {/* Phone Mockup */}
