@@ -1565,3 +1565,18 @@ body {
     transform: none;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HERO SCENE MOBILE SCALING & DOCK ALIGNMENT
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 639px) {
+  .phone-wrapper-mobile-shift {
+    transform: translateX(-40px) !important;
+  }
+  .hero-controls-dock {
+    right: 0px !important;
+    top: 230px !important;
+    transform: translateY(-50%) !important;
+  }
+}
+

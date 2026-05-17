@@ -130,14 +130,14 @@ export default function HeroScene({ onSubmit, loading, data, error, isAnimating,
       {/* Right Content Area (Phone Mockup) */}
       <div className={`relative z-30 w-full lg:w-[55%] flex items-start lg:items-center justify-center p-4 lg:p-12 pb-20 lg:pb-12 pointer-events-none pt-12 lg:pt-0 transition-transform duration-[1500ms] ease-out ${animState === 'zoom-phone' || animState === 'switching' ? 'scale-[1.08] translate-x-[-2%]' : 'scale-100 translate-x-0'}`}>
         
-        <div className="relative flex flex-col items-center justify-center">
+        <div className="phone-wrapper-mobile-shift relative flex flex-col items-center justify-center -translate-x-6 sm:translate-x-0">
           {/* Phone Mockup */}
           <div className="relative pointer-events-auto transform scale-[0.55] sm:scale-75 md:scale-[0.85] lg:scale-[0.85] origin-top mt-4 lg:mt-0 mb-[-380px] sm:mb-[-210px] md:mb-[-126px] lg:mb-[-126px]">
             <PhoneMockup ref={mockupRef} data={data} loading={loading} theme={phoneTheme} app={currentApp} />
           </div>
 
           {/* Vertical Controls Dock */}
-          <div className="pointer-events-auto absolute top-[60%] sm:top-1/2 -right-8 sm:-right-12 md:-right-24 -translate-y-1/2 flex flex-col items-center gap-4 z-50 bg-[#111a15]/80 backdrop-blur-md p-2 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/10">
+          <div className="hero-controls-dock pointer-events-auto absolute top-[60%] sm:top-1/2 right-4 sm:-right-6 md:-right-24 -translate-y-1/2 flex flex-col items-center gap-4 z-50 bg-[#111a15]/80 backdrop-blur-md p-2 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/10">
             {/* App Switcher */}
             {(() => {
               const APPS_LIST = [
