@@ -7,7 +7,7 @@ const faqData = [
   },
   {
     question: "Is it really free?",
-    answer: "Yes, LinkPeek is free for up to 5 URL scans per day, with unlimited previews for local development testing."
+    answer: "Yes, LinkPeek is 100% free to use. Enjoy unlimited URL scans and previews with no restrictions."
   },
   {
     question: "Can I use it for localhost?",
