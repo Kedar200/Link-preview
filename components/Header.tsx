@@ -26,12 +26,6 @@ export default function Header() {
         {/* Right Side — Navigation & GitHub */}
         <div className="flex items-center gap-1 sm:gap-4">
           <a
-            href="/blog"
-            className="flex items-center px-4 py-2 rounded-full text-[rgba(255,255,255,0.7)] hover:text-white hover:bg-white/10 transition-all font-medium text-sm"
-          >
-            Blog
-          </a>
-          <a
             href="https://github.com/Kedar200/Link-preview"
             target="_blank"
             rel="noopener noreferrer"
