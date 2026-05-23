@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -1888,5 +1888,13 @@ body {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* Premium Grid Paper Background */
+.grid-paper-bg {
+  background-color: #f2fcf3;
+  background-image: linear-gradient(#dbe5dd 1px, transparent 1px), linear-gradient(90deg, #dbe5dd 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: center top;
 }
 
