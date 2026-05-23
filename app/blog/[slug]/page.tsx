@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { blogPosts, getPostBySlug, getAllSlugs } from '@/lib/blog-data';
 import { getSiteUrl } from '@/lib/site';
 import CopyButton from '@/components/CopyButton';
+import Footer from '@/components/Footer';
 
 /* ─── Static params for ISR ─── */
 export async function generateStaticParams() {
@@ -462,26 +463,8 @@ export default async function BlogPostPage({
         </article>
       </main>
 
-      {/* ─── Footer ─── */}
-      <footer className="bg-surface-cream w-full py-12 border-t border-outline-variant mt-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-6 md:px-12 max-w-[1200px] mx-auto">
-          <div className="flex flex-col gap-4">
-            <span className="font-headline-md text-xl font-bold text-primary">LinkPeek</span>
-            <span className="font-body-sm text-xs text-on-surface-variant">© 2026 LinkPeek API. All rights reserved.</span>
-          </div>
-          <div className="flex flex-col gap-2.5">
-            <Link href="/" className="font-label-md text-xs text-on-surface-variant hover:text-primary hover:underline transition-all duration-200 no-underline font-semibold">Privacy Policy</Link>
-            <Link href="/" className="font-label-md text-xs text-on-surface-variant hover:text-primary hover:underline transition-all duration-200 no-underline font-semibold">Terms of Service</Link>
-          </div>
-          <div className="flex flex-col gap-2.5">
-            <Link href="/" className="font-label-md text-xs text-on-surface-variant hover:text-primary hover:underline transition-all duration-200 no-underline font-semibold">Security</Link>
-            <Link href="/" className="font-label-md text-xs text-on-surface-variant hover:text-primary hover:underline transition-all duration-200 no-underline font-semibold">Status</Link>
-          </div>
-          <div className="flex flex-col gap-2.5">
-            <Link href="/" className="font-label-md text-xs text-on-surface-variant hover:text-primary hover:underline transition-all duration-200 no-underline font-semibold">Contact Support</Link>
-          </div>
-        </div>
-      </footer>
+      {/* ─── Shared Footer Component ─── */}
+      <Footer />
 
       {/* ─── Article Structured Data ─── */}
       <script
