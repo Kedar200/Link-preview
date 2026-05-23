@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Header() {
   return (
     <header className="relative z-10 w-full pt-8 pb-4">
@@ -25,6 +27,16 @@ export default function Header() {
 
         {/* Right Side — Navigation & GitHub */}
         <div className="flex items-center gap-1 sm:gap-4">
+          <Link
+            href="/blog"
+            className="flex items-center gap-2 px-4 py-2 rounded-full text-[rgba(255,255,255,0.7)] hover:text-white hover:bg-white/10 transition-all label-sm no-underline"
+          >
+            <span className="hidden sm:inline">Blog</span>
+            <svg className="sm:hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </svg>
+          </Link>
           <a
             href="https://github.com/Kedar200/Link-preview"
             target="_blank"
@@ -42,3 +54,4 @@ export default function Header() {
     </header>
   );
 }
+
