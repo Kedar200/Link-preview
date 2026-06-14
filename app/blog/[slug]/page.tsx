@@ -294,6 +294,7 @@ export default async function BlogPostPage({
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) notFound();
+  const siteUrl = getSiteUrl();
 
   // Find related posts (exclude current)
   const related = blogPosts.filter((p) => p.slug !== slug).slice(0, 2);
@@ -475,7 +476,7 @@ export default async function BlogPostPage({
             '@type': 'BlogPosting',
             headline: post.title,
             description: post.description,
-            image: 'https://getlinkpeek.com/og-image.png',
+            image: `${siteUrl}/og-image.png`,
             datePublished: post.publishedAt,
             dateModified: post.updatedAt,
             author: {
@@ -485,15 +486,15 @@ export default async function BlogPostPage({
             publisher: {
               '@type': 'Organization',
               name: 'LinkPeek',
-              url: 'https://getlinkpeek.com',
+              url: siteUrl,
               logo: {
                 '@type': 'ImageObject',
-                url: 'https://getlinkpeek.com/icon.png',
+                url: `${siteUrl}/icon.png`,
               },
             },
             mainEntityOfPage: {
               '@type': 'WebPage',
-              '@id': `https://getlinkpeek.com/blog/${post.slug}`,
+              '@id': `${siteUrl}/blog/${post.slug}`,
             },
             keywords: post.keywords.join(', '),
           }),

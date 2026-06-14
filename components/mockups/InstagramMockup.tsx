@@ -119,7 +119,7 @@ const InstagramMockup = forwardRef<HTMLDivElement, Props>(function InstagramMock
 
           {/* Outgoing URL Bubble */}
           <div className={`${bgOutgoing} ${textOutgoing} px-4 py-2 rounded-[20px] text-[13px] leading-snug transition-all duration-300 max-w-[90%] min-w-0 overflow-hidden`} style={{ wordBreak: 'break-all' }}>
-            {data?.url || 'https://getlinkpeek.com'}
+            {data?.url || 'https://www.getlinkpeek.com'}
           </div>
         </div>
       </div>

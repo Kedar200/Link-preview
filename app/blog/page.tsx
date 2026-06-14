@@ -409,17 +409,17 @@ export default function BlogPage() {
             '@type': 'Blog',
             name: 'LinkPeek Blog',
             description: 'Expert guides on Open Graph meta tags, link preview optimization, and social media sharing.',
-            url: 'https://getlinkpeek.com/blog',
+            url: 'https://www.getlinkpeek.com/blog',
             publisher: {
               '@type': 'Organization',
               name: 'LinkPeek',
-              url: 'https://getlinkpeek.com',
+              url: 'https://www.getlinkpeek.com',
             },
             blogPost: blogPosts.map((post) => ({
               '@type': 'BlogPosting',
               headline: post.title,
               description: post.description,
-              url: `https://getlinkpeek.com/blog/${post.slug}`,
+              url: `https://www.getlinkpeek.com/blog/${post.slug}`,
               datePublished: post.publishedAt,
               dateModified: post.updatedAt,
               author: {

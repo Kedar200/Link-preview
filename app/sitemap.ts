@@ -1,21 +1,29 @@
 import { MetadataRoute } from 'next';
 import { getSiteUrl } from '@/lib/site';
 import { blogPosts } from '@/lib/blog-data';
+import { seoToolPages } from '@/lib/seo-pages';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = getSiteUrl();
+  const staticLastModified = new Date('2026-06-14');
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: siteUrl,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
+      lastModified: staticLastModified,
+      changeFrequency: 'weekly',
       priority: 1,
     },
     {
       url: `${siteUrl}/blog`,
-      lastModified: new Date(),
+      lastModified: staticLastModified,
       changeFrequency: 'weekly',
       priority: 0.9,
+    },
+    {
+      url: `${siteUrl}/tools`,
+      lastModified: staticLastModified,
+      changeFrequency: 'weekly',
+      priority: 0.95,
     },
   ];
 
@@ -26,6 +34,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...blogRoutes];
-}
+  const toolRoutes: MetadataRoute.Sitemap = seoToolPages.map((page) => ({
+    url: `${siteUrl}/tools/${page.slug}`,
+    lastModified: new Date(page.updatedAt),
+    changeFrequency: 'weekly' as const,
+    priority: 0.85,
+  }));
 
+  return [...staticRoutes, ...toolRoutes, ...blogRoutes];
+}

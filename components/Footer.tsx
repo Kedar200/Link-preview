@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Footer() {
   return (
     <footer
@@ -9,6 +11,18 @@ export default function Footer() {
           LinkPeek — free forever, open source
         </p>
         <div className="flex items-center gap-6">
+          <Link
+            href="/tools"
+            className="label-sm transition-colors text-[#4f6f5b] hover:text-[#1a2b21] no-underline"
+          >
+            Tools
+          </Link>
+          <Link
+            href="/blog"
+            className="label-sm transition-colors text-[#4f6f5b] hover:text-[#1a2b21] no-underline"
+          >
+            Blog
+          </Link>
           <a
             href="https://github.com/Kedar200/Link-preview"
             target="_blank"

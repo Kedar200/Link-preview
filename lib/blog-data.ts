@@ -158,7 +158,7 @@ Here's the complete, battle-tested tag setup that guarantees a working WhatsApp 
 
 ## How to Test Your WhatsApp Link Preview
 
-Before sharing your link publicly, use [LinkPeek](https://getlinkpeek.com) to preview exactly how your link will appear on WhatsApp (and 5 other platforms). LinkPeek shows you the live WhatsApp mockup, audits your OG tags, and generates fix code if anything is wrong.
+Before sharing your link publicly, use [LinkPeek](https://www.getlinkpeek.com) to preview exactly how your link will appear on WhatsApp (and 5 other platforms). LinkPeek shows you the live WhatsApp mockup, audits your OG tags, and generates fix code if anything is wrong.
 
 Unlike other tools, LinkPeek:
 - Shows real platform mockups (not just raw tag data)
@@ -356,7 +356,7 @@ Don't just optimize your images—your title and description have character limi
 
 ## Test Your OG Images Before Sharing
 
-Use [LinkPeek](https://getlinkpeek.com) to preview your link across WhatsApp, Twitter, LinkedIn, Slack, Discord, and Instagram simultaneously. It checks all platform-specific requirements and tells you exactly what needs fixing.`,
+Use [LinkPeek](https://www.getlinkpeek.com) to preview your link across WhatsApp, Twitter, LinkedIn, Slack, Discord, and Instagram simultaneously. It checks all platform-specific requirements and tells you exactly what needs fixing.`,
   },
 
   {
@@ -509,7 +509,7 @@ A: Usually within a few minutes. Use the Card Validator to force a refresh.
 **Q: Why does my card work on some URLs but not others?**
 A: Each URL needs its own valid meta tags. If some pages have correct tags and others don't, only the correctly tagged pages will show cards.
 
-Use [LinkPeek](https://getlinkpeek.com) to test your Twitter card alongside previews for 5 other platforms before publishing.`,
+Use [LinkPeek](https://www.getlinkpeek.com) to test your Twitter card alongside previews for 5 other platforms before publishing.`,
   },
 
   {
@@ -626,7 +626,7 @@ Posts with properly configured link previews on LinkedIn get **2× more engageme
 
 ## Test Before You Post
 
-Use [LinkPeek](https://getlinkpeek.com) to preview your LinkedIn link card alongside WhatsApp, Twitter, Slack, Discord, and Instagram. Fix issues before they embarrass you in front of your professional network.`,
+Use [LinkPeek](https://www.getlinkpeek.com) to preview your LinkedIn link card alongside WhatsApp, Twitter, Slack, Discord, and Instagram. Fix issues before they embarrass you in front of your professional network.`,
   },
 
   {
@@ -801,7 +801,7 @@ Twitter reads OG tags as fallbacks but has its own tag system:
 
 ### Multi-Platform Testing
 
-Use [LinkPeek](https://getlinkpeek.com) to test your link across **all 6 major platforms** simultaneously. It shows you real mockups for WhatsApp, Twitter, LinkedIn, Slack, Discord, and Instagram—plus a full audit with fix code for every issue.
+Use [LinkPeek](https://www.getlinkpeek.com) to test your link across **all 6 major platforms** simultaneously. It shows you real mockups for WhatsApp, Twitter, LinkedIn, Slack, Discord, and Instagram—plus a full audit with fix code for every issue.
 
 ---
 
@@ -841,6 +841,111 @@ While OG tags control social previews, structured data (JSON-LD schema) controls
 \`\`\`
 
 This is becoming increasingly important for **GEO (Generative Engine Optimization)** — optimizing for AI-powered search engines like Perplexity, ChatGPT Search, and Google AI Overviews.`,
+  },
+  {
+    slug: 'link-preview-not-showing',
+    title: 'Link Preview Not Showing? Fix Missing Social Cards Fast',
+    description:
+      'A practical troubleshooting checklist for missing link previews, blank cards, stale images, and social previews that show the wrong title or description.',
+    keywords: [
+      'link preview not showing',
+      'link preview image not showing',
+      'social preview not working',
+      'URL preview not working',
+      'OG image not showing',
+      'fix link preview',
+      'link preview checker',
+    ],
+    category: 'Troubleshooting',
+    readTime: '7 min read',
+    publishedAt: '2026-06-14',
+    updatedAt: '2026-06-14',
+    author: { name: 'LinkPeek Team', role: 'OG Experts' },
+    heroEmoji: '🔎',
+    content: `## Why Link Previews Disappear
+
+A missing link preview usually means the social app could not read clean metadata from your page. The page may load perfectly in a browser, but crawlers still need accessible Open Graph tags, a valid image URL, and a response they can fetch without JavaScript-only rendering.
+
+This is why the same URL can show a full card in one app, a tiny thumbnail in another app, and plain text somewhere else.
+
+---
+
+## Quick Fix Checklist
+
+- Add \`og:title\`, \`og:description\`, \`og:image\`, \`og:url\`, and \`og:type\`
+- Use an absolute HTTPS URL for \`og:image\`
+- Make sure the image returns a 200 response without login, bot blocking, or hotlink protection
+- Use a JPG, PNG, or WebP image instead of SVG as the primary preview image
+- Keep the image large enough for rich cards and compressed enough for strict apps
+- Avoid redirect chains for the page URL and the image URL
+- Check that \`robots.txt\` does not block social crawlers
+- Refresh or cache-bust the URL after fixing metadata
+
+---
+
+## The Tags Most Apps Expect
+
+\`\`\`html
+<meta property="og:title" content="Page title for the preview" />
+<meta property="og:description" content="Short preview copy for social cards" />
+<meta property="og:image" content="https://example.com/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://example.com/page" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+\`\`\`
+
+Use the same canonical page URL in your Open Graph tags, canonical tag, sitemap, and internal links. Mixed hosts like \`example.com\` and \`www.example.com\` can split signals and make debuggers show stale or unexpected results.
+
+---
+
+## Platform-Specific Problems
+
+### WhatsApp
+
+WhatsApp is often strict about image access, size, and format. If your WhatsApp preview is missing, start by checking \`og:image\`, HTTPS access, image file size, and stale cache.
+
+### Twitter/X
+
+Twitter/X can use Twitter Card tags and Open Graph fallback data. If the large image card is missing, confirm \`twitter:card\`, \`twitter:image\`, and the image URL.
+
+### LinkedIn
+
+LinkedIn commonly shows stale titles or images after metadata changes. Confirm the canonical URL and Open Graph tags, then retest after refreshing cached metadata.
+
+### Slack and Discord
+
+Slack and Discord previews usually fail when the page requires JavaScript to expose metadata, blocks crawler access, or has an image URL that cannot be fetched directly.
+
+---
+
+## How to Test the Fix
+
+Use [LinkPeek](https://www.getlinkpeek.com) to run a multi-platform preview scan. It renders WhatsApp, Twitter/X, LinkedIn, Slack, Discord, and Instagram-style cards, then gives you an audit of missing tags and copy-paste fixes.
+
+After updating your page:
+
+1. Retest the canonical URL
+2. Retest a cache-busted URL such as \`/page?v=2\`
+3. Confirm the image URL opens directly in a private browser window
+4. Share the final URL only after the preview is correct
+
+---
+
+## FAQ: Link Preview Not Showing
+
+**Q: Why does my link preview show no image?**
+A: The most common reasons are a missing \`og:image\` tag, a relative image URL, blocked crawler access, unsupported image format, image file size problems, or stale platform cache.
+
+**Q: Why does my preview show the old image?**
+A: Social apps cache preview metadata. Update the image URL or add a versioned query string, then use platform debuggers or a fresh share to retest.
+
+**Q: Do Open Graph tags help SEO?**
+A: Open Graph tags are mainly for social previews, not direct Google ranking. They can still improve click-through and sharing quality, which helps distribution.
+
+**Q: Can I test a preview before deployment?**
+A: Yes. LinkPeek supports localhost preview workflows so you can fix metadata before a public release.`,
   },
 ];
 

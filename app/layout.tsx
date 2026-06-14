@@ -3,11 +3,16 @@ import './globals.css';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 import { getSiteUrl } from '@/lib/site';
 
+const siteUrl = getSiteUrl();
+
 export const metadata: Metadata = {
-  metadataBase: new URL(getSiteUrl()),
+  metadataBase: new URL(siteUrl),
   title: 'LinkPeek - Open Graph Preview Tool & Link Preview Checker',
   description:
     'Check Open Graph previews, OG images, Twitter cards, LinkedIn previews, and WhatsApp link previews before you publish or share your URL.',
+  alternates: {
+    canonical: siteUrl,
+  },
   keywords: [
     'Open Graph preview tool',
     'social media link preview tool',
@@ -29,6 +34,8 @@ export const metadata: Metadata = {
     description:
       'Preview Open Graph images, Twitter cards, LinkedIn previews, WhatsApp link previews, Slack, Discord, and Instagram cards before you share.',
     type: 'website',
+    url: siteUrl,
+    siteName: 'LinkPeek',
     images: [
       {
         url: '/og-image.png',
@@ -63,6 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
               "name": "LinkPeek",
+              "url": siteUrl,
               "operatingSystem": "All",
               "applicationCategory": "DeveloperApplication",
               "applicationSubCategory": "Open Graph preview tool",
@@ -79,7 +87,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 "@type": "Offer",
                 "price": "0",
                 "priceCurrency": "USD"
-              }
+              },
+              "sameAs": [
+                "https://github.com/Kedar200/Link-preview"
+              ]
             })
           }}
         />
@@ -90,7 +101,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "@context": "https://schema.org",
               "@type": "WebSite",
               "name": "LinkPeek",
-              "url": "https://getlinkpeek.com/"
+              "url": siteUrl
             })
           }}
         />

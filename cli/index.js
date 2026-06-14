@@ -179,7 +179,7 @@ async function start() {
       console.log(`  │   Running on http://localhost:${port}   │`);
       console.log('  │                                         │');
       console.log('  │   Ready to preview localhost URLs from  │');
-      console.log('  │   https://getlinkpeek.com/              │');
+      console.log('  │   https://www.getlinkpeek.com/          │');
       console.log('  │                                         │');
       console.log('  │   Press Ctrl+C to stop                  │');
       console.log('  │                                         │');

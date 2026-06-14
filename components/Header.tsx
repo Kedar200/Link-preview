@@ -6,7 +6,7 @@ export default function Header() {
       <div className="max-w-[1400px] mx-auto px-6 sm:px-12 flex items-center justify-between">
         
         {/* Left Side Logo */}
-        <div className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3 no-underline">
           {/* LP monogram with eye-slit — inline SVG for crisp rendering */}
           <svg width="30" height="30" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="LinkPeek logo">
             {/* Background rounded square */}
@@ -23,10 +23,19 @@ export default function Header() {
           <span className="text-xl font-bold tracking-tight text-white">
             LinkPeek
           </span>
-        </div>
+        </Link>
 
         {/* Right Side — Navigation & GitHub */}
         <div className="flex items-center gap-1 sm:gap-4">
+          <Link
+            href="/tools"
+            className="flex items-center gap-2 px-4 py-2 rounded-full text-[rgba(255,255,255,0.7)] hover:text-white hover:bg-white/10 transition-all label-sm no-underline"
+          >
+            <span className="hidden sm:inline">Tools</span>
+            <svg className="sm:hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.1-3.1a6 6 0 0 1-7.9 7.9l-5.8 5.8a2.1 2.1 0 0 1-3-3l5.8-5.8a6 6 0 0 1 7.9-7.9l-3.1 3.1z"/>
+            </svg>
+          </Link>
           <Link
             href="/blog"
             className="flex items-center gap-2 px-4 py-2 rounded-full text-[rgba(255,255,255,0.7)] hover:text-white hover:bg-white/10 transition-all label-sm no-underline"
@@ -54,4 +63,3 @@ export default function Header() {
     </header>
   );
 }
-
