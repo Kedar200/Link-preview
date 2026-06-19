@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import * as cheerio from 'cheerio';
+import { checkRobotsTxt } from '@/lib/robots-txt';
+import { probeImageDimensions } from '@/lib/image-size';
+
 
 function makeAbsolute(url: string, base: string): string {
   if (!url) return '';
@@ -116,6 +119,7 @@ export async function GET(request: NextRequest) {
           twitterCard: '',
           url,
           isLocalhost: false,
+          robotsBlockedCrawlers: [],
         },
         { status: 200 }
       );
@@ -163,6 +167,11 @@ export async function GET(request: NextRequest) {
       multipleOgImages: ogImageCount > 1,
     };
 
+    // Run robots.txt check in the background
+    const robotsBlockedCrawlers = await checkRobotsTxt(url);
+
+    let probedDimensions: { width: number; height: number } | undefined = undefined;
+
     // Probe image file size + Content-Type via HEAD
     if (data.image) {
       try {
@@ -178,12 +187,27 @@ export async function GET(request: NextRequest) {
         if (cl) data.imageSize = parseInt(cl, 10);
         const ct = headRes.headers.get('content-type');
         if (ct) data.imageContentType = ct.split(';')[0].trim().toLowerCase();
+
+        // If dimensions are missing from tags, probe the image headers
+        if (!data.imageWidth || !data.imageHeight) {
+          const probed = await probeImageDimensions(data.image);
+          if (probed) {
+            probedDimensions = { width: probed.width, height: probed.height };
+          }
+        }
       } catch {
-        // Non-critical – leave imageSize/imageContentType undefined
+        // Non-critical – leave imageSize/imageContentType/probedDimensions undefined
       }
     }
 
-    return NextResponse.json(data);
+    const finalData = {
+      ...data,
+      robotsBlockedCrawlers,
+      probedDimensions,
+    };
+
+    return NextResponse.json(finalData);
+
 
   } catch (err: unknown) {
     clearTimeout(timeout);
@@ -207,6 +231,7 @@ export async function GET(request: NextRequest) {
         twitterCard: '',
         url,
         isLocalhost: false,
+        robotsBlockedCrawlers: [],
       },
       { status: 200 }
     );

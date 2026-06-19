@@ -132,21 +132,52 @@ export function runAudit(data: OGData): AuditResult {
   }
 
   // ── og:image:width & og:image:height ───────────────────────────────────
-  if (!has(data.imageWidth) || !has(data.imageHeight)) {
-    findings.push({ id: next(), tag: 'og:image:width', severity: 'warning', plain: 'Image dimensions aren\'t specified — Instagram and LinkedIn may take longer to crawl your page.', technical: 'og:image:width / og:image:height missing', platforms: ['instagram', 'linkedin', 'facebook'], fix: `<meta property="og:image:width" content="1200" />\n<meta property="og:image:height" content="630" />` });
-  } else {
-    const w = parseInt(data.imageWidth);
-    const h = parseInt(data.imageHeight);
-    if (!isNaN(w) && !isNaN(h)) {
-      const ratio = w / h;
-      if (ratio < 1.5 || ratio > 2.2) {
-        findings.push({ id: next(), tag: 'og:image', severity: 'info', plain: `Your image ratio is ${ratio.toFixed(2)} — for best results use 1200×630 (ratio ~1.9).`, technical: `Image ratio ${ratio.toFixed(2)}, ideal ~1.91`, platforms: ['instagram', 'twitter', 'linkedin', 'facebook'] });
-      }
-      if (w < 600) {
-        findings.push({ id: next(), tag: 'og:image:width', severity: 'warning', plain: 'Image is narrower than 600px — it may appear blurry on hi-res screens.', technical: `Image width only ${w}px`, platforms: ['instagram', 'linkedin', 'twitter'] });
-      }
+  let w = has(data.imageWidth) ? parseInt(data.imageWidth) : NaN;
+  let h = has(data.imageHeight) ? parseInt(data.imageHeight) : NaN;
+
+  if (isNaN(w) || isNaN(h)) {
+    if (data.probedDimensions) {
+      w = data.probedDimensions.width;
+      h = data.probedDimensions.height;
+      findings.push({
+        id: next(),
+        tag: 'og:image:width',
+        severity: 'warning',
+        plain: `Your page is missing og:image:width and og:image:height tags. LinkPeek probed the image and found it to be ${w}×${h}px. Add these tags so social platforms can render previews faster on the first crawl without pre-downloading the image.`,
+        technical: `og:image:width/height tags missing, probed image is ${w}×${h}px`,
+        platforms: ['instagram', 'linkedin', 'facebook'],
+        fix: `<meta property="og:image:width" content="${w}" />\n<meta property="og:image:height" content="${h}" />`
+      });
+    } else {
+      findings.push({
+        id: next(),
+        tag: 'og:image:width',
+        severity: 'warning',
+        plain: "Image dimensions aren't specified — Instagram and LinkedIn may take longer to crawl your page.",
+        technical: 'og:image:width / og:image:height missing',
+        platforms: ['instagram', 'linkedin', 'facebook'],
+        fix: `<meta property="og:image:width" content="1200" />\n<meta property="og:image:height" content="630" />`
+      });
     }
-    findings.push({ id: next(), tag: 'og:image:width', severity: 'pass', plain: 'Image dimensions are specified.', technical: `${data.imageWidth}×${data.imageHeight}`, platforms: ['instagram', 'linkedin', 'facebook'] });
+  } else {
+    findings.push({
+      id: next(),
+      tag: 'og:image:width',
+      severity: 'pass',
+      plain: 'Image dimensions are specified.',
+      technical: `${data.imageWidth}×${data.imageHeight}`,
+      platforms: ['instagram', 'linkedin', 'facebook']
+    });
+  }
+
+  if (!isNaN(w) && !isNaN(h)) {
+    const ratio = w / h;
+    if (ratio < 1.5 || ratio > 2.2) {
+      findings.push({ id: next(), tag: 'og:image', severity: 'info', plain: `Your image ratio is ${ratio.toFixed(2)} — for best results use 1200×630 (ratio ~1.9).`, technical: `Image ratio ${ratio.toFixed(2)}, ideal ~1.91`, platforms: ['instagram', 'twitter', 'linkedin', 'facebook'] });
+    }
+    if (w < 600) {
+      findings.push({ id: next(), tag: 'og:image:width', severity: 'warning', plain: 'Image is narrower than 600px — it may appear blurry on hi-res screens.', technical: `Image width only ${w}px`, platforms: ['instagram', 'linkedin', 'twitter'] });
+    }
   }
 
   // ── og:type ────────────────────────────────────────────────────────────
@@ -202,9 +233,7 @@ export function runAudit(data: OGData): AuditResult {
   }
 
   // WhatsApp minimum dimension check: images under 100×100px show NO preview at all
-  if (has(data.image) && has(data.imageWidth) && has(data.imageHeight)) {
-    const w = parseInt(data.imageWidth);
-    const h = parseInt(data.imageHeight);
+  if (has(data.image)) {
     if (!isNaN(w) && !isNaN(h)) {
       if (w < 100 || h < 100) {
         findings.push({ id: next(), tag: 'og:image', severity: 'critical', plain: `Your image is ${w}×${h}px — WhatsApp requires at least 100×100px or it won't show any preview at all.`, technical: `Image ${w}×${h}px is below WhatsApp's 100px minimum`, platforms: ['whatsapp'] });
@@ -227,9 +256,6 @@ export function runAudit(data: OGData): AuditResult {
 
   // ── Facebook-specific checks ───────────────────────────────────────────
   if (has(data.image)) {
-    const w = parseInt(data.imageWidth);
-    const h = parseInt(data.imageHeight);
-
     // Facebook minimum: 200×200px (below this → no image at all)
     if (!isNaN(w) && !isNaN(h) && (w < 200 || h < 200)) {
       findings.push({ id: next(), tag: 'og:image', severity: 'critical', plain: `Your image is ${w}×${h}px — Facebook requires at least 200×200px or no image will display at all.`, technical: `Image ${w}×${h}px is below Facebook's 200px minimum`, platforms: ['facebook'] });
@@ -264,8 +290,6 @@ export function runAudit(data: OGData): AuditResult {
     }
 
     // Instagram DM best aspect ratio
-    const w = parseInt(data.imageWidth);
-    const h = parseInt(data.imageHeight);
     if (!isNaN(w) && !isNaN(h) && (w < 200 || h < 200)) {
       findings.push({ id: next(), tag: 'og:image', severity: 'warning', plain: 'Instagram requires images to be at least 200×200px — yours is too small and may not display.', technical: `Image ${w}×${h}px, Instagram minimum is 200×200`, platforms: ['instagram'] });
     }
@@ -289,7 +313,6 @@ export function runAudit(data: OGData): AuditResult {
 
   // ── LinkedIn-specific checks ───────────────────────────────────────────
   if (has(data.image)) {
-    const w = parseInt(data.imageWidth);
     if (!isNaN(w) && w < 1200) {
       findings.push({ id: next(), tag: 'og:image', severity: 'info', plain: 'LinkedIn recommends images at least 1200px wide for the best preview.', technical: `Image width ${w}px, LinkedIn recommends ≥1200px`, platforms: ['linkedin'] });
     }
@@ -310,6 +333,29 @@ export function runAudit(data: OGData): AuditResult {
 
   if (has(data.title) && has(data.description) && data.title.trim().toLowerCase() === data.description.trim().toLowerCase()) {
     findings.push({ id: next(), tag: 'og:description', severity: 'warning', plain: 'Your title and description are identical — make them unique for better engagement.', technical: 'Title and description are duplicates', platforms: ['whatsapp', 'twitter', 'linkedin', 'slack', 'discord', 'instagram', 'facebook'] });
+  }
+
+  // ── robots.txt block check ─────────────────────────────────────────────
+  if (data.robotsBlockedCrawlers && data.robotsBlockedCrawlers.length > 0) {
+    for (const blocked of data.robotsBlockedCrawlers) {
+      const platformMap: Record<string, string> = {
+        'WhatsApp': 'whatsapp',
+        'Twitterbot': 'twitter',
+        'LinkedInBot': 'linkedin',
+        'Slackbot': 'slack',
+        'Discordbot': 'discord',
+        'Facebook': 'facebook'
+      };
+      const platformId = platformMap[blocked] || blocked.toLowerCase();
+      findings.push({
+        id: next(),
+        tag: 'robots.txt',
+        severity: 'critical',
+        plain: `Your robots.txt file explicitly blocks ${blocked} crawler, meaning this platform will fail to generate any link preview for your site.`,
+        technical: `robots.txt disallows crawler User-agent: ${blocked}`,
+        platforms: [platformId]
+      });
+    }
   }
 
   // ── Compute per-platform scores ────────────────────────────────────────

@@ -947,6 +947,460 @@ A: Open Graph tags are mainly for social previews, not direct Google ranking. Th
 **Q: Can I test a preview before deployment?**
 A: Yes. LinkPeek supports localhost preview workflows so you can fix metadata before a public release.`,
   },
+  {
+    slug: 'preview-og-tags-localhost-no-ngrok',
+    title: 'How to Preview OG Tags on Localhost Without Ngrok',
+    description:
+      'Learn how to preview Open Graph tags and check social previews on localhost without setting up tunnels or ngrok. See pixel-perfect mockups of your social cards as you code.',
+    keywords: [
+      'preview og tags localhost',
+      'localhost open graph preview',
+      'test og tags locally',
+      'link preview localhost',
+      'ngrok alternative og preview',
+    ],
+    category: 'Guide',
+    readTime: '8 min read',
+    publishedAt: '2026-06-18',
+    updatedAt: '2026-06-19',
+    author: { name: 'LinkPeek Team', role: 'UI Engineers' },
+    heroEmoji: '💻',
+    content: `## The Pain of Local Open Graph Testing
+
+Web developers know the routine: you're building a new landing page or blog post, you've added your Open Graph (OG) tags, and now you want to check if the social preview looks right. 
+
+You open the official Facebook Sharing Debugger or Twitter Card Validator, paste \`http://localhost:3000/my-page\`, and get a frustrating error. The reason? Social media crawlers live on the internet—they cannot reach your local machine's private network.
+
+Usually, the fix is setting up a tunnel using ngrok or Localtunnel, copying the temporary HTTPS URL, pasting it into the debugger, and repeating the process every time you change a meta tag. It is slow, tedious, and completely breaks your development flow.
+
+LinkPeek solves this with a **zero-tunnel, client-side preview engine** that renders **pixel-perfect visual mockups** of your localhost pages directly in the browser.
+
+---
+
+## Why Pixel-Perfect Local Previews Matter
+
+A social media share card is a key design element. Just like you wouldn't write CSS without looking at the browser, you shouldn't write meta tags without seeing the visual output.
+
+Most raw metadata validators only check if the tags exist. They show you key-value pairs like:
+- \`og:title\`: "Our Amazing Product"
+- \`og:image\`: "/assets/hero.png"
+
+But raw text doesn't tell you how the design looks in real life. It won't show you:
+- Whether your typography wraps awkwardly to a second line.
+- Whether the text contrast looks muddy on light or dark mode.
+- Whether your logo is cropped in half by WhatsApp's square container.
+
+LinkPeek renders 100% accurate, high-fidelity mockups of WhatsApp, X (Twitter), LinkedIn, Slack, Discord, and Instagram, matching the exact fonts, margins, and border radii used by the real apps.
+
+---
+
+## How to Preview Localhost Tags with LinkPeek
+
+LinkPeek supports two ways to inspect localhost URLs, both of which require zero tunnels:
+
+### Method 1: In-Browser Client-Side Fetching (Default)
+
+When you paste a localhost URL (like \`http://localhost:3000\`) into LinkPeek, the app does not send the request to a server. Instead, it reads the HTML directly from your browser:
+
+1. LinkPeek runs a client-side fetch request to your local dev server.
+2. It extracts the raw HTML headers and parses the meta tags.
+3. It immediately generates the social previews using our custom layout engine.
+
+Because nothing leaves your computer, this method is private, instant, and secure.
+
+### Method 2: LinkPeek Local Companion (For Advanced Port Mapping)
+
+If your local server has strict CORS (Cross-Origin Resource Sharing) headers that block in-browser requests, you can run our lightweight, zero-configuration local companion:
+
+\`\`\`bash
+npx linkpeek-local
+\`\`\`
+
+This command starts a tiny proxy that securely relays the HTML to the LinkPeek editor, bypassing CORS blocks in seconds without exposing your code to the public internet.
+
+---
+
+## Verification Checklist for Local OG Tags
+
+Before you deploy your code to production, run your localhost URL through LinkPeek and double-check these visual elements:
+
+- [ ] **Image Cropping**: Check the square preview crop on WhatsApp. Is your logo centered so it doesn't get clipped?
+- [ ] **Title Length**: Does your title fit on X/Twitter without ending in an awkward ellipsis?
+- [ ] **Slack Site Name**: Is \`og:site_name\` configured? Slack uses it as the bold header above your link card, which acts as a major brand anchor.
+- [ ] **Mixed Content**: Ensure your \`og:image\` URL starts with \`https://\` and uses an absolute path. Relative paths like \`/images/og.jpg\` will fail when shared.
+
+---
+
+## FAQ: Localhost OG Previews
+
+**Q: Can I test localhost previews on LinkPeek without a public URL?**
+A: Yes. LinkPeek is built specifically for local development testing. It fetches and parses your local metadata directly inside your browser, requiring no public tunneling.
+
+**Q: Why does my localhost preview work in LinkPeek but fail in Facebook Debugger?**
+A: LinkPeek runs locally on your machine and can access your localhost port, whereas Facebook's external crawlers cannot bypass your private router to fetch localhost.
+
+**Q: Does the local companion send my code to your servers?**
+A: No. The local companion proxy only routes HTML headers locally on your device to help bypass browser CORS security restrictions. Your code stays completely private.`,
+  },
+  {
+    slug: 'facebook-og-image-not-showing',
+    title: 'Facebook OG Image Not Showing? The Ultimate Troubleshooting Guide',
+    description:
+      'Fix broken Facebook preview cards instantly. Learn why your Facebook og:image is missing, how to clear Facebook\'s cache, and why pixel-perfect mockups are key to checking crops.',
+    keywords: [
+      'facebook og image not showing',
+      'facebook link preview broken',
+      'facebook share debugger',
+      'og:image size facebook',
+      'fix facebook card preview',
+    ],
+    category: 'Troubleshooting',
+    readTime: '7 min read',
+    publishedAt: '2026-06-17',
+    updatedAt: '2026-06-19',
+    author: { name: 'LinkPeek Team', role: 'OG Experts' },
+    heroEmoji: '📘',
+    content: `## Why Facebook Link Previews Break
+
+You share your latest article or product page on Facebook, and instead of a beautiful, eye-catching card, all you see is a plain text link or a generic gray fallback box. 
+
+A missing or broken preview image can destroy your click-through rate (CTR). Research shows that links with rich social cards receive **up to 2× more clicks** than plain text links. 
+
+When your Facebook preview fails to render, it is usually because of a small syntax error in your meta tags, a server configuration issue, or a stale cache.
+
+---
+
+## The Top 5 Reasons Facebook Rejects Your OG Image
+
+### 1. The Image File Size Exceeds 8 MB
+
+Facebook has a maximum file size limit of 8 MB for preview images. If your image exceeds this, Facebook's crawler will ignore it and show a text-only card. 
+
+**The Fix:** Compress your images using PNGQuant or TinyPNG. For optimal performance and speed, keep your social card images **under 500 KB**.
+
+### 2. You Are Using a Relative URL
+
+Open Graph image paths must be absolute URLs that start with \`https://\`. Facebook's crawler is an external service and does not know where to look if you specify a relative folder path.
+
+\`\`\`html
+<!-- ❌ Broken relative path -->
+<meta property="og:image" content="/images/social-share.png" />
+
+<!-- ✅ Correct absolute URL -->
+<meta property="og:image" content="https://www.yoursite.com/images/social-share.png" />
+\`\`\`
+
+### 3. Your Image is Below the 200×200 Pixel Minimum
+
+Facebook enforces a strict minimum size of **200×200 pixels** for social card images. If your image is even one pixel smaller, it will not display at all.
+
+For a full-width, rich card preview, Facebook recommends using images that are at least **1200×630 pixels** (a 1.91:1 aspect ratio).
+
+### 4. Facebook Is Showing a Stale Cached Version
+
+Facebook caches link preview metadata heavily to optimize page load speeds. If you upload a page, find an error, fix your meta tags, and re-share, Facebook will continue to display the original broken preview from its database.
+
+**The Fix:** Force a refresh using the [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/):
+1. Paste your URL into the input field.
+2. Click **Debug**.
+3. Click **Scrape Again** to force Facebook's crawler to re-fetch your page and update its index.
+
+### 5. Server Security / Hotlink Protection is Blocking Crawlers
+
+Many CDNs and hosting providers (like Cloudflare) enable hotlink protection by default to prevent other sites from stealing your bandwidth. However, this protection also blocks social media crawlers. When Facebook tries to load your image, your server returns a \`403 Forbidden\` error.
+
+**The Fix:** Make sure your CDN configuration allows requests from Facebook's official user-agent: \`facebookexternalhit\`.
+
+---
+
+## The Importance of Pixel-Perfect Mockups
+
+Checking that tags exist in the HTML is only half the battle. Because Facebook uses different card layouts based on image dimensions, you must inspect the actual visual rendering.
+
+If your image is wide enough (greater than 445px wide, 232px high, and has an aspect ratio above 0.797), Facebook will display an **expanded full-width card**. If it falls below these numbers, Facebook crops it into a **compact square thumbnail** aligned to the left of your text.
+
+Standard metadata parsers cannot show you which layout Facebook will select. LinkPeek's preview engine simulates Facebook's exact aspect ratio rules, rendering a pixel-perfect mockup so you can make sure your key branding assets stay in the frame.
+
+---
+
+## Facebook Open Graph Template
+
+Here is the correct meta tag template to ensure your page renders as a full-width card on Facebook:
+
+\`\`\`html
+<meta property="og:title" content="Your Headline (under 88 characters)" />
+<meta property="og:description" content="A brief summary of your page (under 200 characters)" />
+<meta property="og:image" content="https://www.yoursite.com/images/share-card.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://www.yoursite.com/page-url" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Your Brand Name" />
+\`\`\`
+
+---
+
+## FAQ: Facebook Previews
+
+**Q: How do I force Facebook to update a link preview?**
+A: Go to the Facebook Sharing Debugger, paste your page URL, click "Debug", and then click "Scrape Again". This clears the cache immediately.
+
+**Q: Can I use SVG images for Facebook previews?**
+A: While Facebook supports SVG, other platforms (like WhatsApp and Twitter) will reject SVG images. For universal sharing compatibility, use JPG or PNG.
+
+**Q: Why does Facebook crop my rectangular image into a small thumbnail?**
+A: If the image width is below 445px or the height is below 232px, Facebook defaults to a compact thumbnail layout instead of a full-width card. Check your layout visually with LinkPeek to verify.`,
+  },
+  {
+    slug: 'slack-link-preview-no-image',
+    title: 'The Hidden Reason Your Slack Link Preview Shows No Image',
+    description:
+      'Slack link preview not showing an image? Discover the 32KB bot limit, redirection blocks, and how to verify your site name renders with pixel-perfect bold headers.',
+    keywords: [
+      'slack link preview not working',
+      'slack og:image missing',
+      'slack bot robots.txt',
+      'og:site_name slack preview',
+      'slack unfurl not working',
+    ],
+    category: 'Troubleshooting',
+    readTime: '6 min read',
+    publishedAt: '2026-06-15',
+    updatedAt: '2026-06-19',
+    author: { name: 'LinkPeek Team', role: 'Integration Engineers' },
+    heroEmoji: '⚡',
+    content: `## The Slack Unfurl Mystery
+
+We have all been there: you paste a URL in a Slack channel, expecting a beautiful unfurled card to show off your page layout, but instead, it renders as a bare text link. 
+
+Slack calls its link preview system "unfurling." When a link is shared, the Slackbot crawler attempts to scrape the page's HTML, extract the Open Graph (OG) tags, and format them into a structured card.
+
+Slack is notorious for failing silently. If any part of its strict crawling workflow is interrupted, it drops the image and shows a generic fallback.
+
+---
+
+## The 3 Most Common Reasons Slack Previews Fail
+
+### 1. Your Meta Tags are Too Deep in the HTML (The 32KB Limit)
+
+This is Slack's most famous and frustrating quirk: **Slackbot only reads the first 32 KB of your HTML file.** 
+
+If you use a modern framework that embeds heavy serialized state, large inline CSS styles, or inline SVG symbols at the top of your \`<head>\` tag, your Open Graph meta tags might get pushed past the 32KB boundary. When Slackbot stops reading, it concludes that your page has no social metadata.
+
+**The Fix:** Keep your header lean. Move heavy JS scripts, analytics trackers, and inline CSS blocks below your OG and Twitter meta tags. Always place your meta tags at the absolute top of the \`<head>\` block.
+
+### 2. The Page Redirects Too Many Times
+
+Slackbot is highly sensitive to redirect latency. If your page redirects from HTTP to HTTPS, then to a locale path (like \`/en\`), and then your CDN redirects the image URL to an external bucket, Slackbot will timeout and discard the preview.
+
+Keep redirect chains to a maximum of **1 hop** for both the page URL and the image URL.
+
+### 3. Robots.txt is Blocking Slackbot
+
+If your server has a restrictive \`robots.txt\` file, it might block the Slackbot crawler from index access:
+
+\`\`\`
+# ❌ Blocks Slack previews
+User-agent: *
+Disallow: /
+\`\`\`
+
+**The Fix:** Explicitly allow the Slackbot user-agent in your robots.txt file:
+
+\`\`\`
+# ✅ Allow Slackbot crawler
+User-agent: Slackbot
+Allow: /
+\`
+\`\`\`
+
+---
+
+## Marketing with Pixel-Perfect Precision
+
+Slack formats link previews with a very specific, recognizable layout:
+1. The **Site Name** (\`og:site_name\`) is styled as a bold, uppercase header.
+2. The **Title** (\`og:title\`) is rendered as a clickable link.
+3. The **Description** and **Image** are aligned with precise borders.
+
+Raw metadata outputs cannot show you if your site name matches your logo or if the line-wrapping on your description pushes your image out of frame. LinkPeek's layout simulator matches Slack's exact typography and spacing rules, giving you a 100% accurate visual rendering of how your brand looks inside a Slack message.
+
+---
+
+## FAQ: Slack Link Previews
+
+**Q: Why does my preview show up on Twitter but not on Slack?**
+A: Slackbot has unique constraints like the 32KB HTML size limit and a faster timeout window. Twitterbot is more patient and reads the entire HTML document.
+
+**Q: How do I clear Slack's link preview cache?**
+A: Slack caches link previews for 24 hours. To force an immediate update for testing, append a query parameter to your link: \`https://yoursite.com/page?v=2\`.
+
+**Q: Does Slack support animated GIF preview images?**
+A: Yes, Slack supports static and animated GIFs, but it will only play them if the file is under 2 MB. Larger files are dropped or rendered as static images.`,
+  },
+  {
+    slug: 'react-app-og-tags-not-working',
+    title: 'Why Your React App Has Broken Social Previews (SPA SEO)',
+    description:
+      'Fix broken link previews for single-page applications. Learn how React, Vue, and Angular apps fail to show social cards and how to verify layouts visually before deploy.',
+    keywords: [
+      'react app og tags not working',
+      'spa social preview issues',
+      'single page application open graph',
+      'react meta tags helper',
+      'client-side rendering link preview',
+    ],
+    category: 'Troubleshooting',
+    readTime: '7 min read',
+    publishedAt: '2026-06-12',
+    updatedAt: '2026-06-19',
+    author: { name: 'LinkPeek Team', role: 'Frontend Architects' },
+    heroEmoji: '⚛️',
+    content: `## The Single-Page Application (SPA) Trap
+
+You have built a beautiful, fast, interactive Single-Page Application (SPA) using React, Vue, or Angular. You share a link to your app, but instead of the custom title and image you set, it displays a blank white box or a generic fallback.
+
+This is the most common issue developers face when building client-side rendered apps. It happens because **social media crawlers do not execute JavaScript.**
+
+---
+
+## Why Social Media Crawlers See a Blank Page
+
+When a user opens your SPA, their browser downloads a minimal HTML shell:
+
+\`\`\`html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My React App</title>
+    <!-- React bundle loaded here -->
+    <script src="/static/bundle.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+\`\`\`
+
+The browser then runs the JavaScript bundle, which renders the components and injects the title and meta tags. 
+
+However, social media bots (like \`Twitterbot\`, \`LinkedInBot\`, and \`Discordbot\`) are simple scrapers designed for speed. They request your page, read the raw HTML shell, and immediately parse the metadata. Because they do not wait for the JavaScript to execute, they see a completely blank page with no OG tags.
+
+---
+
+## 3 Ways to Fix React App OG Tags
+
+### 1. Server-Side Rendering (SSR) — The Gold Standard
+
+If you use Next.js (for React) or Nuxt.js (for Vue), the server pre-renders the complete HTML page, including all the correct meta tags, before sending it to the client. When a crawler requests the page, it gets clean, readable HTML.
+
+### 2. Static Site Generation (SSG) / Prerendering
+
+If your site consists of static pages, you can use prerendering tools (like React Snap or Prerender.io). These tools build static HTML files for each route during deployment, ensuring crawlers have access to the headers.
+
+### 3. Edge Middleware / User-Agent Redirection
+
+You can configure an Edge middleware function or serverless rule that checks the incoming \`User-Agent\` header. If the request comes from a social bot, you redirect them to a static, server-rendered version of the metadata. If it is a real human, you serve the standard React bundle.
+
+---
+
+## Spotting SPA Errors Visually with LinkPeek
+
+Debugging client-side rendering errors is difficult because the page looks perfect when you open it in your browser. Since your browser executes the JavaScript, you cannot easily tell what a bot is seeing.
+
+LinkPeek is designed to solve this. When you run a scan, our engine fetches the URL without executing JavaScript, simulating a real bot's crawler environment. 
+
+Our **pixel-perfect layout engine** then renders a mockup of the output. If your React app is serving a blank HTML shell, you will immediately see an empty card in the editor, making it easy to catch SPA rendering bugs before deploying to production.
+
+---
+
+## FAQ: React OG Previews
+
+**Q: Can I use React Helmet to set Open Graph tags?**
+A: React Helmet works by injecting tags into the DOM client-side. While it helps search engines like Google (which runs some JS), it is ignored by social crawlers like WhatsApp and X.
+
+**Q: How do I test what a social bot sees on my local React app?**
+A: Paste your local server URL into LinkPeek. It crawls the page in a bot-like sandbox environment and shows a mockup of the actual crawled results.
+
+**Q: Why does Google show my page title correctly but LinkedIn doesn\'t?**
+A: Google's search bot executes JavaScript rendering queues, whereas LinkedIn's preview crawler only scrapes the raw static HTML from the server response.`,
+  },
+  {
+    slug: 'og-image-https-required',
+    title: 'og:image HTTP vs HTTPS: Why Insecure Links Break Previews',
+    description:
+      'Insecure image links can destroy your click-through rate. Understand why platforms reject HTTP image tags and how to ensure your preview cards render flawlessly.',
+    keywords: [
+      'og image https required',
+      'insecure og:image',
+      'http vs https link preview',
+      'social card mixed content',
+      'broken og image secure connection',
+    ],
+    category: 'Guide',
+    readTime: '6 min read',
+    publishedAt: '2026-06-10',
+    updatedAt: '2026-06-19',
+    author: { name: 'LinkPeek Team', role: 'Security & QA' },
+    heroEmoji: '🔒',
+    content: `## The Silent Protocol Killer
+
+You have configured all your Open Graph tags, verified the image file size is under the limit, and confirmed that your \`robots.txt\` allows bot traffic. Yet, when you share your link on WhatsApp or LinkedIn, the preview image remains blank.
+
+The culprit is often a single letter in your image URL protocol: **HTTP instead of HTTPS.**
+
+In 2026, social media platforms are aggressively enforcing user security. Serving insecure media assets in social shares is no longer accepted, and most crawlers will silently drop your image if it is served over an unencrypted connection.
+
+---
+
+## Why Platforms Reject HTTP Social Images
+
+When a user clicks a link preview on a secure platform (like WhatsApp or Slack), they expect a safe, encrypted transition. If the platform renders an image served over HTTP inside its secure mobile app interface, it triggers a **mixed-content warning**.
+
+To maintain their security standards, WhatsApp, LinkedIn, X, and Facebook crawlers reject insecure asset connections:
+
+- **WhatsApp**: Silently drops any \`og:image\` that does not use a secure HTTPS protocol.
+- **LinkedIn**: Fails to load insecure images due to strict SSL handshakes on its CDN proxy.
+- **Facebook**: Flags insecure images in its debugger, warning that they will fail to load for users.
+
+---
+
+## Visual Branding Impact of Insecure Cards
+
+A broken preview card does not just hurt your traffic; it damages your brand credibility. When an image fails to load, the layout shifts, leaving a large, empty gray box that looks broken and untrustworthy to users.
+
+Raw tag checkers might show you that \`og:image\` is populated, but they will not show you the visual impact of an empty, broken image box. LinkPeek's layout checker immediately simulates these connection failures and triggers a critical warning, allowing you to fix protocol mismatches before your users see a broken link card.
+
+---
+
+## How to Secure Your Open Graph Assets
+
+To guarantee that your preview images render flawlessly, ensure that:
+1. Your domain has a valid SSL certificate.
+2. Your \`og:image\` URL starts with \`https://\`.
+3. Your server redirects all HTTP traffic to HTTPS.
+
+\`\`\`html
+<!-- ❌ Insecure HTTP URL (will fail on WhatsApp and LinkedIn) -->
+<meta property="og:image" content="http://example.com/share-image.jpg" />
+
+<!-- ✅ Secure HTTPS URL (universal compatibility) -->
+<meta property="og:image" content="https://example.com/share-image.jpg" />
+\`\`\`
+
+---
+
+## FAQ: Insecure OG Images
+
+**Q: Can I use an HTTP page URL if my image uses HTTPS?**
+A: While the image will render, it is best practice to secure both the page URL and the image URL to prevent security warnings.
+
+**Q: Why does my HTTP image show up in Slack but not in WhatsApp?**
+A: Slackbot runs in a more permissive server environment, whereas WhatsApp generates previews directly on the sender's device, which enforces strict mobile security settings.
+
+**Q: How can I check if my certificate is causing issues?**
+A: Run your URL through LinkPeek. It checks the SSL handshake of the image server and flags expired or self-signed certificates that block crawlers.`,
+  },
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {

@@ -75,6 +75,7 @@ export function parseOGFromHTML(html: string, sourceUrl: string): OGData {
     twitterSite: getMeta('twitter:site') || getMetaName('twitter:site'),
     twitterCreator: getMeta('twitter:creator') || getMetaName('twitter:creator'),
     multipleOgImages,
+    robotsBlockedCrawlers: [],
   };
 }
 

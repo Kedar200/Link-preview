@@ -16,4 +16,7 @@ export interface OGData {
   twitterSite?: string;      // twitter:site (@username)
   twitterCreator?: string;   // twitter:creator (@authorname)
   multipleOgImages?: boolean; // true if page has >1 og:image tag
+  robotsBlockedCrawlers?: string[]; // list of crawlers blocked by robots.txt
+  probedDimensions?: { width: number; height: number }; // dimensions extracted from image headers
 }
+
