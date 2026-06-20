@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: 'LinkPeek - Open Graph Preview Tool & Link Preview Checker',
   description:
-    'Check Open Graph previews, OG images, Twitter cards, LinkedIn previews, and WhatsApp link previews before you publish or share your URL.',
+    'Preview pixel-perfect social card mockups and audit Open Graph tags for WhatsApp, X, LinkedIn, Slack, Discord, and Instagram before publishing.',
   alternates: {
     canonical: siteUrl,
   },
@@ -23,6 +23,8 @@ export const metadata: Metadata = {
     'WhatsApp link preview checker',
     'Open Graph checker',
     'social media preview',
+    'pixel-perfect social card mockups',
+    'high-fidelity link preview mockups',
     'meta tags',
   ],
   icons: {
@@ -32,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'LinkPeek - Open Graph Preview Tool & Link Preview Checker',
     description:
-      'Preview Open Graph images, Twitter cards, LinkedIn previews, WhatsApp link previews, Slack, Discord, and Instagram cards before you share.',
+      'Preview high-fidelity social card mockups for WhatsApp, X, LinkedIn, Slack, Discord, and Instagram, then audit the meta tags behind them.',
     type: 'website',
     url: siteUrl,
     siteName: 'LinkPeek',
@@ -50,7 +52,7 @@ export const metadata: Metadata = {
     site: '@KedarDe02887131',
     title: 'LinkPeek - Open Graph Preview Tool',
     description:
-      'Check OG images, Twitter cards, LinkedIn previews, and WhatsApp link previews before you publish.',
+      'Preview pixel-perfect social card mockups and audit Open Graph tags before you publish.',
     images: ['/og-image.png'],
   },
 };
@@ -74,9 +76,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "operatingSystem": "All",
               "applicationCategory": "DeveloperApplication",
               "applicationSubCategory": "Open Graph preview tool",
-              "description": "Open Graph preview tool and social media link preview checker for testing OG images, Twitter cards, LinkedIn previews, WhatsApp link previews, Slack, Discord, and Instagram cards before publishing.",
+              "description": "Open Graph preview tool and social media link preview checker for testing high-fidelity social card mockups, OG images, Twitter cards, LinkedIn previews, WhatsApp link previews, Slack, Discord, and Instagram cards before publishing.",
               "featureList": [
                 "Open Graph preview checker",
+                "Pixel-perfect social card mockups",
+                "High-fidelity app UI replicas",
                 "OG image preview",
                 "Twitter card preview",
                 "LinkedIn preview checker",

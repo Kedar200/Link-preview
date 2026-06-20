@@ -77,11 +77,11 @@ export default function HeroScene({ onSubmit, loading, data, error, isAnimating,
       <div className={`relative z-20 w-full lg:w-[45%] flex flex-col justify-start px-6 sm:px-12 xl:px-20 pt-20 pb-16 lg:pb-32 ${isAnimating ? 'pointer-events-none' : ''} transition-all duration-[1500ms] ease-out ${animState === 'zoom-phone' || animState === 'switching' ? 'opacity-20 blur-sm grayscale brightness-[0.4]' : 'opacity-100 blur-0 grayscale-0 brightness-100'}`}>
         <div className="pointer-events-auto">
           <h1 className="h1 mb-10 text-white max-w-[800px]">
-            Make your links look perfect<span className="text-[rgba(255,255,255,0.45)]"> on social media.</span>
+            Pixel-perfect link preview mockups<span className="text-[rgba(255,255,255,0.45)]"> before you publish.</span>
           </h1>
 
           <p className="body-lg mb-14 text-[rgba(255,255,255,0.7)] max-w-[540px]">
-            See exactly how your website looks before you post. Preview links instantly, test them while you build, and export your designs to Figma.
+            See high-fidelity UI mockups for WhatsApp, X, LinkedIn, Slack, Discord, and Instagram. Audit your tags while you build, then export polished preview images for reviews.
           </p>
 
           <div className="w-full max-w-[480px]">

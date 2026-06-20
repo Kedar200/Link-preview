@@ -10,14 +10,14 @@ const siteUrl = getSiteUrl();
 export const metadata: Metadata = {
   title: 'Free Social Link Preview Tools | LinkPeek',
   description:
-    'Free Open Graph, link preview, WhatsApp preview, Twitter card, LinkedIn preview, and localhost social card testing tools from LinkPeek.',
+    'Free tools for pixel-perfect social card mockups, Open Graph audits, WhatsApp previews, Twitter cards, LinkedIn previews, and localhost testing.',
   alternates: {
     canonical: `${siteUrl}/tools`,
   },
   openGraph: {
     title: 'Free Social Link Preview Tools | LinkPeek',
     description:
-      'Preview and audit social cards for Open Graph, WhatsApp, Twitter/X, LinkedIn, Slack, Discord, Instagram-style cards, and localhost URLs.',
+      'Preview high-fidelity social card mockups and audit Open Graph tags for WhatsApp, Twitter/X, LinkedIn, Slack, Discord, Instagram-style cards, and localhost URLs.',
     type: 'website',
     url: `${siteUrl}/tools`,
     images: [
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Free Social Link Preview Tools | LinkPeek',
-    description: 'Preview and audit Open Graph and social media link cards before publishing.',
+    description: 'Preview pixel-perfect social card mockups and audit Open Graph tags before publishing.',
     images: ['/og-image.png'],
   },
 };
@@ -45,11 +45,11 @@ export default function ToolsPage() {
         <section className="max-w-[1200px] mx-auto px-6 sm:px-12 pt-14 pb-20">
           <p className="label-sm text-white/55 mb-5">LinkPeek tools</p>
           <h1 className="h1 max-w-[900px]">
-            Free social link preview tools for every publishing workflow.
+            Free pixel-perfect social link preview tools for every publishing workflow.
           </h1>
           <p className="body-lg text-white/70 max-w-[680px] mt-8">
-            Test Open Graph tags, social card images, platform previews, and localhost URLs before
-            your page is shared in feeds, chats, communities, and launch posts.
+            Test Open Graph tags, social card images, high-fidelity app UI mockups, and localhost
+            URLs before your page is shared in feeds, chats, communities, and launch posts.
           </p>
           <Link
             href="/"

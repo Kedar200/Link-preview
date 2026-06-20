@@ -24,7 +24,7 @@ export const seoToolPages: SeoToolPage[] = [
     title: 'Open Graph Preview Tool',
     metaTitle: 'Open Graph Preview Tool - Test OG Images & Meta Tags | LinkPeek',
     description:
-      'Preview Open Graph title, description, image, URL, and social cards before publishing. Test how your page appears when it is shared across major apps.',
+      'Preview Open Graph tags as pixel-perfect social card mockups before publishing. Test how your page appears across major apps.',
     keywords: [
       'Open Graph preview tool',
       'OG preview tool',
@@ -40,11 +40,11 @@ export const seoToolPages: SeoToolPage[] = [
       {
         title: 'Check the tags that decide your link preview',
         body:
-          'LinkPeek reads your page metadata and shows the title, description, image, URL, and card layout that social crawlers rely on.',
+          'LinkPeek reads your page metadata and renders the title, description, image, URL, and card layout inside high-fidelity social UI mockups.',
         points: [
           'Validate og:title, og:description, og:image, og:url, and og:type',
           'Catch missing absolute image URLs before the link is shared',
-          'Compare Open Graph output against Twitter/X, LinkedIn, WhatsApp, Slack, Discord, and Instagram-style cards',
+          'Compare Open Graph output against pixel-perfect Twitter/X, LinkedIn, WhatsApp, Slack, Discord, and Instagram-style cards',
         ],
       },
       {
@@ -67,7 +67,7 @@ export const seoToolPages: SeoToolPage[] = [
       {
         question: 'Can LinkPeek preview OG images before publishing?',
         answer:
-          'Yes. LinkPeek can test a live URL and also supports localhost preview workflows for checking metadata before a public deploy.',
+          'Yes. LinkPeek can test a live URL, render high-fidelity preview mockups, and support localhost workflows before a public deploy.',
       },
       {
         question: 'Why does my Open Graph image not show?',
@@ -81,7 +81,7 @@ export const seoToolPages: SeoToolPage[] = [
     title: 'Link Preview Checker',
     metaTitle: 'Link Preview Checker - Test Social Cards Before Sharing | LinkPeek',
     description:
-      'Check how a URL preview looks before sharing it. Test social link cards for WhatsApp, Twitter/X, LinkedIn, Slack, Discord, and Instagram-style previews.',
+      'Check how a URL preview looks before sharing it with pixel-perfect mockups for WhatsApp, Twitter/X, LinkedIn, Slack, Discord, and Instagram-style previews.',
     keywords: [
       'link preview checker',
       'URL preview checker',
@@ -97,9 +97,10 @@ export const seoToolPages: SeoToolPage[] = [
       {
         title: 'See the share card before your audience does',
         body:
-          'A broken preview can reduce clicks even when the page itself is fine. LinkPeek gives you a visual card and a metadata audit in one place.',
+          'A broken preview can reduce clicks even when the page itself is fine. LinkPeek gives you high-fidelity social card mockups and a metadata audit in one place.',
         points: [
           'Preview title, description, thumbnail, and destination URL',
+          'Inspect platform-specific UI mockups before the link is shared',
           'Spot truncation and missing image issues early',
           'Export a preview image for design or approval workflows',
         ],
@@ -119,12 +120,12 @@ export const seoToolPages: SeoToolPage[] = [
       {
         question: 'How do I check a link preview?',
         answer:
-          'Paste the URL into LinkPeek and run a scan. The tool fetches metadata and renders social card previews with an audit of missing or weak tags.',
+          'Paste the URL into LinkPeek and run a scan. The tool fetches metadata and renders pixel-perfect social card previews with an audit of missing or weak tags.',
       },
       {
         question: 'Which social previews can LinkPeek check?',
         answer:
-          'LinkPeek shows previews for WhatsApp, Twitter/X, LinkedIn, Slack, Discord, and Instagram-style link cards.',
+          'LinkPeek shows high-fidelity previews for WhatsApp, Twitter/X, LinkedIn, Slack, Discord, and Instagram-style link cards.',
       },
       {
         question: 'Does a link preview checker update cached previews?',
@@ -138,7 +139,7 @@ export const seoToolPages: SeoToolPage[] = [
     title: 'WhatsApp Link Preview Checker',
     metaTitle: 'WhatsApp Link Preview Checker - Fix Missing Preview Images | LinkPeek',
     description:
-      'Test WhatsApp link previews and diagnose missing title, description, and image problems before you share a page in chats or groups.',
+      'Test pixel-perfect WhatsApp link preview mockups and diagnose missing title, description, and image problems before sharing in chats or groups.',
     keywords: [
       'WhatsApp link preview checker',
       'WhatsApp link preview not working',
@@ -153,10 +154,11 @@ export const seoToolPages: SeoToolPage[] = [
       {
         title: 'Debug the most common WhatsApp preview failures',
         body:
-          'WhatsApp previews are sensitive to image size, image format, crawler access, and Open Graph tag quality.',
+          'WhatsApp previews are sensitive to image size, image format, crawler access, and Open Graph tag quality. LinkPeek shows the issue inside a WhatsApp-style UI mockup.',
         points: [
           'Check whether og:image is present and absolute',
           'Confirm the preview has a title and concise description',
+          'See how the WhatsApp card layout frames your image and copy',
           'Review image format, dimensions, HTTPS access, and crawler-blocking issues',
         ],
       },
@@ -194,7 +196,7 @@ export const seoToolPages: SeoToolPage[] = [
     title: 'Twitter Card Preview',
     metaTitle: 'Twitter Card Preview - Test X Cards & OG Images | LinkPeek',
     description:
-      'Preview Twitter/X cards, check summary large image metadata, and find missing Twitter Card or Open Graph tags before posting a URL.',
+      'Preview high-fidelity Twitter/X card mockups, check summary large image metadata, and find missing Twitter Card or Open Graph tags before posting.',
     keywords: [
       'Twitter card preview',
       'X card preview',
@@ -210,10 +212,11 @@ export const seoToolPages: SeoToolPage[] = [
       {
         title: 'Check Twitter/X card metadata',
         body:
-          'A Twitter card needs the right card type, title, description, and image tags to avoid a weak or missing preview.',
+          'A Twitter card needs the right card type, title, description, and image tags to avoid a weak or missing preview. LinkPeek renders the result as a realistic X card mockup.',
         points: [
           'Review twitter:card, twitter:title, twitter:description, and twitter:image',
           'Compare the card with Open Graph fallback data',
+          'Inspect the visual card layout before a post goes live',
           'Find missing or low-quality preview image tags',
         ],
       },
@@ -242,7 +245,7 @@ export const seoToolPages: SeoToolPage[] = [
       {
         question: 'Can LinkPeek show summary large image cards?',
         answer:
-          'Yes. LinkPeek previews large-image social cards and audits the metadata that controls them.',
+          'Yes. LinkPeek previews large-image social cards as high-fidelity mockups and audits the metadata that controls them.',
       },
     ],
   },
@@ -251,7 +254,7 @@ export const seoToolPages: SeoToolPage[] = [
     title: 'LinkedIn Preview Checker',
     metaTitle: 'LinkedIn Preview Checker - Test Link Cards Before Posting | LinkPeek',
     description:
-      'Check LinkedIn link previews for missing images, wrong titles, stale descriptions, and Open Graph metadata issues before publishing a post.',
+      'Check pixel-perfect LinkedIn link preview mockups for missing images, wrong titles, stale descriptions, and Open Graph metadata issues before posting.',
     keywords: [
       'LinkedIn preview checker',
       'LinkedIn link preview not showing',
@@ -266,17 +269,18 @@ export const seoToolPages: SeoToolPage[] = [
       {
         title: 'Protect professional posts from bad previews',
         body:
-          'LinkedIn link cards are often used for launches, hiring pages, case studies, and company updates where trust matters.',
+          'LinkedIn link cards are often used for launches, hiring pages, case studies, and company updates where trust matters. LinkPeek lets you inspect the card in a high-fidelity LinkedIn-style UI.',
         points: [
           'Verify the title and description that appear in the feed',
           'Catch missing or incorrect og:image values',
+          'Review the visual preview before stakeholders or customers see it',
           'Confirm the canonical URL and metadata are aligned',
         ],
       },
       {
         title: 'Diagnose image and copy problems quickly',
         body:
-          'LinkPeek turns metadata into a visual preview and highlights what should be changed in the page head.',
+          'LinkPeek turns metadata into a pixel-perfect visual preview and highlights what should be changed in the page head.',
         points: [
           'Scan live pages or local development URLs',
           'Find common Open Graph mistakes',
@@ -293,7 +297,7 @@ export const seoToolPages: SeoToolPage[] = [
       {
         question: 'Can I test a LinkedIn preview before posting?',
         answer:
-          'Yes. LinkPeek renders a LinkedIn-style card and audits the Open Graph metadata before you publish the post.',
+          'Yes. LinkPeek renders a high-fidelity LinkedIn-style card and audits the Open Graph metadata before you publish the post.',
       },
       {
         question: 'What tags control LinkedIn previews?',
@@ -307,7 +311,7 @@ export const seoToolPages: SeoToolPage[] = [
     title: 'Localhost Link Preview',
     metaTitle: 'Localhost Link Preview - Test Social Cards Before Deploy | LinkPeek',
     description:
-      'Preview Open Graph and social media cards for localhost URLs before deployment. Test metadata while your app is still in development.',
+      'Preview pixel-perfect Open Graph and social media card mockups for localhost URLs before deployment. Test metadata while your app is still in development.',
     keywords: [
       'localhost link preview',
       'test OG tags localhost',
@@ -322,9 +326,10 @@ export const seoToolPages: SeoToolPage[] = [
       {
         title: 'Test social metadata before the page is public',
         body:
-          'Many preview tools require a deployed URL. LinkPeek is built for developers who need to check cards while the page is still running locally.',
+          'Many preview tools require a deployed URL. LinkPeek is built for developers who need high-fidelity card mockups while the page is still running locally.',
         points: [
           'Preview localhost pages during development',
+          'Inspect WhatsApp, X, LinkedIn, Slack, Discord, and Instagram-style mockups',
           'Avoid deploys just to inspect metadata',
           'Catch broken image paths before production',
         ],
@@ -344,7 +349,7 @@ export const seoToolPages: SeoToolPage[] = [
       {
         question: 'Can I preview Open Graph tags on localhost?',
         answer:
-          'Yes. LinkPeek supports a local preview workflow so developers can inspect social cards before a public deployment.',
+          'Yes. LinkPeek supports a local preview workflow so developers can inspect pixel-perfect social cards before a public deployment.',
       },
       {
         question: 'Why do normal social debuggers fail on localhost?',

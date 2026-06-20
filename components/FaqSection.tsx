@@ -3,7 +3,7 @@
 const faqData = [
   {
     question: "How does it work?",
-    answer: "LinkPeek scans your URL, audits your metadata tags, and generates high-fidelity previews across major platforms instantly. No tunnels or setup required."
+    answer: "LinkPeek scans your URL, audits your metadata tags, and renders high-fidelity, pixel-perfect UI mockups across major platforms instantly. No tunnels or setup required."
   },
   {
     question: "Is it really free?",
@@ -15,7 +15,7 @@ const faqData = [
   },
   {
     question: "Which platforms are supported?",
-    answer: "We support pixel-perfect replicas for WhatsApp, X (Twitter), LinkedIn, Slack, Discord, and Instagram."
+    answer: "We support high-fidelity, pixel-perfect replicas for WhatsApp, X (Twitter), LinkedIn, Slack, Discord, and Instagram."
   }
 ];
 

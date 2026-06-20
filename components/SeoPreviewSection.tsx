@@ -1,4 +1,5 @@
 const previewTargets = [
+  'Pixel-perfect UI mockups',
   'Open Graph preview',
   'OG image preview',
   'Twitter card preview',
@@ -22,12 +23,12 @@ export default function SeoPreviewSection() {
           <div className="seo-preview-copy">
             <p className="seo-preview-kicker">Social card checker</p>
             <h2>
-              A social media link preview tool for checking cards before the page is live.
+              Pixel-perfect social card mockups before the page is live.
             </h2>
             <p>
-              Most link preview tools only work after your page is published. LinkPeek helps you
-              test Open Graph previews, OG images, Twitter cards, LinkedIn cards, and WhatsApp link
-              previews while you are still building.
+              Most link preview tools show raw tags or generic cards. LinkPeek renders high-fidelity
+              UI mockups for WhatsApp, X, LinkedIn, Slack, Discord, and Instagram while you are still
+              building.
             </p>
           </div>
 
