@@ -17,6 +17,163 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'bulk-link-preview-checker-launch-qa',
+    title: 'Bulk Link Preview Checker: QA Every Social Card Before Launch',
+    description:
+      'Learn how bulk link preview testing helps marketers, agencies, founders, and developers catch broken social cards across many URLs before a campaign goes live.',
+    keywords: [
+      'bulk link preview checker',
+      'bulk Open Graph checker',
+      'launch QA social previews',
+      'social card audit',
+      'Open Graph audit multiple URLs',
+      'link preview QA',
+      'campaign URL checker',
+    ],
+    category: 'Launch QA',
+    readTime: '7 min read',
+    publishedAt: '2026-06-20',
+    updatedAt: '2026-06-20',
+    author: { name: 'LinkPeek Team', role: 'Launch QA' },
+    heroEmoji: '🚀',
+    content: `## The Problem With Checking Links One by One
+
+Most teams do not launch one URL at a time.
+
+A real launch usually includes a homepage, pricing page, product pages, landing pages, blog posts, documentation, newsletter links, partner pages, and campaign URLs. If even one of those pages has a missing \`og:image\`, a bad title, a blocked crawler, or an oversized image, the link can look broken when it gets shared.
+
+That is why single URL preview tools are useful, but not enough for launch QA. They help you inspect one page deeply. They do not help you answer the bigger launch question:
+
+> Are all of our important URLs ready to be shared?
+
+The [Bulk Link Preview Checker](https://www.getlinkpeek.com/tools/bulk-link-preview-checker) is built for that exact moment.
+
+---
+
+## What the Bulk Link Preview Checker Does
+
+The tool lets you paste a list of public URLs and scan them together. Instead of checking each page manually, LinkPeek audits the batch and gives you a compact table of what needs attention.
+
+You can use it to:
+
+- Scan up to 100 public URLs in one run
+- Check Open Graph and social preview metadata across multiple pages
+- See per-platform scores for WhatsApp, X, LinkedIn, Slack, Discord, and Instagram
+- Find missing titles, descriptions, preview images, crawler blocks, and image problems
+- Export the results as a CSV report
+- Open any row in the full pixel-perfect LinkPeek previewer
+
+Try it here: [Bulk Link Preview Checker](https://www.getlinkpeek.com/tools/bulk-link-preview-checker)
+
+---
+
+## Why Bulk Testing Is Useful
+
+### 1. It Saves Time Before a Launch
+
+If you have 30 campaign URLs, checking them one by one is slow. It is also easy to lose track of which URLs passed and which ones still need fixes.
+
+With bulk testing, you paste the full URL list once and get a table back. That table becomes your launch QA checklist.
+
+### 2. It Finds Problems Hidden Across the Site
+
+One landing page might have a perfect preview. Another might be missing \`twitter:card\`. A blog post might use an image that is too large for WhatsApp. A pricing page might have a title that gets cut off in the feed.
+
+Bulk testing helps you spot these inconsistencies quickly.
+
+### 3. It Makes Social Preview QA Easy to Share
+
+The CSV export is useful for agencies, developers, and marketing teams. You can send a clean list of failed URLs, scores, and main issues instead of writing a long manual audit.
+
+That makes it easier to hand fixes to the right person.
+
+### 4. It Connects Summary QA With Pixel-Perfect Review
+
+The bulk table is intentionally compact. It is for triage.
+
+When a URL needs deeper review, click **Open mockup** and LinkPeek loads that URL in the full preview experience. That means you can move from batch QA to visual inspection without copying the URL again.
+
+---
+
+## Who Should Use It?
+
+### Marketing Teams
+
+Use it before campaigns, launches, newsletters, and social announcements. A broken card can make a polished launch look unfinished.
+
+### Agencies
+
+Use it to audit client URLs before sending final reports or publishing campaign links. The CSV export gives you a simple deliverable.
+
+### Founders
+
+Use it before posting to Product Hunt, LinkedIn, X, Reddit, newsletters, and communities. Your launch links should look right the first time.
+
+### Developers
+
+Use it before release to catch missing metadata, bad image URLs, and crawler issues across multiple routes.
+
+### SEO Teams
+
+Use it when auditing site sections where social sharing matters: blog posts, comparison pages, landing pages, product pages, and guides.
+
+---
+
+## What to Check Before You Share a URL
+
+| Check | Why it matters |
+|------|----------------|
+| \`og:title\` | Controls the headline shown in social cards |
+| \`og:description\` | Controls the supporting preview text |
+| \`og:image\` | Determines whether the card has a strong visual |
+| Image size | Oversized or tiny images can fail or look weak |
+| HTTPS image URL | Some platforms reject insecure preview images |
+| \`twitter:card\` | Helps X render the right card style |
+| Crawler access | Blocked bots can prevent previews from rendering |
+
+The bulk checker is useful because it does not only tell you whether tags exist. It helps you see which URLs are risky before the audience sees them.
+
+---
+
+## Recommended Launch Workflow
+
+1. Collect all launch URLs in a spreadsheet.
+2. Paste the URLs into the [Bulk Link Preview Checker](https://www.getlinkpeek.com/tools/bulk-link-preview-checker).
+3. Run the scan.
+4. Sort mentally by critical failures first.
+5. Open failed URLs in the full mockup view.
+6. Fix metadata in your app, CMS, or site builder.
+7. Re-run the scan before the campaign goes live.
+8. Export the CSV report for your team or client.
+
+This turns social preview QA from a last-minute manual check into a repeatable launch step.
+
+---
+
+## Why LinkPeek Is Different
+
+Many tools focus on raw tags. Raw tags are useful, but they do not show how the link will feel when someone sees it in a real social app.
+
+LinkPeek combines two things:
+
+- Bulk metadata scanning for many URLs
+- Pixel-perfect social preview mockups for deep visual review
+
+That combination matters. A technically valid card can still look weak, cropped, generic, or unclear. LinkPeek helps you catch both the metadata problems and the visual presentation problems.
+
+---
+
+## Start With Your Next Launch
+
+If you are preparing a campaign, product launch, blog rollout, or client handoff, run the URLs through LinkPeek before publishing.
+
+Use the tool here:
+
+[https://www.getlinkpeek.com/tools/bulk-link-preview-checker](https://www.getlinkpeek.com/tools/bulk-link-preview-checker)
+
+Your links should not look broken after they are already in the feed. Check them before they get shared.`,
+  },
+  {
     slug: 'whatsapp-link-preview-not-working',
     title: 'WhatsApp Link Preview Not Working? Complete Fix Guide (2026)',
     description:

@@ -25,11 +25,12 @@ export default function HomePage() {
   const isAnimating = animState !== 'done' && animState !== 'init';
 
   const hasFetchedRef = useRef(false);
-  const doFetch = useCallback(() => {
+  const doFetch = useCallback((url = DEFAULT_URL, shouldTrack = false) => {
     if (!hasFetchedRef.current) {
       hasFetchedRef.current = true;
       setHasSearched(true);
-      fetch(DEFAULT_URL);
+      if (shouldTrack) trackUrlChecked(url);
+      fetch(url);
     }
   }, [fetch]);
 
@@ -48,6 +49,13 @@ export default function HomePage() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
+
+    const urlParam = new URLSearchParams(window.location.search).get('url');
+    if (urlParam) {
+      setAnimState('done');
+      doFetch(urlParam, true);
+      return;
+    }
     
     if (window.innerWidth < 1024 || localStorage.getItem('onboardingDone')) {
       setAnimState('done');
@@ -110,7 +118,7 @@ export default function HomePage() {
     
     run();
     return () => { cancelled = true; };
-  }, [skipAnimation]);
+  }, [doFetch, skipAnimation]);
 
   const handleSubmit = async (url: string) => {
     setHasSearched(true);

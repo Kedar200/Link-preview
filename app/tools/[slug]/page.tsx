@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import BulkLinkPreviewChecker from '@/components/BulkLinkPreviewChecker';
 import { getSiteUrl } from '@/lib/site';
 import { getSeoToolPage, seoToolPages } from '@/lib/seo-pages';
 
@@ -65,6 +66,7 @@ export default async function SeoToolPage({
 
   const siteUrl = getSiteUrl();
   const url = `${siteUrl}/tools/${page.slug}`;
+  const isBulkChecker = page.slug === 'bulk-link-preview-checker';
 
   return (
     <div className="min-h-screen flex flex-col bg-[#f4f0e6]">
@@ -76,7 +78,7 @@ export default async function SeoToolPage({
           <p className="body-lg text-white/70 max-w-[720px] mt-8">{page.description}</p>
           <div className="mt-10 flex flex-col sm:flex-row gap-3">
             <Link
-              href="/"
+              href={isBulkChecker ? '#bulk-checker' : '/'}
               className="inline-flex justify-center px-5 py-3 rounded-lg bg-[#dde6e1] text-[#1a2b21] font-semibold text-sm no-underline hover:bg-white transition-colors"
             >
               {page.primaryCta}
@@ -92,6 +94,12 @@ export default async function SeoToolPage({
       </div>
 
       <main className="flex-1">
+        {isBulkChecker && (
+          <section className="max-w-[1200px] mx-auto px-6 sm:px-12 py-16 pb-0">
+            <BulkLinkPreviewChecker />
+          </section>
+        )}
+
         <section className="max-w-[1200px] mx-auto px-6 sm:px-12 py-16">
           <div className="grid lg:grid-cols-[1fr_320px] gap-10 items-start">
             <div className="space-y-8">

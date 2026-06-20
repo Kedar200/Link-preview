@@ -135,6 +135,63 @@ export const seoToolPages: SeoToolPage[] = [
     ],
   },
   {
+    slug: 'bulk-link-preview-checker',
+    title: 'Bulk Link Preview Checker',
+    metaTitle: 'Bulk Link Preview Checker - Scan Multiple Social Cards | LinkPeek',
+    description:
+      'Scan multiple URLs at once, find broken Open Graph tags, and open pixel-perfect social preview mockups for launch QA.',
+    keywords: [
+      'bulk link preview checker',
+      'bulk Open Graph checker',
+      'bulk social preview audit',
+      'launch QA social previews',
+      'multiple URL preview checker',
+      'CSV link preview checker',
+    ],
+    updatedAt: '2026-06-20',
+    heroLabel: 'Launch QA',
+    primaryCta: 'Run bulk scan',
+    sections: [
+      {
+        title: 'Scan launch URLs in one pass',
+        body:
+          'Paste a list of campaign, blog, product, or landing page URLs and LinkPeek will audit each page with the same metadata engine used by the single URL previewer.',
+        points: [
+          'Check multiple public URLs without pasting them one by one',
+          'Summarize missing titles, descriptions, images, crawler blocks, and image size problems',
+          'See platform scores for WhatsApp, X, LinkedIn, Slack, Discord, and Instagram',
+        ],
+      },
+      {
+        title: 'Drill into the URLs that need attention',
+        body:
+          'Bulk results stay compact for fast QA, but every row links back to the full pixel-perfect mockup view for deeper inspection.',
+        points: [
+          'Open any URL in the full LinkPeek preview experience',
+          'Export a CSV report for developers, clients, or launch checklists',
+          'Use the table to prioritize critical failures before warnings and polish items',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is a bulk link preview checker?',
+        answer:
+          'A bulk link preview checker scans multiple URLs and reports which pages have broken or weak social preview metadata.',
+      },
+      {
+        question: 'How many URLs can I scan at once?',
+        answer:
+          'This bulk checker currently scans up to 100 public URLs in one run, with controlled parallel checks to keep the scan reliable.',
+      },
+      {
+        question: 'Can I inspect the actual preview for one failed URL?',
+        answer:
+          'Yes. Each result has an Open mockup action that loads the URL in the full LinkPeek preview interface.',
+      },
+    ],
+  },
+  {
     slug: 'whatsapp-link-preview-checker',
     title: 'WhatsApp Link Preview Checker',
     metaTitle: 'WhatsApp Link Preview Checker - Fix Missing Preview Images | LinkPeek',
