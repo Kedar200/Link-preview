@@ -76,7 +76,7 @@ export default function HeroScene({ onSubmit, loading, data, error, isAnimating,
       {/* Left Content Area */}
       <div className={`relative z-20 w-full lg:w-[45%] flex flex-col justify-start px-6 sm:px-12 xl:px-20 pt-20 pb-16 lg:pb-32 ${isAnimating ? 'pointer-events-none' : ''} transition-all duration-[1500ms] ease-out ${animState === 'zoom-phone' || animState === 'switching' ? 'opacity-20 blur-sm grayscale brightness-[0.4]' : 'opacity-100 blur-0 grayscale-0 brightness-100'}`}>
         <div className="pointer-events-auto">
-          <h1 className="h1 mb-10 text-white max-w-[800px]">
+          <h1 className="h1 hero-title mb-10 text-white max-w-[760px]">
             Pixel-perfect link preview mockups<span className="text-[rgba(255,255,255,0.45)]"> before you publish.</span>
           </h1>
 

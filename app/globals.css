@@ -54,6 +54,12 @@ body {
   font-size: clamp(40px, 5vw, 80px);
 }
 
+.hero-title {
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-size: clamp(38px, 4vw, 64px);
+}
+
 .h2 {
   @apply font-inter font-[500] leading-[1.2] tracking-[-0.01em];
   font-size: clamp(32px, 4vw, 48px);
@@ -1897,4 +1903,3 @@ body {
   background-size: 24px 24px;
   background-position: center top;
 }
-
