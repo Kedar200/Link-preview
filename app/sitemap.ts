@@ -5,7 +5,7 @@ import { seoToolPages } from '@/lib/seo-pages';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = getSiteUrl();
-  const staticLastModified = new Date('2026-06-14');
+  const staticLastModified = new Date('2026-06-28');
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: siteUrl,

@@ -74,14 +74,14 @@ export default function HeroScene({ onSubmit, loading, data, error, isAnimating,
     <div className="relative w-full min-h-[85vh] flex flex-col lg:flex-row">
       
       {/* Left Content Area */}
-      <div className={`relative z-20 w-full lg:w-[45%] flex flex-col justify-start px-6 sm:px-12 xl:px-20 pt-20 pb-16 lg:pb-32 ${isAnimating ? 'pointer-events-none' : ''} transition-all duration-[1500ms] ease-out ${animState === 'zoom-phone' || animState === 'switching' ? 'opacity-20 blur-sm grayscale brightness-[0.4]' : 'opacity-100 blur-0 grayscale-0 brightness-100'}`}>
+      <div className={`relative z-20 w-full lg:w-[45%] flex flex-col justify-start px-6 sm:px-12 xl:px-20 pt-14 sm:pt-16 lg:pt-[4.5rem] pb-16 lg:pb-28 ${isAnimating ? 'pointer-events-none' : ''} transition-all duration-[1500ms] ease-out ${animState === 'zoom-phone' || animState === 'switching' ? 'opacity-20 blur-sm grayscale brightness-[0.4]' : 'opacity-100 blur-0 grayscale-0 brightness-100'}`}>
         <div className="pointer-events-auto">
-          <h1 className="h1 hero-title mb-10 text-white max-w-[760px]">
-            Pixel-perfect link preview mockups<span className="text-[rgba(255,255,255,0.45)]"> before you publish.</span>
+          <h1 className="h1 hero-title mb-8 text-white max-w-[720px]">
+            Open Graph previews<span className="text-[rgba(255,255,255,0.45)]"> before you publish.</span>
           </h1>
 
-          <p className="body-lg mb-14 text-[rgba(255,255,255,0.7)] max-w-[540px]">
-            See high-fidelity UI mockups for WhatsApp, X, LinkedIn, Slack, Discord, and Instagram. Audit your tags while you build, then export polished preview images for reviews.
+          <p className="body-lg mb-10 text-[rgba(255,255,255,0.7)] max-w-[560px]">
+            Test WhatsApp, LinkedIn, X, Slack, Discord, Instagram, Twitter Card, and localhost link previews from one URL.
           </p>
 
           <div className="w-full max-w-[480px]">
@@ -92,6 +92,13 @@ export default function HeroScene({ onSubmit, loading, data, error, isAnimating,
               showCursor={showCursor}
               isButtonHighlighted={buttonHighlighted}
             />
+          </div>
+
+          <div className="mt-5 hidden max-w-[560px] flex-wrap gap-2 text-[11px] font-mono uppercase tracking-[0.05em] text-white/55 sm:flex">
+            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">Open Graph</span>
+            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">Twitter Cards</span>
+            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">WhatsApp</span>
+            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">Localhost</span>
           </div>
 
           {error && !loading && error === LOCALHOST_COMPANION_NEEDED && (

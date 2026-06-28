@@ -103,10 +103,6 @@ export default function BlogPage() {
           background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(79,111,91,0.25) 0%, transparent 70%)'
         }} />
         <div className="max-w-[1200px] mx-auto px-6 sm:px-12 relative z-10">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-2 h-2 rounded-full bg-[#22c55e] shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
-            <span className="label-sm text-[rgba(255,255,255,0.5)] tracking-wide font-semibold">LinkPeek Technical Journal</span>
-          </div>
           <h1 className="font-headline-xl text-4xl sm:text-5xl text-white leading-tight font-bold mb-4">
             Technical Journal
           </h1>

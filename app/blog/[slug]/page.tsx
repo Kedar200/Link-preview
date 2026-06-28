@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { blogPosts, getPostBySlug, getAllSlugs } from '@/lib/blog-data';
 import { getSiteUrl } from '@/lib/site';
+import { seoToolPages } from '@/lib/seo-pages';
 import CopyButton from '@/components/CopyButton';
 import Footer from '@/components/Footer';
 
@@ -285,6 +286,30 @@ function renderContent(raw: string) {
   return elements;
 }
 
+function getRelatedToolsForPost(post: NonNullable<ReturnType<typeof getPostBySlug>>) {
+  const text = `${post.slug} ${post.title} ${post.description} ${post.keywords.join(' ')}`.toLowerCase();
+  const slugs: string[] = [];
+
+  if (text.includes('whatsapp')) slugs.push('whatsapp-link-preview-checker');
+  if (text.includes('linkedin')) slugs.push('linkedin-preview-checker');
+  if (text.includes('twitter') || text.includes(' x ') || text.includes('x card')) {
+    slugs.push('twitter-card-preview');
+  }
+  if (text.includes('slack')) slugs.push('slack-link-preview-checker');
+  if (text.includes('localhost') || text.includes('deploy')) slugs.push('localhost-og-preview');
+  if (text.includes('bulk') || text.includes('launch qa')) slugs.push('bulk-link-preview-checker');
+  if (text.includes('image') || text.includes('crop') || text.includes('open graph') || text.includes('og ')) {
+    slugs.push('open-graph-preview-tool');
+  }
+
+  slugs.push('open-graph-preview-tool');
+
+  return Array.from(new Set(slugs))
+    .map((toolSlug) => seoToolPages.find((tool) => tool.slug === toolSlug))
+    .filter(Boolean)
+    .slice(0, 4);
+}
+
 /* ─── Page Component ─── */
 export default async function BlogPostPage({
   params,
@@ -298,6 +323,7 @@ export default async function BlogPostPage({
 
   // Find related posts (exclude current)
   const related = blogPosts.filter((p) => p.slug !== slug).slice(0, 2);
+  const relatedTools = getRelatedToolsForPost(post);
 
   const authorInitials = post.author.name
     .split(' ')
@@ -371,6 +397,17 @@ export default async function BlogPostPage({
             <span className="text-on-tertiary-container/30">/</span>
             <span className="px-2.5 py-0.5 rounded bg-primary-container text-on-primary font-label-md text-xs font-semibold">{post.category}</span>
           </div>
+          <nav className="mb-6 flex flex-wrap items-center gap-2 text-xs font-mono uppercase tracking-[0.05em] text-white/45">
+            <Link href="/" className="text-white/60 no-underline hover:text-white">
+              Home
+            </Link>
+            <span>/</span>
+            <Link href="/blog" className="text-white/60 no-underline hover:text-white">
+              Blog
+            </Link>
+            <span>/</span>
+            <span className="text-white/80">{post.title}</span>
+          </nav>
           <h1 className="font-headline-xl text-3xl sm:text-4xl md:text-5xl text-white leading-tight font-bold mb-5">
             {post.title}
           </h1>
@@ -414,6 +451,44 @@ export default async function BlogPostPage({
               {renderContent(post.content)}
             </div>
           </div>
+
+          <section className="mt-8 rounded-2xl border border-outline-variant bg-surface-container-lowest p-6 sm:p-8 shadow-sm">
+            <div className="grid gap-6 md:grid-cols-[0.9fr_1.1fr] md:items-start">
+              <div>
+                <p className="font-label-md text-xs font-semibold uppercase tracking-wider text-sage-accent">
+                  Try LinkPeek
+                </p>
+                <h2 className="mt-2 font-headline-lg text-2xl text-deep-forest font-semibold leading-tight">
+                  Preview the card before you share the URL
+                </h2>
+                <p className="mt-3 text-sm leading-6 text-on-surface-variant">
+                  Test Open Graph tags, Twitter Cards, WhatsApp previews, LinkedIn cards,
+                  Slack unfurls, Discord cards, Instagram-style previews, and localhost URLs
+                  before the link reaches your audience.
+                </p>
+                <Link
+                  href="/"
+                  className="mt-5 inline-flex rounded-lg bg-deep-forest px-5 py-3 text-sm font-semibold text-white no-underline transition-colors hover:bg-primary"
+                >
+                  Open the preview checker
+                </Link>
+              </div>
+
+              {relatedTools.length > 0 && (
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {relatedTools.map((tool) => (
+                    <Link
+                      key={tool!.slug}
+                      href={`/tools/${tool!.slug}`}
+                      className="rounded-lg bg-surface-container-low px-4 py-3 text-sm font-semibold leading-5 text-deep-forest no-underline transition-colors hover:bg-surface-container-high"
+                    >
+                      {tool!.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          </section>
 
           {/* ─── Keywords / Tags ─── */}
           <div className="mt-8 flex flex-wrap gap-2">
@@ -473,7 +548,7 @@ export default async function BlogPostPage({
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'BlogPosting',
+            '@type': ['Article', 'BlogPosting'],
             headline: post.title,
             description: post.description,
             image: `${siteUrl}/og-image.png`,
@@ -497,6 +572,37 @@ export default async function BlogPostPage({
               '@id': `${siteUrl}/blog/${post.slug}`,
             },
             keywords: post.keywords.join(', '),
+          }),
+        }}
+      />
+
+      {/* ─── Breadcrumb Structured Data ─── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: siteUrl,
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Blog',
+                item: `${siteUrl}/blog`,
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: post.title,
+                item: `${siteUrl}/blog/${post.slug}`,
+              },
+            ],
           }),
         }}
       />

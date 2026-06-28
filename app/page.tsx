@@ -6,11 +6,13 @@ import AuditInsights from '@/components/AuditInsights';
 import SeoPreviewSection from '@/components/SeoPreviewSection';
 import LocalhostPreviewSection from '@/components/LocalhostPreviewSection';
 import FaqSection from '@/components/FaqSection';
+import HomeAnswerSections from '@/components/HomeAnswerSections';
 import Footer from '@/components/Footer';
 import { useOGFetch } from '@/hooks/useOGFetch';
 import { trackUrlChecked, trackEvent } from '@/lib/analytics';
 
 const DEFAULT_URL = 'https://www.getlinkpeek.com';
+const SITE_URL = 'https://www.getlinkpeek.com';
 
 export default function HomePage() {
   const { data, loading, error, fetch } = useOGFetch();
@@ -152,7 +154,7 @@ export default function HomePage() {
         >
           {/* Global Horizontal Split Background for Hero */}
           <div className="absolute inset-0 flex flex-col z-0 pointer-events-none overflow-hidden">
-            <div className="h-[75vh] w-full bg-[#1a2b21]"></div>
+            <div className="h-[60vh] min-h-[600px] w-full bg-[#1a2b21] lg:min-h-[620px]"></div>
             <div className="flex-1 w-full bg-[#f4f0e6]"></div>
           </div>
 
@@ -180,8 +182,68 @@ export default function HomePage() {
       <AuditInsights data={data} loading={loading} />
       <SeoPreviewSection />
       <LocalhostPreviewSection />
+      <HomeAnswerSections />
       <FaqSection />
       <Footer />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: [
+              {
+                '@type': 'Question',
+                name: 'What is LinkPeek?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'LinkPeek is a free Open Graph preview tool that lets developers test how their links appear on WhatsApp, LinkedIn, X, Slack, Discord and Instagram. It also supports localhost URLs, so developers can debug social previews before deploying or using ngrok.',
+                },
+              },
+              {
+                '@type': 'Question',
+                name: 'Can LinkPeek test Open Graph tags on localhost?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'Yes. LinkPeek supports localhost URLs so developers can preview Open Graph tags, Twitter cards, and social cards before deployment without using ngrok.',
+                },
+              },
+              {
+                '@type': 'Question',
+                name: 'Which link preview platforms does LinkPeek support?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'LinkPeek previews WhatsApp, LinkedIn, X, Slack, Discord, Instagram, and generic Open Graph or Twitter Card metadata.',
+                },
+              },
+            ],
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebPage',
+            name: 'Free Open Graph Preview Tool for WhatsApp, LinkedIn, X & Localhost',
+            url: SITE_URL,
+            isPartOf: {
+              '@type': 'WebSite',
+              name: 'LinkPeek',
+              url: SITE_URL,
+            },
+            about: {
+              '@type': 'SoftwareApplication',
+              name: 'LinkPeek',
+              applicationCategory: 'DeveloperApplication',
+              description:
+                'LinkPeek is a free web application for previewing Open Graph tags, Twitter cards, and platform-specific link previews across WhatsApp, LinkedIn, X, Slack, Discord and Instagram, including localhost URLs.',
+            },
+          }),
+        }}
+      />
     </div>
   );
 }

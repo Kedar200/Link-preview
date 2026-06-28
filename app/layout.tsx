@@ -7,9 +7,9 @@ const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: 'LinkPeek - Open Graph Preview Tool & Link Preview Checker',
+  title: 'Open Graph Preview Tool | Test WhatsApp, LinkedIn & X Link Previews',
   description:
-    'Preview pixel-perfect social card mockups and audit Open Graph tags for WhatsApp, X, LinkedIn, Slack, Discord, and Instagram before publishing.',
+    'Preview how your links look on WhatsApp, LinkedIn, X, Slack, Discord and Instagram. Test Open Graph tags, Twitter cards and localhost URLs without ngrok.',
   alternates: {
     canonical: siteUrl,
   },
@@ -21,6 +21,11 @@ export const metadata: Metadata = {
     'Twitter card preview',
     'LinkedIn preview checker',
     'WhatsApp link preview checker',
+    'test Open Graph localhost',
+    'preview OG tags localhost',
+    'Open Graph localhost without ngrok',
+    'WhatsApp OG image not showing',
+    'clear WhatsApp link preview cache',
     'Open Graph checker',
     'social media preview',
     'pixel-perfect social card mockups',
@@ -32,9 +37,9 @@ export const metadata: Metadata = {
     apple: '/apple-icon.png',
   },
   openGraph: {
-    title: 'LinkPeek - Open Graph Preview Tool & Link Preview Checker',
+    title: 'Open Graph Preview Tool | Test WhatsApp, LinkedIn & X Link Previews',
     description:
-      'Preview high-fidelity social card mockups for WhatsApp, X, LinkedIn, Slack, Discord, and Instagram, then audit the meta tags behind them.',
+      'Preview how your links look on WhatsApp, LinkedIn, X, Slack, Discord and Instagram. Test Open Graph tags, Twitter cards and localhost URLs without ngrok.',
     type: 'website',
     url: siteUrl,
     siteName: 'LinkPeek',
@@ -50,9 +55,9 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@KedarDe02887131',
-    title: 'LinkPeek - Open Graph Preview Tool',
+    title: 'Open Graph Preview Tool | LinkPeek',
     description:
-      'Preview pixel-perfect social card mockups and audit Open Graph tags before you publish.',
+      'Test WhatsApp, LinkedIn, X, Slack, Discord, Instagram, Twitter Cards, and localhost Open Graph previews without ngrok.',
     images: ['/og-image.png'],
   },
 };
@@ -70,13 +75,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "SoftwareApplication",
+              "@type": ["SoftwareApplication", "WebApplication"],
               "name": "LinkPeek",
               "url": siteUrl,
+              "alternateName": "GetLinkPeek",
               "operatingSystem": "All",
               "applicationCategory": "DeveloperApplication",
               "applicationSubCategory": "Open Graph preview tool",
-              "description": "Open Graph preview tool and social media link preview checker for testing high-fidelity social card mockups, OG images, Twitter cards, LinkedIn previews, WhatsApp link previews, Slack, Discord, and Instagram cards before publishing.",
+              "description": "LinkPeek is a free web application for previewing Open Graph tags, Twitter cards, and platform-specific link previews across WhatsApp, LinkedIn, X, Slack, Discord and Instagram, including localhost URLs.",
               "featureList": [
                 "Open Graph preview checker",
                 "Pixel-perfect social card mockups",
@@ -85,6 +91,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 "Twitter card preview",
                 "LinkedIn preview checker",
                 "WhatsApp link preview checker",
+                "Slack link preview checker",
+                "Discord link preview checker",
+                "Localhost Open Graph preview without ngrok",
                 "Social media link preview audit"
               ],
               "offers": {
@@ -105,7 +114,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "@context": "https://schema.org",
               "@type": "WebSite",
               "name": "LinkPeek",
-              "url": siteUrl
+              "url": siteUrl,
+              "description": "Free Open Graph preview tool for testing WhatsApp, LinkedIn, X, Slack, Discord, Instagram, Twitter Card, and localhost link previews."
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "LinkPeek",
+              "url": siteUrl,
+              "logo": `${siteUrl}/icon.png`,
+              "sameAs": ["https://github.com/Kedar200/Link-preview"],
+              "description": "LinkPeek builds free developer tools for Open Graph, Twitter Card, social card, and localhost link preview debugging."
             })
           }}
         />
