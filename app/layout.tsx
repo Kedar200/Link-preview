@@ -62,12 +62,15 @@ export const metadata: Metadata = {
   },
 };
 
+import ProductHuntWidget from '@/components/ProductHuntWidget';
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className="antialiased">
         <GoogleAnalytics />
         {children}
+        <ProductHuntWidget />
 
         {/* Global Structured Data */}
         <script

@@ -5,6 +5,7 @@ import HeroScene from '@/components/HeroScene';
 import AuditInsights from '@/components/AuditInsights';
 import SeoPreviewSection from '@/components/SeoPreviewSection';
 import LocalhostPreviewSection from '@/components/LocalhostPreviewSection';
+import TestimonialsBento from '@/components/TestimonialsBento';
 import FaqSection from '@/components/FaqSection';
 import HomeAnswerSections from '@/components/HomeAnswerSections';
 import Footer from '@/components/Footer';
@@ -182,6 +183,7 @@ export default function HomePage() {
       <AuditInsights data={data} loading={loading} />
       <SeoPreviewSection />
       <LocalhostPreviewSection />
+      <TestimonialsBento />
       <HomeAnswerSections />
       <FaqSection />
       <Footer />
