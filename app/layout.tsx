@@ -63,11 +63,17 @@ export const metadata: Metadata = {
 };
 
 import ProductHuntWidget from '@/components/ProductHuntWidget';
+import Script from 'next/script';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className="antialiased">
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1121997396716995"
+          crossOrigin="anonymous"
+        />
         <GoogleAnalytics />
         {children}
         <ProductHuntWidget />
