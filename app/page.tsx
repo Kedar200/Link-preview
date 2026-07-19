@@ -9,6 +9,7 @@ import TestimonialsBento from '@/components/TestimonialsBento';
 import FaqSection from '@/components/FaqSection';
 import HomeAnswerSections from '@/components/HomeAnswerSections';
 import Footer from '@/components/Footer';
+import ProductHuntWidget from '@/components/ProductHuntWidget';
 import { useOGFetch } from '@/hooks/useOGFetch';
 import { trackUrlChecked, trackEvent } from '@/lib/analytics';
 
@@ -187,6 +188,7 @@ export default function HomePage() {
       <HomeAnswerSections />
       <FaqSection />
       <Footer />
+      <ProductHuntWidget />
 
       <script
         type="application/ld+json"
