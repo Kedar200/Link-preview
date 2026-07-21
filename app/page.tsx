@@ -10,6 +10,7 @@ import FaqSection from '@/components/FaqSection';
 import HomeAnswerSections from '@/components/HomeAnswerSections';
 import Footer from '@/components/Footer';
 import ProductHuntWidget from '@/components/ProductHuntWidget';
+import FeedbackNudge from '@/components/FeedbackNudge';
 import { useOGFetch } from '@/hooks/useOGFetch';
 import { trackUrlChecked, trackEvent } from '@/lib/analytics';
 
@@ -189,6 +190,11 @@ export default function HomePage() {
       <FaqSection />
       <Footer />
       <ProductHuntWidget />
+      <FeedbackNudge
+        canShow={hasSearched && !loading && !isAnimating}
+        checkedDomain={data?.domain}
+        previewStatus={error ? 'error' : data ? 'success' : 'idle'}
+      />
 
       <script
         type="application/ld+json"
