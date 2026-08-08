@@ -25,6 +25,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.95,
     },
+    {
+      url: `${siteUrl}/privacy`,
+      lastModified: staticLastModified,
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${siteUrl}/terms`,
+      lastModified: staticLastModified,
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${siteUrl}/contact`,
+      lastModified: staticLastModified,
+      changeFrequency: 'yearly',
+      priority: 0.4,
+    },
   ];
 
   const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({

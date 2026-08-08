@@ -51,6 +51,12 @@ export default function Footer() {
             >
               Blog
             </Link>
+            <Link
+              href="/contact"
+              className="label-sm transition-colors text-[#4f6f5b] hover:text-[#1a2b21] no-underline"
+            >
+              Contact
+            </Link>
             <a
               href="https://github.com/Kedar200/Link-preview"
               target="_blank"
@@ -89,6 +95,30 @@ export default function Footer() {
             Bulk link preview checker
           </Link>
         </nav>
+        {/* Legal row — required for AdSense compliance */}
+        <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 border-t border-[#1a2b21]/10 pt-5">
+          <span className="text-xs text-[#7a9b87]">
+            © {new Date().getFullYear()} LinkPeek. All rights reserved.
+          </span>
+          <Link
+            href="/privacy"
+            className="text-xs text-[#4f6f5b] hover:text-[#1a2b21] no-underline transition-colors"
+          >
+            Privacy Policy
+          </Link>
+          <Link
+            href="/terms"
+            className="text-xs text-[#4f6f5b] hover:text-[#1a2b21] no-underline transition-colors"
+          >
+            Terms of Service
+          </Link>
+          <Link
+            href="/contact"
+            className="text-xs text-[#4f6f5b] hover:text-[#1a2b21] no-underline transition-colors"
+          >
+            Contact
+          </Link>
+        </div>
       </div>
     </footer>
   );

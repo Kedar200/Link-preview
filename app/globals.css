@@ -239,6 +239,24 @@ body {
   animation: auditDots 1.2s infinite steps(1);
 }
 
+@keyframes feedbackChoicePop {
+  0% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.16);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.feedback-choice-pop {
+  animation: feedbackChoicePop 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 /* ─── Audit pulse glow ─── */
 @keyframes auditPulse {
   0%, 100% { box-shadow: 0 0 15px rgba(26,43,33,0.3); }
