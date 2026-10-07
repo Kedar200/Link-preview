@@ -45,6 +45,34 @@ export default function HeroScene({ onSubmit, loading, data, error, isAnimating,
   const [phoneTheme, setPhoneTheme] = useState<'light'|'dark'>('light');
   const [app, setApp] = useState<'whatsapp' | 'twitter' | 'linkedin' | 'slack' | 'discord' | 'instagram'>('whatsapp');
   const [exportState, setExportState] = useState<ExportState>('idle');
+  const [previewData, setPreviewData] = useState<OGData | null>(data);
+
+  useEffect(() => {
+    setPreviewData(data);
+    let active = true;
+
+    if (data && data.isLocalhost && data.image) {
+      try {
+        const urlParsed = new URL(data.url);
+        const imgParsed = new URL(data.image);
+        if (imgParsed.host !== urlParsed.host) {
+          const img = new Image();
+          img.src = data.image;
+          img.onerror = () => {
+            if (!active) return;
+            const fallbackImg = new URL(data.image);
+            fallbackImg.host = urlParsed.host;
+            fallbackImg.protocol = urlParsed.protocol;
+            setPreviewData(prev => prev ? { ...prev, image: fallbackImg.href } : null);
+          };
+        }
+      } catch {}
+    }
+
+    return () => {
+      active = false;
+    };
+  }, [data]);
   
   useEffect(() => {
     if (isAnimating && demoApp) {
@@ -140,7 +168,7 @@ export default function HeroScene({ onSubmit, loading, data, error, isAnimating,
         <div className="phone-wrapper-mobile-shift relative flex flex-col items-center justify-center -translate-x-6 sm:translate-x-0">
           {/* Phone Mockup */}
           <div className="relative pointer-events-auto transform scale-[0.55] sm:scale-75 md:scale-[0.85] lg:scale-[0.85] origin-top mt-4 lg:mt-0 mb-[-380px] sm:mb-[-210px] md:mb-[-126px] lg:mb-[-126px]">
-            <PhoneMockup ref={mockupRef} data={data} loading={loading} theme={phoneTheme} app={currentApp} />
+            <PhoneMockup ref={mockupRef} data={previewData} loading={loading} theme={phoneTheme} app={currentApp} />
           </div>
 
           {/* Vertical Controls Dock */}

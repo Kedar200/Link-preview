@@ -16,6 +16,15 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/tools/localhost-link-preview',
+        destination: '/tools/localhost-og-preview',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

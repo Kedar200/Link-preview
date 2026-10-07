@@ -1,4 +1,5 @@
 import type { OGData } from '@/types';
+import { isLocalhostUrl } from '@/lib/detect';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -127,6 +128,10 @@ export function runAudit(data: OGData): AuditResult {
     // HTTPS check
     if (data.image.startsWith('http://')) {
       findings.push({ id: next(), tag: 'og:image', severity: 'warning', plain: 'Your image uses HTTP, not HTTPS — some platforms will refuse to show it.', technical: 'og:image uses insecure HTTP', platforms: ['twitter', 'linkedin', 'slack', 'facebook'] });
+    }
+    // Localhost check
+    if (isLocalhostUrl(data.image)) {
+      findings.push({ id: next(), tag: 'og:image', severity: 'warning', plain: 'Your image URL points to localhost — this is fine for local testing, but make sure to update it to a public URL before deploying.', technical: 'og:image is a localhost URL', platforms: ['whatsapp', 'twitter', 'linkedin', 'slack', 'discord', 'instagram', 'facebook'] });
     }
     findings.push({ id: next(), tag: 'og:image', severity: 'pass', plain: 'Preview image is present.', technical: 'og:image is set', platforms: ['whatsapp', 'twitter', 'linkedin', 'slack', 'discord', 'instagram', 'facebook'] });
   }
